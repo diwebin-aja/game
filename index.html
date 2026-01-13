@@ -230,7 +230,7 @@
             border-color: var(--accent-red);
         }
 
-        /* --- GAME GRID --- */
+        /* --- GAME GRID & CARD STYLE UPDATE --- */
         .section-title {
             font-family: var(--font-title);
             padding: 0 15px;
@@ -246,80 +246,93 @@
             padding: 0 15px;
         }
 
+        /* UPDATED: Card Style */
         .game-card {
             background-color: var(--bg-card);
             border-radius: 12px;
             overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-bottom: 13px;
+            /* Relative diperlukan agar judul bisa di-absolute */
+            position: relative; 
             cursor: pointer;
             transition: transform 0.2s;
-            position: relative;
+            /* Membuat card menjadi kotak sempurna */
+            aspect-ratio: 4 / 5; 
+            /* Menghilangkan padding agar gambar full */
+            padding: 0; 
         }
 
         .game-card:active {
             transform: scale(0.98);
         }
 
+        /* UPDATED: Image Style */
         .game-img {
             width: 100%;
-            padding: 7px;
-            border-radius: 15px;
-            aspect-ratio: 1/1;
-            object-fit: cover;
-            margin-bottom: 5px;
+            height: 100%;
+            padding: 0; /* Hapus padding */
+            border-radius: 0; /* Hapus radius inner */
+            object-fit: cover; /* Pastikan gambar mengisi area tanpa gepeng */
+            margin: 0;
+            display: block;
         }
 
+        /* UPDATED: Title Style */
         .game-title {
-            font-size: 12px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            font-size: 12px; /* Sedikit diperkecil agar muat */
             font-weight: 600;
             text-align: center;
-            padding: 0 5px;
-            white-space: nowrap;
+            padding: 15px 5px 8px; /* Padding atas besar untuk efek gradasi */
+            color: var(--text-white);
+            z-index: 5;
+            /* Efek gradasi hitam transparan agar tulisan terbaca di atas gambar apapun */
+            background: linear-gradient(to top, rgba(2, 18, 43, 0.9) 0%, rgba(2, 18, 43, 0) 100%);
+            
             overflow: hidden;
             text-overflow: ellipsis;
-            width: 100%;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.8);
         }
 
         /* --- HOT BADGE STYLES --- */
 
-.hot-badge {
-    position: absolute;
-    top: 0;
-    right: 0;
-    background: linear-gradient(135deg, #ff9f43 0%, #ee5253 100%); /* Warna Gradasi Api */
-    color: white;
-    font-size: 10px;
-    font-weight: 800;
-    padding: 4px 10px;
-    border-bottom-left-radius: 12px; /* Melengkung di sudut dalam */
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    box-shadow: 0 2px 8px rgba(238, 82, 83, 0.4);
-}
+        .hot-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: linear-gradient(135deg, #ff9f43 0%, #ee5253 100%); /* Warna Gradasi Api */
+            color: white;
+            font-size: 10px;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-bottom-left-radius: 12px; /* Melengkung di sudut dalam */
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            box-shadow: 0 2px 8px rgba(238, 82, 83, 0.4);
+        }
 
-/* Animasi untuk Ikon Api */
-.hot-badge i {
-    animation: burn 0.8s ease-in-out infinite alternate;
-}
+        /* Animasi untuk Ikon Api */
+        .hot-badge i {
+            animation: burn 0.8s ease-in-out infinite alternate;
+        }
 
-/* Keyframes Animasi Membara */
-@keyframes burn {
-    0% {
-        transform: scale(1);
-        filter: drop-shadow(0 0 0 rgba(255, 255, 0, 0));
-        color: #fff;
-    }
-    100% {
-        transform: scale(1.2);
-        filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.8)); /* Efek cahaya kuning */
-        color: #fffbe6;
-    }
-}
+        /* Keyframes Animasi Membara */
+        @keyframes burn {
+            0% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 0 rgba(255, 255, 0, 0));
+                color: #fff;
+            }
+            100% {
+                transform: scale(1.2);
+                filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.8)); /* Efek cahaya kuning */
+                color: #fffbe6;
+            }
+        }
 
         /* --- FLOATING BUTTON --- */
         .fab {
