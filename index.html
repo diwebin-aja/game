@@ -8,6 +8,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 
     <style>
         /* --- RESET & VARIABLES --- */
@@ -103,11 +107,12 @@
             margin-right: 10px;
         }
 
+        /* UPDATE: Menu Icon menggunakan RemixIcon (Font) */
         .menu-icon {
-            width: 24px;
-            height: 24px;
+            font-size: 24px; /* Menggunakan font-size alih-alih width/height */
+            color: white;    /* Menggunakan color alih-alih fill */
             cursor: pointer;
-            fill: white;
+            line-height: 1;
         }
 
         /* --- QUICK TAGS --- */
@@ -230,7 +235,7 @@
         .game-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 8px; /*12px*/
+            gap: 10px; /*12px*/
             padding: 0 15px;
         }
 
@@ -285,12 +290,13 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
             cursor: pointer;
             z-index: 200;
+            text-decoration: none; /* remove underline if anchor */
         }
         
-        .fab svg {
-            width: 30px;
-            height: 30px;
-            fill: white;
+        /* UPDATE: Styling untuk FontAwesome Icon di dalam FAB */
+        .fab i {
+            font-size: 30px;
+            color: white;
         }
 
     </style>
@@ -309,9 +315,8 @@
             </svg>
         </div>
         <button class="btn-masuk">Login</button>
-        <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white">
-            <path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/>
-        </svg>
+        
+        <i class="ri-menu-line menu-icon"></i>
     </header>
 
     <nav class="quick-tags">
@@ -397,9 +402,7 @@
     </main>
 
     <a href="#" class="fab">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.654-.698c.99.54 1.743.838 2.808.838 3.182 0 5.768-2.587 5.769-5.767.001-3.181-2.585-5.768-5.767-5.768zm0-2c4.28 0 7.769 3.488 7.769 7.768 0 4.28-3.488 7.768-7.769 7.768-1.35 0-2.616-.34-3.714-.933l-4.137 1.087 1.107-4.03C4.743 16.712 4.263 15.39 4.263 13.94c0-4.28 3.488-7.768 7.768-7.768zm3.92 9.58c-.16-.08-1.42-.7-1.64-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.44-1.34-1.68-.14-.24-.02-.36.1-.48.1-.1.24-.26.36-.4.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.46-.4-.4-.54-.4h-.46c-.16 0-.42.06-.64.3-.22.24-.86.84-.86 2.04 0 1.2.88 2.36 1 2.52.14.16 3.42 5.3 8.3 7.06.46.16 1.48.56 2.3.4.82-.16 1.94-.8 2.22-1.56.26-.78.26-1.44.18-1.56-.08-.12-.3-.2-.54-.32z"/>
-        </svg>
+        <i class="fa-brands fa-whatsapp"></i>
     </a>
 
 </body>
