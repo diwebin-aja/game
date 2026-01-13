@@ -15,12 +15,13 @@
         /* --- RESET & VARIABLES --- */
         :root {
             --bg-dark: #02122b;
-            --card-bg: #1c2e4a; /* Warna background kotak form */
-            --item-bg: #101935; /* Warna background item diamond */
+            --card-bg: #1c2e4a;
+            --item-bg: #101935;
             --text-white: #ffffff;
             --text-grey: #a0aec0;
             --accent-blue: #3b82f6;
             --accent-orange: #f59e0b;
+            --danger-red: #ff4757; /* Warna Error */
             
             --font-title: 'Outfit', sans-serif;
             --font-body: 'Plus Jakarta Sans', sans-serif;
@@ -37,13 +38,14 @@
             background-color: var(--bg-dark);
             color: var(--text-white);
             font-family: var(--font-body);
-            max-width: 480px; /* Tampilan mobile */
+            max-width: 480px;
             margin: 0 auto;
             border-left: 1px solid #1c2e4a;
             border-right: 1px solid #1c2e4a;
             min-height: 100vh;
-            padding-bottom: 80px; /* Ruang untuk tombol WA */
+            padding-bottom: 80px;
             position: relative;
+            scroll-behavior: smooth; /* Smooth scroll bawaan */
         }
 
         /* --- HEADER / NAVBAR --- */
@@ -195,12 +197,11 @@
         }
         .dot.active { background-color: white; }
 
-        /* --- ORDER SECTION (BARU) --- */
+        /* --- ORDER SECTION --- */
         .order-container {
             padding: 0 15px;
         }
 
-        /* Game Header (MLBB Logo + Title) */
         .game-title-header {
             display: flex;
             align-items: center;
@@ -224,15 +225,15 @@
             color: var(--text-grey);
         }
 
-        /* Kartu Biru Utama */
         .blue-card {
             background-color: var(--card-bg);
             border-radius: 12px;
             padding: 15px;
             margin-bottom: 20px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent; /* Border default transparan */
         }
 
-        /* Header Langkah (1, 2) */
         .step-header {
             display: flex;
             align-items: center;
@@ -256,31 +257,56 @@
             font-weight: 600;
         }
 
-        /* Form Input */
         .form-input {
             width: 100%;
             padding: 12px;
             background-color: white;
-            border: none;
+            border: 2px solid transparent; /* Siap untuk border merah */
             border-radius: 8px;
             margin-bottom: 10px;
             font-family: var(--font-body);
             font-size: 14px;
             color: #333;
+            transition: all 0.3s ease;
         }
         .form-input::placeholder {
             color: #a0aec0;
         }
 
-        /* Grid Item (Diamonds) */
+        /* --- ERROR / DANGER STYLES --- */
+        /* Animasi Getar */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+
+        /* Class ini ditambahkan via JS saat error */
+        .card-danger {
+            border-color: var(--danger-red) !important;
+            box-shadow: 0 0 15px rgba(255, 71, 87, 0.3);
+            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+        }
+
+        .input-danger {
+            border-color: var(--danger-red) !important;
+            background-color: #fff0f0;
+        }
+
+        .input-danger::placeholder {
+            color: var(--danger-red);
+        }
+
+
+        /* --- ITEMS GRID --- */
         .items-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr; /* 2 Kolom */
+            grid-template-columns: 1fr 1fr;
             gap: 12px;
         }
 
         .item-card {
-            background-color: var(--bg-dark); /* Lebih gelap dari card utama */
+            background-color: var(--bg-dark);
             border: 1px solid #2d3748;
             border-radius: 8px;
             padding: 12px;
@@ -295,6 +321,12 @@
         .item-card:hover {
             border-color: var(--accent-blue);
             background-color: #051b3b;
+        }
+
+        .item-card.active {
+            border-color: var(--accent-orange);
+            background-color: #1a2740;
+            box-shadow: 0 0 10px rgba(245, 158, 11, 0.2);
         }
 
         .item-icon {
@@ -317,7 +349,6 @@
             font-weight: 600;
         }
 
-        /* Tombol WA Melayang */
         .floating-wa {
             position: fixed;
             bottom: 20px;
@@ -388,13 +419,13 @@
             </div>
         </div>
 
-        <div class="blue-card">
+        <div class="blue-card" id="form-identity-card">
             <div class="step-header">
                 <div class="step-num">1</div>
                 <div class="step-title">ID Pengguna</div>
             </div>
-            <input type="text" class="form-input" placeholder="ID Pengguna">
-            <input type="text" class="form-input" placeholder="ID Zona" style="margin-bottom: 0;">
+            <input type="number" id="input-userid" class="form-input" placeholder="ID Pengguna">
+            <input type="number" id="input-zoneid" class="form-input" placeholder="ID Zona" style="margin-bottom: 0;">
         </div>
 
         <div class="blue-card">
@@ -404,37 +435,37 @@
             </div>
             
             <div class="items-grid">
-                <div class="item-card">
+                <div class="item-card" onclick="selectItem(this)">
                     <i class="ri-vip-diamond-fill item-icon"></i>
                     <div class="item-name">MOBILE LEGEND 5 DIAMONDS</div>
                     <div class="item-price">Rp 1.590</div>
                 </div>
 
-                <div class="item-card">
+                <div class="item-card" onclick="selectItem(this)">
                     <i class="ri-vip-diamond-fill item-icon"></i>
                     <div class="item-name">MOBILE LEGEND 10 DIAMONDS</div>
                     <div class="item-price">Rp 3.053</div>
                 </div>
 
-                <div class="item-card">
+                <div class="item-card" onclick="selectItem(this)">
                     <i class="ri-vip-diamond-fill item-icon"></i>
                     <div class="item-name">MOBILE LEGEND 20 DIAMONDS</div>
                     <div class="item-price">Rp 5.985</div>
                 </div>
 
-                <div class="item-card">
+                <div class="item-card" onclick="selectItem(this)">
                     <i class="ri-vip-diamond-fill item-icon"></i>
                     <div class="item-name">MOBILE LEGEND 28 DIAMONDS</div>
                     <div class="item-price">Rp 7.876</div>
                 </div>
 
-                <div class="item-card">
+                <div class="item-card" onclick="selectItem(this)">
                     <i class="ri-vip-diamond-fill item-icon"></i>
                     <div class="item-name">MOBILE LEGEND 30 DIAMONDS</div>
                     <div class="item-price">Rp 8.450</div>
                 </div>
 
-                 <div class="item-card">
+                 <div class="item-card" onclick="selectItem(this)">
                     <i class="ri-vip-diamond-fill item-icon"></i>
                     <div class="item-name">MOBILE LEGEND 34 DIAMONDS</div>
                     <div class="item-price">Rp 9.500</div>
@@ -446,6 +477,59 @@
     <a href="#" class="floating-wa">
         <i class="ri-whatsapp-line"></i>
     </a>
+
+    <script>
+        function selectItem(element) {
+            const userId = document.getElementById('input-userid');
+            const zoneId = document.getElementById('input-zoneid');
+            const formCard = document.getElementById('form-identity-card');
+
+            // 1. Cek Validasi: Apakah ID atau Zone Kosong?
+            if (userId.value.trim() === "" || zoneId.value.trim() === "") {
+                
+                // Scroll ke element form (posisi di tengah layar)
+                formCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                // Tambahkan efek Danger ke Card Utama
+                formCard.classList.add('card-danger');
+
+                // Tambahkan efek Danger ke Input yang kosong
+                if(userId.value.trim() === "") userId.classList.add('input-danger');
+                if(zoneId.value.trim() === "") zoneId.classList.add('input-danger');
+
+                // Hapus efek Danger setelah 2 detik agar kembali normal
+                setTimeout(() => {
+                    formCard.classList.remove('card-danger');
+                    userId.classList.remove('input-danger');
+                    zoneId.classList.remove('input-danger');
+                }, 2000);
+
+                // Hentikan proses seleksi item karena data belum lengkap
+                return;
+            }
+
+            // 2. Jika Validasi Berhasil (User sudah isi form):
+            // Hapus class 'active' dari semua item
+            document.querySelectorAll('.item-card').forEach(item => {
+                item.classList.remove('active');
+            });
+
+            // Tambahkan class 'active' ke item yang diklik
+            element.classList.add('active');
+            
+            console.log("Item dipilih: " + element.querySelector('.item-name').innerText);
+        }
+
+        // Opsional: Hapus border merah saat user mulai mengetik
+        document.getElementById('input-userid').addEventListener('input', function() {
+            this.classList.remove('input-danger');
+            document.getElementById('form-identity-card').classList.remove('card-danger');
+        });
+        document.getElementById('input-zoneid').addEventListener('input', function() {
+            this.classList.remove('input-danger');
+            document.getElementById('form-identity-card').classList.remove('card-danger');
+        });
+    </script>
 
 </body>
 </html>
