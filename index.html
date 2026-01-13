@@ -256,6 +256,7 @@
             padding-bottom: 13px;
             cursor: pointer;
             transition: transform 0.2s;
+            position: relative;
         }
 
         .game-card:active {
@@ -281,6 +282,44 @@
             text-overflow: ellipsis;
             width: 100%;
         }
+
+        /* --- HOT BADGE STYLES --- */
+
+.hot-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: linear-gradient(135deg, #ff9f43 0%, #ee5253 100%); /* Warna Gradasi Api */
+    color: white;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-bottom-left-radius: 12px; /* Melengkung di sudut dalam */
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    box-shadow: 0 2px 8px rgba(238, 82, 83, 0.4);
+}
+
+/* Animasi untuk Ikon Api */
+.hot-badge i {
+    animation: burn 0.8s ease-in-out infinite alternate;
+}
+
+/* Keyframes Animasi Membara */
+@keyframes burn {
+    0% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 0 rgba(255, 255, 0, 0));
+        color: #fff;
+    }
+    100% {
+        transform: scale(1.2);
+        filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.8)); /* Efek cahaya kuning */
+        color: #fffbe6;
+    }
+}
 
         /* --- FLOATING BUTTON --- */
         .fab {
@@ -361,11 +400,14 @@
     <div class="category-section" data-category="games">
         <h2 class="section-title">Top up game</h2>
         
-        <div class="game-grid">
-            <article class="game-card">
-                <img src="https://images.unsplash.com/photo-1535295972055-1c762f4483e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="MLBB" class="game-img">
-                <span class="game-title">Mobile Legends</span>
-            </article>
+       <div class="game-grid">
+        <article class="game-card">
+        <div class="hot-badge">
+        <i class="fa-solid fa-fire"></i> HOT
+       </div>
+          <img src="https://images.unsplash.com/photo-1535295972055-1c762f4483e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="MLBB" class="game-img">
+          <span class="game-title">Mobile Legends</span>
+       </article>
 
             <article class="game-card">
                 <img src="https://images.unsplash.com/photo-1599961103738-c67d71701314?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="PUBG" class="game-img">
