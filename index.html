@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameSquad Clone</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- RESET & VARIABLES --- */
+        :root {
+            --bg-dark: #02122b; /* Warna latar belakang utama */
+            --bg-card: #0d2752; /* Warna kartu game */
+            --primary-blue: #1c468a;
+            --accent-red: #b91c32; /* Warna tombol All */
+            --text-white: #ffffff;
+            --text-grey: #a0aec0;
+            --whatsapp-green: #25D366;
+            
+            --font-title: 'Outfit', sans-serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-white);
+            font-family: var(--font-body);
+            padding-bottom: 80px; /* Space for FAB */
+            max-width: 480px; /* Membatasi lebar agar terlihat seperti tampilan mobile di desktop */
+            margin: 0 auto;
+            border-left: 1px solid #1c2e4a;
+            border-right: 1px solid #1c2e4a;
+            min-height: 100vh;
+        }
+
+        /* --- HEADER / NAVBAR --- */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            background-color: var(--bg-dark);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: var(--font-title);
+            font-weight: 700;
+            line-height: 1;
+        }
+        .logo span:first-child { font-size: 18px; letter-spacing: 1px; }
+        .logo span:last-child { font-size: 8px; color: var(--text-grey); }
+
+        .search-container {
+            flex-grow: 1;
+            margin: 0 10px;
+            position: relative;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 8px 35px 8px 15px;
+            border-radius: 6px;
+            border: none;
+            background-color: white;
+            font-family: var(--font-body);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 16px;
+            height: 16px;
+            color: #666;
+        }
+
+        .btn-masuk {
+            background-color: #2b4c80;
+            color: white;
+            border: 1px solid #4a6fa5;
+            padding: 6px 15px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .menu-icon {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            fill: white;
+        }
+
+        /* --- QUICK TAGS --- */
+        .quick-tags {
+            display: flex;
+            gap: 8px;
+            padding: 0 15px 15px;
+            justify-content: center;
+        }
+
+        .tag {
+            background-color: #e2e8f0;
+            color: #333;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        /* --- HERO BANNER --- */
+        .hero-section {
+            padding: 0 15px;
+            margin-bottom: 20px;
+        }
+
+        .hero-card {
+            background: linear-gradient(90deg, #0d2752 0%, #1a3c75 100%);
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            height: 160px;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Menggunakan overlay gambar untuk meniru banner */
+        .hero-bg {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+        }
+        
+        .hero-content {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 2;
+            max-width: 60%;
+        }
+
+        .hero-content h3 {
+            font-family: var(--font-title);
+            font-size: 18px;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .hero-content p {
+            font-size: 10px;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .dots {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 10px;
+        }
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #4a5568;
+        }
+        .dot.active { background-color: white; }
+
+        /* --- FILTERS --- */
+        .filters {
+            display: flex;
+            gap: 10px;
+            padding: 0 15px;
+            margin-bottom: 25px;
+            overflow-x: auto;
+            scrollbar-width: none; /* Hide scrollbar Firefox */
+        }
+        .filters::-webkit-scrollbar { display: none; } /* Hide scrollbar Chrome */
+
+        .filter-btn {
+            background: transparent;
+            border: 1px solid #4a6fa5;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 8px;
+            font-family: var(--font-body);
+            font-size: 14px;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+
+        .filter-btn.active {
+            background-color: var(--accent-red);
+            border-color: var(--accent-red);
+        }
+
+        /* --- GAME GRID --- */
+        .section-title {
+            font-family: var(--font-title);
+            padding: 0 15px;
+            margin-bottom: 15px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            padding: 0 15px;
+        }
+
+        .game-card {
+            background-color: var(--bg-card);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 10px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .game-card:active {
+            transform: scale(0.98);
+        }
+
+        .game-img {
+            width: 100%;
+            padding: 7px;
+            border-radius: 15px;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            margin-bottom: 5px;
+        }
+
+        .game-title {
+            font-size: 12px;
+            font-weight: 600;
+            text-align: center;
+            padding: 0 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+        }
+
+        /* --- FLOATING BUTTON --- */
+        .fab {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--whatsapp-green);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            cursor: pointer;
+            z-index: 200;
+        }
+        
+        .fab svg {
+            width: 30px;
+            height: 30px;
+            fill: white;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <span>GS</span>
+            <span>GAMESQUAD</span>
+        </div>
+        <div class="search-container">
+            <input type="text" placeholder="Free fire">
+            <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+        </div>
+        <button class="btn-masuk">Login</button>
+        <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white">
+            <path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/>
+        </svg>
+    </header>
+
+    <nav class="quick-tags">
+        <a href="#" class="tag">Free Fire</a>
+        <a href="#" class="tag">Mobile Legends</a>
+        <a href="#" class="tag">PUBG</a>
+    </nav>
+
+    <section class="hero-section">
+        <div class="hero-card">
+            <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Banner" class="hero-bg">
+            <div class="hero-content">
+                <h3>PUSH RANK, PAKAI SKIN KEREN</h3>
+                <p>TOP UP MLBB LEBIH LENGKAP</p>
+            </div>
+        </div>
+        <div class="dots">
+            <div class="dot active"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    </section>
+
+    <div class="filters">
+        <button class="filter-btn active">All</button>
+        <button class="filter-btn">Top Up</button>
+        <button class="filter-btn">Voucher</button>
+        <button class="filter-btn">Pembayaran</button>
+    </div>
+
+    <main>
+        <h2 class="section-title">Top up game</h2>
+        
+        <div class="game-grid">
+            <article class="game-card">
+                <img src="https://images.unsplash.com/photo-1535295972055-1c762f4483e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="MLBB" class="game-img">
+                <span class="game-title">Mobile Legends</span>
+            </article>
+
+            <article class="game-card">
+                <img src="https://images.unsplash.com/photo-1599961103738-c67d71701314?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="PUBG" class="game-img">
+                <span class="game-title">PUBG Mobile</span>
+            </article>
+
+            <article class="game-card">
+                <img src="https://images.unsplash.com/photo-1628260412297-a3377e45006f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Free Fire" class="game-img">
+                <span class="game-title">Free Fire</span>
+            </article>
+
+            <article class="game-card">
+                <img src="https://images.unsplash.com/photo-1551103782-8ab07afd45c1?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Metal Slug" class="game-img">
+                <span class="game-title">METAL SLUG</span>
+            </article>
+
+            <article class="game-card">
+                <img src="https://images.unsplash.com/photo-1616440347437-b1c73416ef12?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Ride Out" class="game-img">
+                <span class="game-title">RIDE OUT HEROES</span>
+            </article>
+
+            <article class="game-card">
+                <img src="https://images.unsplash.com/photo-1580234550905-408d62633e92?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Laplace" class="game-img">
+                <span class="game-title">LAPLACE M</span>
+            </article>
+
+             <article class="game-card">
+                <img src="https://images.unsplash.com/photo-1560419015-7c427e8ae5ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="LoL" class="game-img">
+                <span class="game-title">League of Legends</span>
+            </article>
+
+             <article class="game-card">
+                <img src="https://images.unsplash.com/photo-1614680376593-902f74cf0d41?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Game" class="game-img">
+                <span class="game-title">Cyber Hunter</span>
+            </article>
+
+             <article class="game-card">
+                <img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Game" class="game-img">
+                <span class="game-title">Marvel Super War</span>
+            </article>
+        </div>
+    </main>
+
+    <a href="#" class="fab">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.654-.698c.99.54 1.743.838 2.808.838 3.182 0 5.768-2.587 5.769-5.767.001-3.181-2.585-5.768-5.767-5.768zm0-2c4.28 0 7.769 3.488 7.769 7.768 0 4.28-3.488 7.768-7.769 7.768-1.35 0-2.616-.34-3.714-.933l-4.137 1.087 1.107-4.03C4.743 16.712 4.263 15.39 4.263 13.94c0-4.28 3.488-7.768 7.768-7.768zm3.92 9.58c-.16-.08-1.42-.7-1.64-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.44-1.34-1.68-.14-.24-.02-.36.1-.48.1-.1.24-.26.36-.4.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.46-.4-.4-.54-.4h-.46c-.16 0-.42.06-.64.3-.22.24-.86.84-.86 2.04 0 1.2.88 2.36 1 2.52.14.16 3.42 5.3 8.3 7.06.46.16 1.48.56 2.3.4.82-.16 1.94-.8 2.22-1.56.26-.78.26-1.44.18-1.56-.08-.12-.3-.2-.54-.32z"/>
+        </svg>
+    </a>
+
+</body>
+</html>
