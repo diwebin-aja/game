@@ -67,6 +67,13 @@
             font-weight: 700;
             line-height: 1;
         }
+        .logo i {
+            font-size: 18px; /* Ukuran disesuaikan menggantikan tinggi teks sebelumnya */
+            color: var(--text-white);
+            /* Opsional: Efek glow atau warna aksen jika diinginkan */
+            /* color: var(--accent-red); */ 
+        }
+
         .logo span:first-child { font-size: 18px; letter-spacing: 1px; }
         .logo span:last-child { font-size: 8px; color: var(--text-grey); }
 
@@ -305,8 +312,8 @@
 
     <header>
         <div class="logo">
-            <span>GS</span>
-            <span>GAMESQUAD</span>
+            <i class="fa-solid fa-gamepad"></i>
+            <span>HUPAYTOP</span>
         </div>
         <div class="search-container">
             <input type="text" placeholder="Cari Produk">
