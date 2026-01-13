@@ -26,6 +26,13 @@
             
             --font-title: 'Outfit', sans-serif;
             --font-body: 'Plus Jakarta Sans', sans-serif;
+
+
+            --mech-bg: rgba(2, 18, 43, 0.95);
+            --mech-border: #1c468a;
+            --neon-cyan: #00f3ff;
+            --neon-red: #ff003c;
+            --tech-font: 'Outfit', sans-serif;
         }
 
         * {
@@ -46,6 +53,202 @@
             border-right: 1px solid #1c2e4a;
             min-height: 100vh;
         }
+
+        /* --- ROBOTIC SIDEBAR VARIABLES --- */
+:root {
+    --mech-bg: rgba(2, 18, 43, 0.95);
+    --mech-border: #1c468a;
+    --neon-cyan: #00f3ff;
+    --neon-red: #ff003c;
+    --tech-font: 'Outfit', sans-serif;
+}
+
+/* OVERLAY GELAP */
+.mech-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(3px);
+    z-index: 998;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+.mech-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* CONTAINER SIDEBAR */
+.mech-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px; /* Lebar Sidebar */
+    height: 100vh;
+    background: var(--mech-bg);
+    z-index: 999;
+    transform: translateX(-100%); /* Sembunyi di kiri */
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); /* Efek gerak mekanis */
+    border-right: 1px solid var(--mech-border);
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    /* Sudut terpotong (Clip Path) ala Sci-Fi */
+    clip-path: polygon(0 0, 100% 0, 100% 95%, 85% 100%, 0 100%);
+}
+
+.mech-sidebar.active {
+    transform: translateX(0);
+}
+
+/* DEKORASI SUDUT */
+.tech-corner {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--neon-cyan);
+    pointer-events: none;
+}
+.top-left { top: 10px; left: 10px; border-right: none; border-bottom: none; }
+.bottom-right { bottom: 10px; right: 10px; border-left: none; border-top: none; }
+
+/* HEADER */
+.mech-header {
+    padding: 25px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    margin-top: 10px;
+}
+
+.sys-title {
+    font-family: var(--tech-font);
+    font-weight: 800;
+    color: var(--neon-cyan);
+    letter-spacing: 2px;
+    font-size: 14px;
+    position: relative;
+}
+
+/* Tombol Close */
+.mech-close {
+    background: transparent;
+    border: 1px solid var(--neon-red);
+    color: var(--neon-red);
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.3s;
+    /* Bentuk Hexagon kecil */
+    clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%);
+}
+.mech-close:hover {
+    background: var(--neon-red);
+    color: white;
+    transform: rotate(90deg);
+}
+
+/* USER INFO */
+.mech-user {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: linear-gradient(90deg, rgba(0,243,255,0.05) 0%, rgba(0,0,0,0) 100%);
+    margin-bottom: 10px;
+}
+.avatar-frame {
+    width: 45px;
+    height: 45px;
+    border: 2px solid var(--mech-border);
+    padding: 2px;
+    border-radius: 50%; /* Lingkaran tapi ada border tech */
+}
+.avatar-frame img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+.user-info { display: flex; flex-direction: column; }
+.u-name { font-weight: 700; color: white; letter-spacing: 1px; font-size: 14px; }
+.u-status { font-size: 10px; color: var(--whatsapp-green); display: flex; align-items: center; gap: 5px; }
+
+/* NAVIGATION LINKS */
+.mech-nav {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px;
+    gap: 5px;
+}
+
+.mech-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px 15px;
+    text-decoration: none;
+    color: #a0aec0;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border-left: 2px solid transparent;
+    overflow: hidden;
+}
+
+.mech-item i { font-size: 18px; }
+
+/* Efek Hover Robotic */
+.mech-item:hover, .mech-item.active {
+    background: rgba(0, 243, 255, 0.1);
+    color: var(--neon-cyan);
+    border-left: 2px solid var(--neon-cyan);
+    padding-left: 20px; /* Geser sedikit ke kanan */
+}
+
+/* Animasi Bar saat hover */
+.hover-bar {
+    position: absolute;
+    right: -10px;
+    top: 0;
+    width: 5px;
+    height: 100%;
+    background: var(--neon-cyan);
+    transform: skewX(-20deg);
+    opacity: 0;
+    transition: 0.3s;
+}
+.mech-item:hover .hover-bar {
+    right: 0;
+    opacity: 1;
+}
+
+/* Logout khusus */
+.mech-item.logout:hover {
+    color: var(--neon-red);
+    background: rgba(255, 0, 60, 0.1);
+    border-color: var(--neon-red);
+}
+.mech-item.logout:hover .hover-bar { background: var(--neon-red); }
+
+/* FOOTER */
+.mech-footer {
+    padding: 15px;
+    text-align: center;
+    color: #4a5568;
+    font-size: 10px;
+    letter-spacing: 2px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+}
 
         /* --- HEADER / NAVBAR --- */
         header {
@@ -378,6 +581,71 @@
         <i class="ri-menu-line menu-icon"></i>
     </header>
 
+    <div class="mech-overlay" id="mechOverlay"></div>
+
+<aside class="mech-sidebar" id="mechSidebar">
+    <div class="tech-corner top-left"></div>
+    <div class="tech-corner bottom-right"></div>
+
+    <div class="mech-header">
+        <div class="sys-title">
+            <span class="glitch-text">SYSTEM MENU</span>
+            <div class="scan-line"></div>
+        </div>
+        <button class="mech-close" id="closeSidebar">
+            <i class="ri-close-line"></i>
+        </button>
+    </div>
+
+    <div class="mech-user">
+        <div class="avatar-frame">
+            <img src="https://ui-avatars.com/api/?name=Gamer+Pro&background=0D8ABC&color=fff" alt="User">
+        </div>
+        <div class="user-info">
+            <span class="u-name">COMMANDER</span>
+            <span class="u-status">ONLINE <i class="fa-solid fa-circle"></i></span>
+        </div>
+    </div>
+
+    <nav class="mech-nav">
+        <a href="#" class="mech-item active">
+            <i class="ri-dashboard-3-line"></i>
+            <span>DASHBOARD</span>
+            <div class="hover-bar"></div>
+        </a>
+        <a href="#" class="mech-item">
+            <i class="ri-gamepad-line"></i>
+            <span>MY GAMES</span>
+            <div class="hover-bar"></div>
+        </a>
+        <a href="#" class="mech-item">
+            <i class="ri-history-line"></i>
+            <span>RIWAYAT TRX</span>
+            <div class="hover-bar"></div>
+        </a>
+        <a href="#" class="mech-item">
+            <i class="ri-wallet-3-line"></i>
+            <span>DEPOSIT SALDO</span>
+            <div class="hover-bar"></div>
+        </a>
+        <a href="#" class="mech-item">
+            <i class="ri-customer-service-2-line"></i>
+            <span>BANTUAN CS</span>
+            <div class="hover-bar"></div>
+        </a>
+        <a href="#" class="mech-item logout">
+            <i class="ri-shut-down-line"></i>
+            <span>LOGOUT</span>
+            <div class="hover-bar"></div>
+        </a>
+    </nav>
+
+    <div class="mech-footer">
+        <small>VERSI SISTEM 2.0.4</small>
+        <div class="decor-line"></div>
+    </div>
+</aside>
+
     <nav class="quick-tags">
         <a href="#" class="tag">Proses Cepat</a>
         <a href="#" class="tag">Transaksi Aman</a>
@@ -667,5 +935,39 @@
     });
 </script>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    // Selector
+    const menuIcon = document.querySelector('.menu-icon'); // Icon Burger di Header
+    const mechSidebar = document.getElementById('mechSidebar');
+    const mechOverlay = document.getElementById('mechOverlay');
+    const closeSidebar = document.getElementById('closeSidebar');
+
+    // Fungsi Buka Sidebar
+    function openMenu() {
+        mechSidebar.classList.add('active');
+        mechOverlay.classList.add('active');
+    }
+
+    // Fungsi Tutup Sidebar
+    function closeMenu() {
+        mechSidebar.classList.remove('active');
+        mechOverlay.classList.remove('active');
+    }
+
+    // Event Listeners
+    if (menuIcon) {
+        menuIcon.addEventListener('click', openMenu);
+    }
+
+    if (closeSidebar) {
+        closeSidebar.addEventListener('click', closeMenu);
+    }
+
+    if (mechOverlay) {
+        mechOverlay.addEventListener('click', closeMenu); // Klik background luar untuk tutup
+    }
+});
+</script>
 </body>
 </html>
