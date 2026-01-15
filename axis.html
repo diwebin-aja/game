@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
         /* --- RESET & VARIABLES --- */
@@ -58,7 +59,7 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            border-bottom: 1px solid #1c2e4a;
+            /*border-bottom: 1px solid #1c2e4a;*/
         }
 
         .logo {
@@ -68,6 +69,12 @@
             font-family: var(--font-title);
             font-weight: 700;
             line-height: 1;
+        }
+        .logo i {
+            font-size: 18px; /* Ukuran disesuaikan menggantikan tinggi teks sebelumnya */
+            color: var(--text-white);
+            /* Opsional: Efek glow atau warna aksen jika diinginkan */
+            /* color: var(--accent-red); */ 
         }
 
         .logo-link {
@@ -91,7 +98,6 @@
             border: none;
             background-color: white;
             font-family: var(--font-body);
-            font-size: 13px;
         }
 
         .search-icon {
@@ -110,13 +116,18 @@
             border: 1px solid #4a6fa5;
             padding: 6px 15px;
             border-radius: 6px;
-            font-size: 12px;
+            font-size: 14px;
             font-weight: 600;
             cursor: pointer;
             margin-right: 10px;
         }
 
-        .menu-icon { font-size: 24px; color: white; cursor: pointer; line-height: 1; }
+        .menu-icon { 
+            font-size: 24px; 
+            color: white; 
+            cursor: pointer; 
+            line-height: 1; 
+        }
 
         /* --- QUICK TAGS --- */
         .quick-tags {
@@ -498,10 +509,10 @@
 
     <header>
         <a href="index.html" class="logo-link">
-            <div class="logo">
-             <span>GS</span>
-            <span>GAMESQUAD</span>
-            </div>
+         <div class="logo">
+            <i class="fa-solid fa-gamepad"></i>
+            <span>HUPAYTOP</span>
+         </div>
         </a>
 
         <div class="search-container">
@@ -544,7 +555,7 @@
             <span>Axis Indonesia</span>
             <span class="divider">/</span>
             <a href="#" class="link-tutorial" onclick="alert('Pop-up Cara Pembayaran bisa dipasang di sini!')">
-                Cara Pembayaran <i class="ri-question-line"></i> 
+                Cara Pembelian <i class="ri-question-line"></i> 
             </a>
         </div>
         </div>
@@ -579,6 +590,16 @@
                     <div class="item-price">Rp 10.850</div>
                 </div>
 
+                <div class="item-card" onclick="selectProduct(this, 15000)">
+                    <div class="item-name">AXIS 15.000</div>
+                    <div class="item-price">Rp 15.850</div>
+                </div>
+
+                <div class="item-card" onclick="selectProduct(this, 20000)">
+                    <div class="item-name">AXIS 20.000</div>
+                    <div class="item-price">Rp 20.850</div>
+                </div>
+
                 <div class="item-card" onclick="selectProduct(this, 25000)">
                     <div class="item-name">AXIS 25.000</div>
                     <div class="item-price">Rp 25.400</div>
@@ -592,6 +613,11 @@
                 <div class="item-card" onclick="selectProduct(this, 100000)">
                     <div class="item-name">AXIS 100.000</div>
                     <div class="item-price">Rp 98.500</div>
+                </div>
+
+                <div class="item-card" onclick="selectProduct(this, 150000)">
+                    <div class="item-name">AXIS 150.000</div>
+                    <div class="item-price">Rp 150.850</div>
                 </div>
             </div>
         </div>
