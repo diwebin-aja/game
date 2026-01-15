@@ -139,7 +139,7 @@
             justify-content: flex-start; /* Agar dimulai dari kiri & bisa discroll */
             
             overflow-x: auto;
-            
+            margin-top: -15px;
             /* Tambahan agar scroll lebih halus di iOS */
             -webkit-overflow-scrolling: touch; 
         }
@@ -382,6 +382,9 @@
         }
         
         .payment-item {
+            position: relative;
+            overflow: visible !important; /* WAJIB: Supaya badge bisa "keluar" dari kotak */
+            margin-top: 15px !important; /* WAJIB: Kasih jarak napas ke atas biar badge gak nabrak */
             background-color: white;
             border-radius: 8px;
             padding: 12px;
@@ -400,6 +403,69 @@
             border-color: var(--accent-orange);
             background-color: #fff9ed;
         }
+
+/* --- ANIMASI GLOW BERDENYUT --- */
+@keyframes pulse-glow {
+    0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4); border-color: #f59e0b; }
+    50% { box-shadow: 0 0 15px 2px rgba(245, 158, 11, 0.2); border-color: #fbbf24; }
+    100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4); border-color: #f59e0b; }
+}
+
+/* --- STYLE KHUSUS CARD REKOMENDASI (VERSI ELEGAN & WAJAR) --- */
+.payment-item.recommended {
+    /* Background sedikit off-white (kekuningan tipis) agar beda dari putih biasa */
+    background-color: #fffbf2; 
+    
+    /* Border warna oranye solid (tanpa animasi) */
+    border: 1.5px solid var(--accent-orange);
+    
+    /* Shadow halus berwarna oranye, statis (diam) */
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.15);
+    
+    /* Setup posisi badge */
+    position: relative;
+    overflow: visible !important;
+    margin-top: 20px !important;
+    z-index: 5;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Efek saat disentuh/hover sedikit saja (interaktif) */
+.payment-item.recommended:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(245, 158, 11, 0.25);
+}
+
+/* --- STYLE BADGE DI GARIS ATAS --- */
+.badge-hot-line {
+    position: absolute;
+    top: -10px; /* Posisi pas nangkring di garis */
+    right: 15px; /* Jarak dari kanan */
+    
+    /* Warna gradasi halus, tidak mencolok mata */
+    background: linear-gradient(to bottom, #f59e0b, #d97706);
+    
+    color: #fff; /* Teks putih agar kontras */
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 4px; /* Sudut sedikit melengkung (wajar) */
+    
+    /* Shadow kecil agar badge terlihat timbul 3D */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    
+    z-index: 10;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Icon api diam saja, tidak perlu goyang-goyang */
+.badge-hot-line i {
+    font-size: 11px;
+}
 
         .pay-left { display: flex; align-items: center; gap: 10px; }
         .pay-logo {
@@ -632,14 +698,21 @@
                 <div class="payment-cat-title">E-Wallet & QRIS</div>
                 
                 <div class="payment-item" onclick="selectPayment(this, 0)">
-                    <div class="pay-left">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/QRIS_logo.svg/1200px-QRIS_logo.svg.png" class="pay-logo">
-                        <div class="pay-name">QRIS <br>(Semua E-Wallet)</div>
-                    </div>
-                    <div class="pay-right">
-                        <div class="pay-price" data-fee="750">Rp -</div>
-                    </div>
-                </div>
+    
+    <div class="badge-hot-line">
+        <i class="fa-solid fa-fire"></i> REKOMENDASI
+    </div>
+    <div class="pay-left">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/QRIS_logo.svg/1200px-QRIS_logo.svg.png" class="pay-logo">
+        <div class="pay-name">
+            QRIS <br>
+            <span style="font-weight: normal; font-size: 11px; color: #666;">(Semua E-Wallet)</span>
+        </div>
+    </div>
+    <div class="pay-right">
+        <div class="pay-price" data-fee="750">Rp -</div>
+    </div>
+</div>
 
                 <div class="payment-item" onclick="selectPayment(this, 1)">
                     <div class="pay-left">
