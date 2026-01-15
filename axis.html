@@ -123,9 +123,16 @@
             display: flex;
             gap: 8px;
             padding: 15px;
-            justify-content: center;
+            
+            /* UBAH BAGIAN INI */
+            justify-content: flex-start; /* Agar dimulai dari kiri & bisa discroll */
+            
             overflow-x: auto;
+            
+            /* Tambahan agar scroll lebih halus di iOS */
+            -webkit-overflow-scrolling: touch; 
         }
+
         .quick-tags::-webkit-scrollbar { display: none; }
 
         .tag {
@@ -207,8 +214,43 @@
             padding: 5px;
             border: 2px solid #2d3748;
         }
-        .game-info h2 { font-size: 16px; font-weight: 700; line-height: 1.2; }
-        .game-info span { font-size: 12px; color: var(--text-grey); }
+        .game-info h2 { 
+            font-size: 16px; 
+            font-weight: 700; 
+            line-height: 1.2; 
+            margin-bottom: 4px;
+        }
+
+        .game-info span { 
+            font-size: 12px; 
+            color: var(--text-grey); 
+        }
+
+        /* --- Tambahan CSS untuk Link Cara Pembayaran --- */
+.game-sub-info {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Jarak antar elemen */
+    font-size: 12px;
+    color: var(--text-grey);
+}
+
+.link-tutorial {
+    color: var(--text-grey);
+    text-decoration: none;
+    font-weight: 400;
+    transition: color 0.2s;
+    cursor: pointer;
+}
+
+.link-tutorial:hover {
+    color: var(--accent-orange); /* Berubah warna saat disentuh */
+    text-decoration: underline;
+}
+
+.divider {
+    color: #4a5568;
+}
 
         .blue-card {
             background-color: var(--card-bg);
@@ -493,13 +535,20 @@
 
     <div class="order-container">
         
-        <div class="game-title-header">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Axis_logo_2015.svg" alt="AXIS" class="game-icon">
-            <div class="game-info">
-                <h2>Pulsa Axis Reguler</h2>
-                <span>Axis Indonesia</span>
-            </div>
+<div class="game-title-header">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Axis_logo_2015.svg" alt="AXIS" class="game-icon">
+    <div class="game-info">
+        <h2>Pulsa Axis Reguler</h2>
+        
+        <div class="game-sub-info">
+            <span>Axis Indonesia</span>
+            <span class="divider">/</span>
+            <a href="#" class="link-tutorial" onclick="alert('Pop-up Cara Pembayaran bisa dipasang di sini!')">
+                Cara Pembayaran <i class="ri-question-line"></i> 
+            </a>
         </div>
+        </div>
+</div>
 
         <div class="blue-card" id="form-identity-card">
             <div class="step-header">
