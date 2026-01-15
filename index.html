@@ -17,7 +17,7 @@
         /* --- RESET & VARIABLES --- */
         :root {
             --bg-dark: #02122b; /* Warna latar belakang utama */
-            --bg-card: #0d2752; /* Warna kartu game */
+            --bg-card: #0d2752; /* Warna kartu game */ 
             --primary-blue: #1c468a;
             --accent-red: #b91c32; /* Warna tombol All */
             --text-white: #ffffff;
@@ -139,68 +139,87 @@
             font-weight: 600;
             text-decoration: none;
         }
-
-        /* --- HERO BANNER --- */
-        .hero-section {
-            padding: 0 15px;
-            margin-bottom: 20px;
-        }
-
-        .hero-card {
-            background: linear-gradient(90deg, #0d2752 0%, #1a3c75 100%);
-            border-radius: 12px;
-            overflow: hidden;
-            position: relative;
-            height: 160px;
-            display: flex;
-            align-items: center;
-        }
-
-        /* Menggunakan overlay gambar untuk meniru banner */
-        .hero-bg {
+         
+        /*slide banner*/
+        .slider-wrapper {
+            position: relative; 
+            margin-top: -15px;
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.8;
-        }
-        
-        .hero-content {
-            position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 2;
-            max-width: 60%;
-        }
-
-        .hero-content h3 {
-            font-family: var(--font-title);
-            font-size: 18px;
-            font-weight: 800;
-            text-transform: uppercase;
-            margin-bottom: 5px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-        }
-        
-        .hero-content p {
-            font-size: 10px;
-            margin-bottom: 10px;
-            font-weight: 500;
-        }
-
-        .dots {
+            max-width: 900px;
+            height: 220px;
             display: flex;
             justify-content: center;
-            gap: 6px;
-            margin-top: 10px;
+            align-items: center;
+            perspective: 1000px;
         }
-        .dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background-color: #4a5568;
+
+        /* --- SLIDER TRACK --- */
+        .slider-track {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            position: relative;
         }
-        .dot.active { background-color: white; }
+
+        /* --- ITEM SLIDE --- */
+        .slide {
+            position: absolute;
+            width: 80%;
+            height: 160px;
+            border-radius: 20px;
+            background-size: cover;
+            background-position: center;
+            transition: all 0.5s ease-in-out;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            opacity: 0.6;
+            z-index: 1;
+            transform: scale(0.8) translateX(0);
+            border: 4px solid rgba(255,255,255,0.8);
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            overflow: hidden;
+        }
+
+        /* Styling Judul */
+        .slide-content {
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
+            color: white;
+            text-align: center;
+        }
+
+        /* POSISI SLIDE */
+        .slide.active {
+            opacity: 1;
+            z-index: 5;
+            transform: scale(1.1) translateX(0);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            border: 2px solid #fff;
+        }
+
+        .slide.prev {
+            transform: scale(0.85) translateX(-60%);
+            z-index: 2;
+            opacity: 0.5;
+            filter: brightness(0.5);
+        }
+
+        .slide.next {
+            transform: scale(0.85) translateX(60%);
+            z-index: 2;
+            opacity: 0.5;
+            filter: brightness(0.5);
+        }
+
+        .slide.hide {
+            transform: scale(0.5);
+            opacity: 0;
+            z-index: 0;
+        }
 
         /* --- FILTERS --- */
         .filters {
@@ -390,20 +409,31 @@
         <a href="#" class="tag">Semua Nyaman</a>
     </nav>
 
-    <section class="hero-section">
-        <div class="hero-card">
-            <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Banner" class="hero-bg">
-            <div class="hero-content">
-                <h3>PUSH RANK, PAKAI SKIN KEREN</h3>
-                <p>TOP UP MLBB LEBIH LENGKAP</p>
-            </div>
+    <div class="slider-wrapper">
+
+    <button class="nav-btn prev-btn" onclick="moveSlide(-1)">
+        <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+
+    <div class="slider-track" id="track">
+        
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1555680202-c86f0e12f086?q=80&w=1000&auto=format&fit=crop');">
         </div>
-        <div class="dots">
-            <div class="dot active"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
+
+        <div class="slide next" style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1000&auto=format&fit=crop');">
         </div>
-    </section>
+
+        <div class="slide hide" style="background-image: url('https://images.unsplash.com/photo-1555680202-c86f0e12f086?q=80&w=1000&auto=format&fit=crop');">
+        </div>
+
+        <div class="slide hide" style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1000&auto=format&fit=crop');">
+        </div>
+    </div>
+
+    <button class="nav-btn next-btn" onclick="moveSlide(1)">
+        <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+</div>
 
    <div class="filters">
     <button class="filter-btn active" data-filter="all">All</button>
@@ -675,6 +705,51 @@
         });
     });
 </script>
+
+<script>
+    const track = document.getElementById('track');
+    const slides = Array.from(track.children);
+    let currentIndex = 0;
+    let autoSlideInterval;
+
+    function updateClasses() {
+        slides.forEach((slide, index) => {
+            slide.className = 'slide';
+            let diff = index - currentIndex;
+            if (diff > slides.length / 2) diff -= slides.length;
+            if (diff < -slides.length / 2) diff += slides.length;
+
+            if (diff === 0) slide.classList.add('active');
+            else if (diff === 1) slide.classList.add('next');
+            else if (diff === -1) slide.classList.add('prev');
+            else slide.classList.add('hide');
+        });
+    }
+
+    function moveSlide(direction) {
+        currentIndex += direction;
+        if (currentIndex >= slides.length) currentIndex = 0;
+        else if (currentIndex < 0) currentIndex = slides.length - 1;
+
+        updateClasses();
+        resetTimer();
+    }
+
+    function startAutoSlide() {
+        autoSlideInterval = setInterval(() => {
+            moveSlide(1);
+        }, 3000);
+    }
+
+    function resetTimer() {
+        clearInterval(autoSlideInterval);
+        startAutoSlide();
+    }
+
+    updateClasses();
+    startAutoSlide();
+</script>
+
 
 </body>
 </html>
