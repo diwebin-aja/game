@@ -139,87 +139,68 @@
             font-weight: 600;
             text-decoration: none;
         }
-         
-        /*slide banner*/
-        .slider-wrapper {
-            position: relative; 
-            margin-top: -15px;
-            width: 100%;
-            max-width: 900px;
-            height: 220px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            perspective: 1000px;
+
+        /* --- HERO BANNER --- */
+        .hero-section {
+            padding: 0 15px;
+            margin-bottom: 20px;
         }
 
-        /* --- SLIDER TRACK --- */
-        .slider-track {
+        .hero-card {
+            background: linear-gradient(90deg, #0d2752 0%, #1a3c75 100%);
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            height: 160px;
             display: flex;
             align-items: center;
-            justify-content: center;
+        }
+
+        /* Menggunakan overlay gambar untuk meniru banner */
+        .hero-bg {
             width: 100%;
             height: 100%;
-            position: relative;
+            object-fit: cover;
+            opacity: 0.8;
+        }
+        
+        .hero-content {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 2;
+            max-width: 60%;
         }
 
-        /* --- ITEM SLIDE --- */
-        .slide {
-            position: absolute;
-            width: 80%;
-            height: 160px;
-            border-radius: 20px;
-            background-size: cover;
-            background-position: center;
-            transition: all 0.5s ease-in-out;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            opacity: 0.6;
-            z-index: 1;
-            transform: scale(0.8) translateX(0);
-            border: 4px solid rgba(255,255,255,0.8);
+        .hero-content h3 {
+            font-family: var(--font-title);
+            font-size: 18px;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .hero-content p {
+            font-size: 10px;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .dots {
             display: flex;
             justify-content: center;
-            align-items: flex-end;
-            overflow: hidden;
+            gap: 6px;
+            margin-top: 10px;
         }
-
-        /* Styling Judul */
-        .slide-content {
-            width: 100%;
-            padding: 20px;
-            background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
-            color: white;
-            text-align: center;
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #4a5568;
         }
-
-        /* POSISI SLIDE */
-        .slide.active {
-            opacity: 1;
-            z-index: 5;
-            transform: scale(1.1) translateX(0);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
-            border: 2px solid #fff;
-        }
-
-        .slide.prev {
-            transform: scale(0.85) translateX(-60%);
-            z-index: 2;
-            opacity: 0.5;
-            filter: brightness(0.5);
-        }
-
-        .slide.next {
-            transform: scale(0.85) translateX(60%);
-            z-index: 2;
-            opacity: 0.5;
-            filter: brightness(0.5);
-        }
-
-        .slide.hide {
-            transform: scale(0.5);
-            opacity: 0;
-            z-index: 0;
-        }
+        .dot.active { background-color: white; }
 
         /* --- FILTERS --- */
         .filters {
@@ -383,6 +364,95 @@
             color: white;
         }
 
+        /* --- 1. SECTION WRAPPER (PENGGANTI BODY DI KODE LAMA) --- */
+        .game-section {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .slider-track {
+            width: 100%;
+            max-width: 900px;
+            
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr;
+            place-items: center; 
+            height: auto;
+            perspective: 1000px;
+        }
+
+        /* --- 3. ITEM SLIDE --- */
+        .slide {
+            /* Menumpuk semua slide di koordinat grid 1 baris / 1 kolom */
+            grid-area: 1 / 1;
+            
+            width: 80%; /* Lebar relatif terhadap track */
+            height: 160px;
+            max-height: 400px; /* Batasan tinggi agar tidak terlalu besar di desktop */
+            
+            border-radius: 20px;
+            background-size: cover;
+            background-position: center;
+            
+            /* Transisi Halus */
+            transition: all 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+            
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            opacity: 0.6;
+            z-index: 1;
+            transform: scale(0.8); /* Posisi default diam */
+            border: 0px solid rgba(255,255,255,0.8);
+            
+            pointer-events: none; 
+            cursor: pointer;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .slide {
+                width: 90%;
+            }
+        }
+
+        /* --- STATE LOGIC (Active, Prev, Next) --- */
+        .slide.active {
+            opacity: 1;
+            z-index: 10;
+            transform: scale(1) translateX(0);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            border: 2px solid #fff;
+            pointer-events: auto;
+        }
+
+        .slide.prev {
+            transform: scale(0.85) translateX(-60%); /* Jarak sedikit dirapatkan */
+            z-index: 5;
+            opacity: 0.5;
+            filter: brightness(0.4);
+        }
+
+        .slide.next {
+            transform: scale(0.85) translateX(60%);
+            z-index: 5;
+            opacity: 0.5;
+            filter: brightness(0.4);
+        }
+
+        .slide.hide {
+            transform: scale(0.5);
+            opacity: 0;
+            z-index: 0;
+            visibility: hidden; 
+        }
+
+
     </style>
 </head>
 <body>
@@ -409,31 +479,18 @@
         <a href="#" class="tag">Semua Nyaman</a>
     </nav>
 
-    <div class="slider-wrapper">
+    <section class="game-section">
 
-    <button class="nav-btn prev-btn" onclick="moveSlide(-1)">
-        <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
-    </button>
-
-    <div class="slider-track" id="track">
-        
-        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1555680202-c86f0e12f086?q=80&w=1000&auto=format&fit=crop');">
+        <div class="slider-track" id="track">
+            <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1000&auto=format&fit=crop');"></div>
+            <div class="slide next" style="background-image: url('https://images.unsplash.com/photo-1538481199705-c710c4e965fc?q=80&w=1000&auto=format&fit=crop');"></div>
+            <div class="slide hide" style="background-image: url('https://images.unsplash.com/photo-1552820728-8b83bb6b773f?q=80&w=1000&auto=format&fit=crop');"></div>
+            <div class="slide hide" style="background-image: url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1000&auto=format&fit=crop');"></div>
+             <div class="slide prev" style="background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1000&auto=format&fit=crop');"></div>
         </div>
 
-        <div class="slide next" style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1000&auto=format&fit=crop');">
-        </div>
+    </section>
 
-        <div class="slide hide" style="background-image: url('https://images.unsplash.com/photo-1555680202-c86f0e12f086?q=80&w=1000&auto=format&fit=crop');">
-        </div>
-
-        <div class="slide hide" style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1000&auto=format&fit=crop');">
-        </div>
-    </div>
-
-    <button class="nav-btn next-btn" onclick="moveSlide(1)">
-        <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
-    </button>
-</div>
 
    <div class="filters">
     <button class="filter-btn active" data-filter="all">All</button>
