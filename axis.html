@@ -458,69 +458,78 @@
 /* Icon api diam saja, tidak perlu goyang-goyang */
 /* --- UPDATE CSS ICON FIRE --- */
 /* --- ICON FIRE: REAL LIQUID WAVE EFFECT --- */
+/* --- ICON FIRE: DUAL COLOR WAVE (RED & ORANGE) + ANIMASI ISI ULANG --- */
 .badge-hot-line i {
     font-size: 13px;
     display: inline-block;
-    color: rgba(255, 255, 255, 0.3); /* Warna dasar transparan tipis */
     
-    /* KUNCI EFEK GELOMBANG NYATA:
-       Kita menggunakan gambar SVG berbentuk gelombang sebagai background.
-       'Fill' warna merah (%23ff4757) ada di dalam kode SVG ini.
-    */
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200' preserveAspectRatio='none'%3E%3Cpath fill='%23ff4757' d='M0,100 C50,150 100,50 150,100 C200,150 250,50 300,100 V200 H0 Z' /%3E%3C/svg%3E");
+    /* 1. Base Putih */
+    background-color: #ffffff;
     
-    /* Setup Background */
-    background-repeat: repeat-x; /* Ulangi gelombang secara horizontal */
-    background-size: 200% 200%;  /* Perbesar agar gelombang terlihat melengkung jelas */
-    background-color: white;
-    /* Potong background agar hanya muncul di dalam bentuk Api */
+    /* 2. DUA LAYER GAMBAR GELOMBANG */
+    background-image: 
+        /* Layer Depan (Merah Api) */
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200' preserveAspectRatio='none'%3E%3Cpath fill='%23ff4757' d='M0,100 C50,150 100,50 150,100 C200,150 250,50 300,100 V200 H0 Z' /%3E%3C/svg%3E"),
+        /* Layer Belakang (Oranye/Kuning) */
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200' preserveAspectRatio='none'%3E%3Cpath fill='%23ffca28' d='M0,100 C50,150 100,50 150,100 C200,150 250,50 300,100 V200 H0 Z' /%3E%3C/svg%3E");
+    
+    /* Layer Merah di posisi 0%, Layer Oranye digeser dikit (-50%) biar gak numpuk total */
+    background-position-x: 0%, -50%;
+    
+    background-repeat: repeat-x; 
+    background-size: 200% 200%;
+    
+    /* Clip ke Text */
     -webkit-background-clip: text;
     background-clip: text;
-    -webkit-text-fill-color: transparent; /* Teks jadi transparan agar air terlihat */
+    color: transparent;
+    -webkit-text-fill-color: transparent;
 
-    /* Menjalankan 3 Animasi:
-       1. liquid-fill: Air naik dari bawah ke atas.
-       2. wave-flow: Gelombang bergerak mendatar (seperti laut).
-       3. pulse: Icon berdenyut.
-    */
+    /* 3. KEMBALI KE 3 ANIMASI TERPISAH (Seperti Versi Sebelumnya) */
     animation: 
-        liquid-fill 3s infinite linear,
-        wave-flow 2s infinite linear,
-        pulse-smooth 1s infinite ease-in-out alternate;
+        liquid-fill-dual 3s infinite linear,       /* Gerakan Naik (Isi Ulang) */
+        wave-flow-dual 2s infinite linear,         /* Gerakan Ombak (Kiri-Kanan) */
+        pulse-smooth 1s infinite ease-in-out alternate; /* Denyut */
 }
 
-/* 1. Animasi Air Naik (Isi Ulang) */
-@keyframes liquid-fill {
+/* --- KEYFRAMES --- */
+
+/* 1. Animasi Air Naik (Untuk 2 Layer Sekaligus) */
+@keyframes liquid-fill-dual {
     0% {
-        background-position-y: 200%; /* Mulai dari bawah (kosong) */
+        /* Mulai dari bawah (Kosong) */
+        background-position-y: 200%, 205%; 
+    }
+    60% {
+        /* Penuh (Sampai Atas) */
+        background-position-y: 30%, 35%; 
     }
     80% {
-        background-position-y: 20%;  /* Penuh berwarna merah */
+        /* Tahan sebentar di posisi penuh */
+        background-position-y: 30%, 35%; 
     }
     100% {
-        background-position-y: 20%;  /* Tahan sebentar di penuh */
+        /* Reset (agar terlihat ngulang dari bawah lagi di siklus berikutnya) */
+        background-position-y: 30%, 35%; 
     }
-    /* Setelah 100%, animasi akan reset otomatis ke 0% (kosong lagi) */
 }
 
-/* 2. Animasi Gelombang Laut (Kiri ke Kanan) */
-@keyframes wave-flow {
+/* 2. Animasi Ombak Mengalir (Untuk 2 Layer Sekaligus) */
+@keyframes wave-flow-dual {
     0% {
-        background-position-x: 0%;
+        /* Posisi Awal Horizontal */
+        background-position-x: 0%, -50%;
     }
     100% {
-        background-position-x: -200%; /* Geser background terus menerus agar terlihat mengalir */
+        /* Geser ke kiri terus menerus */
+        background-position-x: -200%, -250%;
     }
 }
 
-/* 3. Animasi Berdenyut Halus */
+/* 3. Animasi Denyut (Sama) */
 @keyframes pulse-smooth {
-    0% {
-        transform: scale(1);
-    }
-    100% {
-        transform: scale(1.2);
-    }
+    0% { transform: scale(1); }
+    100% { transform: scale(1.2); }
 }
 
         .pay-left { display: flex; align-items: center; gap: 10px; }
