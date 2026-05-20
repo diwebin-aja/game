@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Game.ID - Mobile Legends</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">    
+    
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        body: '#0b1121',
+                        header: '#0b1121',
+                        card: '#151c2d',
+                        'card-header': '#1c253a',
+                        input: '#0b1121',
+                        orange: '#f97316',
+                        yellow: '#fbbf24',
+                        borderInput: 'rgba(148, 163, 184, 0.3)',
+                        borderHeader: '#1e293b',
+                    },
+                    fontFamily: {
+                        sans: ['IBM Plex Sans Condensed', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'btn-grad': 'linear-gradient(90deg, #94a3b8 0%, #f79e1b 100%)',
+                        'badge-grad': 'linear-gradient(180deg, #94a3b8 0%, #f79e1b 100%)',
+                        'flash-top': 'linear-gradient(90deg, #d4af37 0%, #fff2cd 50%, #d4af37 100%)',
+                        'flash-voucher': 'linear-gradient(145deg, #1a2235 0%, #0d1326 100%)',
+                        'flash-stock': 'linear-gradient(90deg, #ef4444 0%, #f97316 100%)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style type="text/tailwindcss">
+        @layer components {
+            .tab-btn {
+                @apply flex-1 py-1.5 text-center rounded-xl text-[14px] font-bold cursor-pointer transition-all duration-300;
+            }
+            .tab-btn.active {
+                @apply bg-btn-grad text-[#0f172a] shadow-[0_2px_4px_rgba(0,0,0,0.2)];
+            }
+            .tab-btn.inactive {
+                @apply text-[#94a3b8] bg-transparent;
+            }
+
+            .prod-tab-btn {
+                @apply px-4 py-2 rounded-xl border border-borderInput bg-transparent text-[#94a3b8] text-[13px] font-semibold cursor-pointer transition-none whitespace-nowrap;
+            }
+            .prod-tab-btn.active {
+                @apply border-yellow bg-orange/10 text-yellow;
+            }
+
+            .prod-item {
+                @apply bg-transparent border border-borderInput rounded-xl p-3 cursor-pointer text-left transition-all duration-200;
+            }
+            .prod-item:active, .prod-item.selected {
+                @apply border-[#9ae2ff] bg-[#9ae2ff]/10;
+            }
+
+            .tag-badge {
+                @apply bg-borderInput text-white text-[9px] font-bold px-2.5 py-1 uppercase tracking-[0.5px] inline-flex items-center;
+                -webkit-mask-image: radial-gradient(circle at 0% 50%, transparent 4px, black 4.5px), radial-gradient(circle at 100% 50%, transparent 4px, black 4.5px);
+                -webkit-mask-size: 51% 100%;
+                -webkit-mask-repeat: no-repeat;
+                -webkit-mask-position: left, right;
+                mask-image: radial-gradient(circle at 0% 50%, transparent 4px, black 4.5px), radial-gradient(circle at 100% 50%, transparent 4px, black 4.5px);
+                mask-size: 51% 100%;
+                mask-repeat: no-repeat;
+                mask-position: left, right;
+            }
+
+            .payment-category {
+                @apply bg-transparent border border-borderInput rounded-xl overflow-hidden transition-all duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)];
+            }
+            .payment-category.active {
+                @apply border-[#657e55];
+            }
+            .payment-category.active .payment-arrow {
+                @apply rotate-180;
+            }
+            .payment-category.active .payment-body-wrapper {
+                grid-template-rows: 1fr;
+            }
+            .payment-category.active .payment-body-content {
+                @apply border-t-borderInput;
+            }
+            .payment-category.active .payment-preview {
+                @apply opacity-0 max-h-0 mt-0;
+            }
+
+            .payment-item {
+                @apply flex items-center justify-between py-3 px-3.5 border border-borderInput rounded-[10px] cursor-pointer transition-all duration-200;
+            }
+            .payment-item:active, .payment-item.selected {
+                @apply border-[#9ae2ff] bg-[#9ae2ff]/10;
+            }
+
+            .flash-voucher {
+                @apply bg-flash-voucher border border-borderInput rounded-2xl flex flex-col relative cursor-pointer overflow-hidden transition-all duration-[400ms] ease-[cubic-bezier(0.175,0.885,0.32,1.275)];
+            }
+            .flash-voucher:active, .flash-voucher.selected {
+                @apply border-yellow scale-95;
+                box-shadow: 0 0 20px rgba(251, 191, 36, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            }
+            .flash-voucher::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -150%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+                transform: skewX(-25deg);
+                animation: premiumShimmer 3.5s infinite;
+                pointer-events: none;
+                z-index: 10;
+            }
+            .flash-voucher-top::before, .flash-voucher-top::after {
+                content: '';
+                position: absolute;
+                bottom: -8px;
+                width: 16px;
+                height: 16px;
+                @apply bg-card-header rounded-full;
+            }
+            .flash-voucher-top::before { left: -8px; }
+            .flash-voucher-top::after { right: -8px; }
+        }
+    </style>
+    
+    <style>
+        @keyframes premiumShimmer {
+            0% { left: -150%; }
+            20% { left: 150%; }
+            100% { left: 150%; }
+        }
+    </style>
+</head>
+<body class="bg-black flex justify-center m-0 p-0 box-border font-sans antialiased" style="-webkit-tap-highlight-color: transparent;">
+
+<div class="w-full max-w-[480px] min-h-screen bg-body relative shadow-[0_0_20px_rgba(0,0,0,0.8)] pb-10">
+    <header class="flex justify-between items-center px-4 py-2.5 bg-header sticky top-0 z-50">
+        <a href="#" class="flex items-center bg-transparent py-1.5 pr-3 pl-1.5 rounded-full gap-2 no-underline">
+            <img src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f?q=80&w=200&auto=format&fit=crop" alt="Logo" class="w-6 h-6 rounded-full object-cover">
+            <div class="text-[13px] font-extrabold text-[#0f172a] tracking-[-0.2px]"><span class="text-orange">Order</span> Game.ID</div>
+        </a>
+        <div class="flex items-center gap-2.5">
+            <button class="bg-card border-0 text-white flex items-center justify-center rounded-[10px] cursor-pointer h-[30px] w-[36px] text-lg">
+                <i class="ph ph-magnifying-glass"></i>
+            </button>
+            <button class="bg-card border-0 text-white flex items-center justify-center rounded-[10px] cursor-pointer h-[30px] px-3.5 gap-2 text-xs font-semibold">
+                <img src="https://flagcdn.com/w20/id.png" alt="ID" class="w-4 h-4 rounded-full">
+                ID / IDR
+            </button>
+            <button class="bg-card border-0 text-white flex items-center justify-center rounded-[10px] cursor-pointer h-[30px] w-[36px] text-lg">
+                <i class="ph ph-list"></i>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section class="w-full h-[250px] relative">
+            <img class="w-full h-full object-cover object-top" src="baner.jpg" alt="Hero Banner">
+        </section>
+
+        <section class="flex px-4 relative z-10">
+            <div class="mt-[-50px] shrink-0 perspective-[500px]">
+                <img src="game.jpg" alt="Game Icon" class="w-[130px] h-[120px] rounded-[18px] object-cover border-0 shadow-[-8px_8px_15px_rgba(0,0,0,0.5)] origin-left [transform:rotateY(30deg)] transition-transform duration-300">
+            </div>
+            <div class="mt-4 -ml-1.5">
+                <h1 class="text-white text-[15px] font-bold uppercase tracking-[0.5px]">MOBILE LEGENDS (ALL REGION)</h1>
+                <p class="text-[#94a3b8] text-[13px] font-medium mt-1">Moonton</p>
+            </div>
+        </section>
+
+        <section class="flex justify-between pt-6 px-4 pb-5 border-b border-[#1a2335]">
+            <div class="flex items-center gap-1.5 text-[11px] font-semibold text-[#cbd5e1]">
+                <i class="ph-fill ph-lightning text-yellow text-sm"></i>
+                Proses Cepat
+            </div>
+            <div class="flex items-center gap-1.5 text-[11px] font-semibold text-[#cbd5e1]">
+                <i class="ph-fill ph-chat-circle-dots text-[#60a5fa] text-sm"></i>
+                Layanan Chat 24/7
+            </div>
+            <div class="flex items-center gap-1.5 text-[11px] font-semibold text-[#cbd5e1]">
+                <i class="ph-fill ph-shield-check text-[#34d399] text-sm"></i>
+                Pembayaran Aman!
+            </div>
+        </section>
+
+        <section class="p-[15px]">
+            <div class="flex bg-card rounded-xl p-1">
+                <div class="tab-btn active" id="tab-transaksi" onclick="switchTab('transaksi')">Transaksi</div>
+                <div class="tab-btn inactive" id="tab-keterangan" onclick="switchTab('keterangan')">Deskripsi & Ulasan</div>
+            </div>
+        </section>
+
+        <section class="px-4">
+            
+            <!-- MULAI WRAPPER KONTEN TRANSAKSI -->
+            <div id="content-transaksi">
+                
+                <div class="bg-card rounded-xl overflow-hidden mb-4">
+                    <div class="flex items-center bg-card-header">
+                        <div class="bg-badge-grad text-[#0f172a] text-base font-extrabold py-3 px-5 rounded-br-xl flex items-center justify-center">1</div>
+                        <div class="text-white text-sm font-bold pl-4">Masukkan Data Akun</div>
+                    </div>
+                    <div class="p-4 pb-5 flex flex-col gap-4">
+                        
+                        <div class="flex flex-col gap-2">
+                            <div class="flex items-center gap-1.5">
+                                <span class="text-[#e2e8f0] text-[13px] font-semibold">ID</span>
+                                <i class="ph ph-info text-[#94a3b8] text-base cursor-pointer"></i>
+                            </div>
+                            <input type="text" class="bg-input border border-borderInput rounded-xl py-3 px-4 text-white text-sm font-medium outline-none transition-colors duration-200 focus:border-[#657e55] placeholder:text-[#475569] placeholder:font-normal" placeholder="Masukkan ID">
+                        </div>
+
+                        <div class="flex flex-col gap-2">
+                            <div class="flex items-center gap-1.5">
+                                <span class="text-[#e2e8f0] text-[13px] font-semibold">Server</span>
+                            </div>
+                            <input type="text" class="bg-input border border-borderInput rounded-xl py-3 px-4 text-white text-sm font-medium outline-none transition-colors duration-200 focus:border-[#657e55] placeholder:text-[#475569] placeholder:font-normal" placeholder="Masukkan Zone ID">
+                        </div>
+
+                        <button class="bg-btn-grad text-[#0f172a] border-none rounded-full p-1.5 text-[15px] font-bold flex justify-center items-center gap-1.5 w-full cursor-pointer mt-1 shadow-[0_4px_12px_rgba(247,158,27,0.2)] transition-opacity duration-200 active:opacity-80">
+                            <i class="ph-fill ph-file-search text-xl"></i>
+                            Cek Akun
+                        </button>
+
+                    </div>
+                </div>
+                
+                <div class="bg-card rounded-xl overflow-hidden mb-4">
+                    <div class="flex items-center bg-card-header">
+                        <div class="bg-badge-grad text-[#0f172a] text-base font-extrabold py-3 px-5 rounded-br-xl flex items-center justify-center">2</div>
+                        <div class="text-white text-sm font-bold pl-4">Pilih Produk</div>
+                    </div>
+                    <div class="p-4 pb-5 flex flex-col gap-4">
+                        
+                        <!-- Tab Kategori Produk -->
+                        <div class="flex gap-2.5 overflow-x-auto">
+                            <div class="prod-tab-btn" id="tab-flashsale" data-redirect-url="/home/flash-sale" onclick="switchProductTab('flashsale')">Flash Sale</div>
+                            <div class="prod-tab-btn active" id="tab-diamond" data-redirect-url="/home/diamond" onclick="switchProductTab('diamond')">Diamond</div>
+                            <div class="prod-tab-btn" id="tab-membership" data-redirect-url="/home/membership" onclick="switchProductTab('membership')">Membership</div>
+                        </div>
+
+                        <!-- Daftar Produk: Diamond -->
+                        <div class="grid grid-cols-2 gap-3 mt-2" id="content-diamond">
+                            <div class="prod-item">
+                                <div class="text-white text-[13px] font-bold mb-2">344 Diamonds</div>
+                                <div class="text-orange text-[13px] font-bold">Rp 80.000</div>
+                                <div class="flex items-center flex-wrap gap-1.5 mt-1.5">
+                                    <span class="tag-badge">Promo</span>
+                                    <span class="text-[#94a3b8] text-[11px] line-through font-medium">Rp 85.000</span>
+                                </div>
+                            </div>
+                            <div class="prod-item">
+                                <div class="text-white text-[13px] font-bold mb-2">706 Diamonds</div>
+                                <div class="text-orange text-[13px] font-bold">Rp 160.000</div>
+                                <div class="flex items-center flex-wrap gap-1.5 mt-1.5">
+                                    <span class="tag-badge">Cashback 5%</span>
+                                </div>
+                            </div>
+                            <div class="prod-item">
+                                <div class="text-white text-[13px] font-bold mb-2">1050 Diamonds</div>
+                                <div class="text-orange text-[13px] font-bold">Rp 240.000</div>
+                                <div class="flex items-center flex-wrap gap-1.5 mt-1.5">
+                                    <span class="tag-badge">Promo</span>
+                                </div>
+                            </div>
+                            <div class="prod-item">
+                                <div class="text-white text-[13px] font-bold mb-2">2195 Diamonds</div>
+                                <div class="text-orange text-[13px] font-bold">Rp 475.000</div>
+                                <div class="flex items-center flex-wrap gap-1.5 mt-1.5">
+                                    <span class="text-[#94a3b8] text-[11px] line-through font-medium">Rp 500.000</span>
+                                </div>
+                            </div>
+                            <div class="prod-item">
+                                <div class="text-white text-[13px] font-bold mb-2">3688 + (3688) Bonus Diamonds</div>
+                                <div class="text-orange text-[13px] font-bold">Rp 800.000</div>
+                                <div class="flex items-center flex-wrap gap-1.5 mt-1.5">
+                                </div>
+                            </div>
+                            <div class="prod-item">
+                                <div class="text-white text-[13px] font-bold mb-2">5532 Diamonds</div>
+                                <div class="text-orange text-[13px] font-bold">Rp 1.200.000</div>
+                                <div class="flex items-center flex-wrap gap-1.5 mt-1.5">
+                                    <span class="tag-badge">Cashback 10%</span>
+                                </div>
+                            </div>
+                            <div class="prod-item">
+                                <div class="text-white text-[13px] font-bold mb-2">9288 Diamonds</div>
+                                <div class="text-orange text-[13px] font-bold">Rp 2.000.000</div>
+                                <div class="flex items-center flex-wrap gap-1.5 mt-1.5">
+                                    <span class="tag-badge">Sultan</span>
+                                    <span class="text-[#94a3b8] text-[11px] line-through font-medium">Rp 2.200.000</span>
+                                </div>
+                            </div>
+                        </div>
+  
+                        <!-- Daftar Produk: Flash Sale (Voucher Premium) -->
+                        <div class="grid-cols-2 gap-3 mt-2" id="content-flashsale" style="display: none;">
+                            
+                            <!-- Item Flash Sale 1 -->
+                            <div class="flash-voucher">
+                                <div class="bg-flash-top py-2.5 px-3 text-center border-b-2 border-dashed border-[#0b1121]/60 relative z-10 flash-voucher-top">
+                                    <div class="text-[#4a3300] text-[13px] font-black uppercase tracking-[1px] flex items-center justify-center gap-1.5 drop-shadow-[0_1px_1px_rgba(255,255,255,0.6)]"><i class="ph-fill ph-tag"></i> Diskon 30%</div>
+                                </div>
+                                <div class="py-4 px-3.5 flex flex-col gap-1 relative z-10">
+                                    <div class="text-white text-[15px] font-extrabold mb-0.5 tracking-[0.3px] drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)]">2575 Diamonds</div>
+                                    
+                                    <div class="flex items-baseline gap-2 mb-1.5">
+                                        <span class="text-yellow text-[14px] font-bold drop-shadow-[0_0_12px_rgba(251,191,36,0.3)]">Rp 455.000</span>
+                                        <span class="text-[#64748b] text-xs line-through font-semibold">Rp 650.000</span>
+                                    </div>
+                                    
+                                    <div class="flex items-center gap-2.5 mt-1">
+                                        <div class="flex-1 h-2 bg-[#0b1121] rounded-full overflow-hidden shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)] border border-white/5">
+                                            <div class="h-full bg-flash-stock rounded-full shadow-[0_0_8px_rgba(239,68,68,0.8)]" style="width: 10%;"></div>
+                                        </div>
+                                        <span class="text-[#cbd5e1] text-[10px] font-bold uppercase tracking-[0.5px]">Tersisa 2/20</span>
+                                    </div>
+
+                                    <div class="mt-2.5 bg-gradient-to-r from-borderInput to-transparent border-l-[3px] border-[#94a3b8] text-[#94a3b8] text-[11px] font-extrabold py-1.5 px-2.5 rounded-r-md inline-flex items-center gap-1.5 w-fit tracking-[0.5px]"><i class="ph-fill ph-clock-countdown"></i> Berakhir 02:15:30</div>
+                                </div>
+                            </div>
+
+                            <!-- Item Flash Sale 2 -->
+                            <div class="flash-voucher">
+                                <div class="bg-flash-top py-2.5 px-3 text-center border-b-2 border-dashed border-[#0b1121]/60 relative z-10 flash-voucher-top">
+                                    <div class="text-[#4a3300] text-[13px] font-black uppercase tracking-[1px] flex items-center justify-center gap-1.5 drop-shadow-[0_1px_1px_rgba(255,255,255,0.6)]"><i class="ph-fill ph-tag"></i> Diskon 45%</div>
+                                </div>
+                                <div class="py-4 px-3.5 flex flex-col gap-1 relative z-10">
+                                    <div class="text-white text-[15px] font-extrabold mb-0.5 tracking-[0.3px] drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)]">4000 Diamonds</div>
+                                    
+                                    <div class="flex items-baseline gap-2 mb-1.5">
+                                        <span class="text-yellow text-[14px] font-bold drop-shadow-[0_0_12px_rgba(251,191,36,0.3)]">Rp 539.000</span>
+                                        <span class="text-[#64748b] text-xs line-through font-semibold">Rp 980.000</span>
+                                    </div>
+                                    
+                                    <div class="flex items-center gap-2.5 mt-1">
+                                        <div class="flex-1 h-2 bg-[#0b1121] rounded-full overflow-hidden shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)] border border-white/5">
+                                            <div class="h-full bg-flash-stock rounded-full shadow-[0_0_8px_rgba(239,68,68,0.8)]" style="width: 45%;"></div>
+                                        </div>
+                                        <span class="text-[#cbd5e1] text-[10px] font-bold uppercase tracking-[0.5px]">Tersisa 45/100</span>
+                                    </div>
+
+                                    <div class="mt-2.5 bg-gradient-to-r from-borderInput to-transparent border-l-[3px] border-[#94a3b8] text-[#94a3b8] text-[11px] font-extrabold py-1.5 px-2.5 rounded-r-md inline-flex items-center gap-1.5 w-fit tracking-[0.5px]"><i class="ph-fill ph-clock-countdown"></i> Berakhir 01:05:10</div>
+                                </div>
+                            </div>
+
+                            <!-- Item Flash Sale 3 -->
+                            <div class="flash-voucher">
+                                <div class="bg-flash-top py-2.5 px-3 text-center border-b-2 border-dashed border-[#0b1121]/60 relative z-10 flash-voucher-top">
+                                    <div class="text-[#4a3300] text-[13px] font-black uppercase tracking-[1px] flex items-center justify-center gap-1.5 drop-shadow-[0_1px_1px_rgba(255,255,255,0.6)]"><i class="ph-fill ph-tag"></i> Flash Deal</div>
+                                </div>
+                                <div class="py-4 px-3.5 flex flex-col gap-1 relative z-10">
+                                    <div class="text-white text-[15px] font-extrabold mb-0.5 tracking-[0.3px] drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)]">Twilight Pass</div>
+                                    
+                                    <div class="flex items-baseline gap-2 mb-1.5">
+                                        <span class="text-yellow text-[14px] font-bold drop-shadow-[0_0_12px_rgba(251,191,36,0.3)]">Rp 99.000</span>
+                                        <span class="text-[#64748b] text-xs line-through font-semibold">Rp 150.000</span>
+                                    </div>
+                                    
+                                    <div class="flex items-center gap-2.5 mt-1">
+                                        <div class="flex-1 h-2 bg-[#0b1121] rounded-full overflow-hidden shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)] border border-white/5">
+                                            <div class="h-full bg-flash-stock rounded-full shadow-[0_0_8px_rgba(239,68,68,0.8)]" style="width: 80%;"></div>
+                                        </div>
+                                        <span class="text-[#cbd5e1] text-[10px] font-bold uppercase tracking-[0.5px]">Tersisa 40/50</span>
+                                    </div>
+
+                                    <div class="mt-2.5 bg-gradient-to-r from-borderInput to-transparent border-l-[3px] border-[#94a3b8] text-[#94a3b8] text-[11px] font-extrabold py-1.5 px-2.5 rounded-r-md inline-flex items-center gap-1.5 w-fit tracking-[0.5px]"><i class="ph-fill ph-clock-countdown"></i> Berakhir 00:45:00</div>
+                                </div>
+                            </div>
+
+                            <!-- Item Flash Sale 4 -->
+                            <div class="flash-voucher">
+                                <div class="bg-flash-top py-2.5 px-3 text-center border-b-2 border-dashed border-[#0b1121]/60 relative z-10 flash-voucher-top">
+                                    <div class="text-[#4a3300] text-[13px] font-black uppercase tracking-[1px] flex items-center justify-center gap-1.5 drop-shadow-[0_1px_1px_rgba(255,255,255,0.6)]"><i class="ph-fill ph-tag"></i> Harga Hancur</div>
+                                </div>
+                                <div class="py-4 px-3.5 flex flex-col gap-1 relative z-10">
+                                    <div class="text-white text-[15px] font-extrabold mb-0.5 tracking-[0.3px] drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)]">9288 Diamonds</div>
+                                    
+                                    <div class="flex items-baseline gap-2 mb-1.5">
+                                        <span class="text-yellow text-[14px] font-bold drop-shadow-[0_0_12px_rgba(251,191,36,0.3)]">Rp 1.650.000</span>
+                                        <span class="text-[#64748b] text-xs line-through font-semibold">Rp 2.200.000</span>
+                                    </div>
+                                    
+                                    <div class="flex items-center gap-2.5 mt-1">
+                                        <div class="flex-1 h-2 bg-[#0b1121] rounded-full overflow-hidden shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)] border border-white/5">
+                                            <div class="h-full bg-flash-stock rounded-full shadow-[0_0_8px_rgba(239,68,68,0.8)]" style="width: 5%;"></div>
+                                        </div>
+                                        <span class="text-[#cbd5e1] text-[10px] font-bold uppercase tracking-[0.5px]">Tersisa 1/20</span>
+                                    </div>
+
+                                    <div class="mt-2.5 bg-gradient-to-r from-borderInput to-transparent border-l-[3px] border-[#94a3b8] text-[#94a3b8] text-[11px] font-extrabold py-1.5 px-2.5 rounded-r-md inline-flex items-center gap-1.5 w-fit tracking-[0.5px]"><i class="ph-fill ph-clock-countdown"></i> Berakhir 05:20:15</div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="bg-card rounded-xl overflow-hidden mb-4">
+                    <div class="flex items-center bg-card-header">
+                        <div class="bg-badge-grad text-[#0f172a] text-base font-extrabold py-3 px-5 rounded-br-xl flex items-center justify-center">3</div>
+                        <div class="text-white text-sm font-bold pl-4">Pilih Pembayaran</div>
+                    </div>
+                    <div class="p-4 pb-5 flex flex-col gap-4">
+                        <div class="payment-item" onclick="selectPayment(this)">
+                            <div class="flex items-center gap-3">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Logo_QRIS.svg" class="w-12 h-8 bg-white p-0.5 rounded-md object-contain" alt="QRIS">
+                                <div class="text-white text-[13px] font-semibold ml-1">QRIS (E-Wallet/M-Banking)</div>
+                            </div>
+                            <div class="text-orange text-[14px] font-bold">Rp 9.980.000</div>
+                        </div>
+
+                        <!-- Kategori E-Wallet -->
+                        <div class="payment-category" id="cat-ewallet">
+                            <div class="p-3.5 px-4 cursor-pointer" onclick="togglePayment('cat-ewallet')">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-white text-[14px] font-bold">E-Wallet</span>
+                                    <i class="ph ph-caret-down payment-arrow text-[#94a3b8] text-base transition-transform duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)]"></i>
+                                </div>
+                                <div class="payment-preview flex gap-2 mt-2.5 opacity-100 max-h-6 overflow-hidden transition-all duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)]">
+                                    <img src="https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?q=80&w=100&h=100&auto=format&fit=crop" class="h-[15px] w-[28px] rounded-sm object-cover" alt="Logo">
+                                    <img src="https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=100&h=100&auto=format&fit=crop" class="h-[15px] w-[28px] rounded-sm object-cover" alt="Logo">
+                                    <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=100&h=100&auto=format&fit=crop" class="h-[15px] w-[28px] rounded-sm object-cover" alt="Logo">
+                                </div>
+                            </div>
+                            
+                            <div class="payment-body-wrapper grid [grid-template-rows:0fr] transition-[grid-template-rows] duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)]">
+                                <div class="overflow-hidden">
+                                    <div class="payment-body-content px-4 pb-4 border-t border-transparent transition-colors duration-[400ms]">
+                                        <div class="grid grid-cols-1 gap-2.5 pt-4">
+                                            <div class="payment-item" onclick="selectPayment(this)">
+                                                <div class="flex items-center gap-3">
+                                                    <img src="https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?q=80&w=100&h=100&auto=format&fit=crop" class="w-[45px] h-[30px] bg-white p-0.5 rounded-md object-cover" alt="Gopay">
+                                                    <div class="text-white text-[13px] font-semibold">GoPay</div>
+                                                </div>
+                                                <div class="text-orange text-[13px] font-bold">Rp 80.000</div>
+                                            </div>
+                                            <div class="payment-item" onclick="selectPayment(this)">
+                                                <div class="flex items-center gap-3">
+                                                    <img src="https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=100&h=100&auto=format&fit=crop" class="w-[45px] h-[30px] bg-white p-0.5 rounded-md object-cover" alt="OVO">
+                                                    <div class="text-white text-[13px] font-semibold">OVO</div>
+                                                </div>
+                                                <div class="text-orange text-[13px] font-bold">Rp 81.500</div>
+                                            </div>
+                                            <div class="payment-item" onclick="selectPayment(this)">
+                                                <div class="flex items-center gap-3">
+                                                    <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=100&h=100&auto=format&fit=crop" class="w-[45px] h-[30px] bg-white p-0.5 rounded-md object-cover" alt="Dana">
+                                                    <div class="text-white text-[13px] font-semibold">DANA</div>
+                                                </div>
+                                                <div class="text-orange text-[13px] font-bold">Rp 80.500</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Kategori Virtual Account -->
+                        <div class="payment-category" id="cat-va">
+                            <div class="p-3.5 px-4 cursor-pointer" onclick="togglePayment('cat-va')">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-white text-[14px] font-bold">Virtual Account</span>
+                                    <i class="ph ph-caret-down payment-arrow text-[#94a3b8] text-base transition-transform duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)]"></i>
+                                </div>
+                                <div class="payment-preview flex gap-2 mt-2.5 opacity-100 max-h-6 overflow-hidden transition-all duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)]">
+                                    <img src="https://images.unsplash.com/photo-1557682250-33bd709cbe85?q=80&w=100&h=100&auto=format&fit=crop" class="h-[15px] w-[28px] rounded-sm object-cover" alt="Logo">
+                                    <img src="https://images.unsplash.com/photo-1557682250-33bd709cbe85?q=80&w=100&h=100&auto=format&fit=crop" class="h-[15px] w-[28px] rounded-sm object-cover" alt="Logo">
+                                </div>
+                            </div>
+                            
+                            <div class="payment-body-wrapper grid [grid-template-rows:0fr] transition-[grid-template-rows] duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)]">
+                                <div class="overflow-hidden">
+                                    <div class="payment-body-content px-4 pb-4 border-t border-transparent transition-colors duration-[400ms]">
+                                        <div class="grid grid-cols-1 gap-2.5 pt-4">
+                                            <div class="payment-item" onclick="selectPayment(this)">
+                                                <div class="flex items-center gap-3">
+                                                    <img src="https://images.unsplash.com/photo-1557682250-33bd709cbe85?q=80&w=100&h=100&auto=format&fit=crop" class="w-[45px] h-[30px] bg-white p-0.5 rounded-md object-cover" alt="BCA">
+                                                    <div class="text-white text-[13px] font-semibold">BCA Virtual Account</div>
+                                                </div>
+                                                <div class="text-orange text-[13px] font-bold">Rp 82.000</div>
+                                            </div>
+                                            <div class="payment-item" onclick="selectPayment(this)">
+                                                <div class="flex items-center gap-3">
+                                                    <img src="https://images.unsplash.com/photo-1557682250-33bd709cbe85?q=80&w=100&h=100&auto=format&fit=crop" class="w-[45px] h-[30px] bg-white p-0.5 rounded-md object-cover" alt="Mandiri">
+                                                    <div class="text-white text-[13px] font-semibold">Mandiri Virtual Account</div>
+                                                </div>
+                                                <div class="text-orange text-[13px] font-bold">Rp 82.000</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="bg-card rounded-xl overflow-hidden mb-4">
+                    <div class="flex items-center bg-card-header">
+                        <div class="bg-badge-grad text-[#0f172a] text-base font-extrabold py-3 px-5 rounded-br-xl flex items-center justify-center">4</div>
+                        <div class="text-white text-sm font-bold pl-4">Rincian Pembayaran</div>
+                    </div>
+                    <div class="p-4 pb-5 flex flex-col gap-4">
+                        
+                        <!-- Bagian Rincian -->
+                        <div class="bg-transparent border border-borderInput rounded-xl p-4 flex flex-col gap-2.5">
+                            
+                            <!-- Info Akun -->
+                            <div class="pb-1 mb-0 border-b border-dashed border-[#1e293b]">
+                                <div class="text-xs text-white font-semibold mb-1.5 tracking-[-0.2px]">Data Akun</div>
+                                <div class="flex justify-between text-[13px] text-[#94a3b8] mb-1">
+                                    <span>User ID</span>
+                                    <span class="text-white">123456789</span>
+                                </div>
+                                <div class="flex justify-between text-[13px] text-[#94a3b8] mb-1">
+                                    <span>Server</span>
+                                    <span class="text-white">(1234)</span>
+                                </div>
+                            </div>
+
+                            <!-- Info Biaya -->
+                            <div class="pb-1 mb-0 border-b border-dashed border-[#1e293b]">
+                                <div class="text-xs text-white font-semibold mb-1.5 tracking-[-0.2px]">Rincian Biaya</div>
+                                <div class="flex justify-between text-[13px] text-[#94a3b8] mb-1">
+                                    <span>344 Diamonds</span>
+                                    <span class="text-orange font-bold">Rp 80.000</span>
+                                </div>
+                                <div class="flex justify-between text-[13px] text-[#94a3b8] mb-1">
+                                    <span>Biaya Layanan VA-BCA</span>
+                                    <span class="text-orange font-bold">Rp 1.500</span>
+                                </div>
+                            </div>
+
+                            <!-- Total -->
+                            <div class="flex justify-between text-[13px] text-[#94a3b8] mb-1 mt-2 text-white font-bold text-[14px]">
+                                <span>Total Pembayaran</span>
+                                <span class="text-orange font-bold">Rp 81.500</span>
+                            </div>
+                        </div>
+
+                        <!-- Input Nomor WA -->
+                        <div class="flex flex-col gap-2">
+                            <div class="flex items-center gap-1.5">
+                                <span class="text-[#e2e8f0] text-[13px] font-semibold">*Nomor WhatsApp</span>
+                            </div>
+                            <input type="tel" class="bg-input border border-borderInput rounded-xl py-3 px-4 text-white text-sm font-medium outline-none transition-colors duration-200 focus:border-[#657e55] placeholder:text-[#475569] placeholder:font-normal" placeholder="08xxxxxxxxxx">
+                            <span class="text-[#94a3b8] text-[11px] font-medium mt-1 pl-0.5 flex items-center gap-1">*Invoice akan dikirim melalui WA di atas.</span>
+                        </div>
+
+                        <!-- Tombol -->
+                        <button class="bg-btn-grad text-[#0f172a] border-none rounded-full py-1.5 px-1.5 text-[15px] font-bold flex justify-center items-center gap-1.5 w-full cursor-pointer mt-1 shadow-[0_4px_12px_rgba(247,158,27,0.2)] transition-opacity duration-200 active:opacity-80">
+                            <i class="ph ph-shopping-cart-simple text-xl"></i>
+                            Beli Sekarang
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="bg-card border border-card-header rounded-xl p-4 flex items-center gap-4 mb-5 cursor-pointer transition-colors duration-200 active:bg-[#3f3f46]">
+                    <div class="text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7">
+                            <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+                            <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
+                        </svg>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <div class="text-white text-sm font-bold">Butuh Bantuan?</div>
+                        <div class="text-[#e2e8f0] text-xs font-medium">Kamu bisa hubungi admin disini.</div>
+                    </div>
+                </div>
+            </div> 
+            <!-- SELESAI WRAPPER KONTEN TRANSAKSI -->
+            
+            <!-- MULAI WRAPPER KONTEN KETERANGAN/DESKRIPSI -->
+            <div id="content-keterangan" style="display: none;">
+                <div class="bg-card rounded-xl overflow-hidden mb-4">
+                    <div class="flex items-center bg-card-header">
+                        <div class="bg-badge-grad text-[#0f172a] text-base font-extrabold py-3 px-5 rounded-br-xl flex items-center justify-center">
+                            <i class="ph-fill ph-article"></i>
+                        </div>
+                        <div class="text-white text-sm font-bold pl-4">Deskripsi Produk</div>
+                    </div>
+                    
+                    <div class="p-4 pb-5 flex flex-col text-[#94a3b8] text-[13px] leading-[1.6]">
+                        
+                        <h3 class="text-white text-[15px] mb-2">Mobile Legends: Bang Bang</h3>
+                        <p class="mb-4">
+                            Mobile Legends: Bang Bang adalah game MOBA mobile 5v5 yang sangat populer. Top up Diamond MLBB sekarang untuk membeli skin premium, Starlight Member, hero baru, dan berbagai item in-game eksklusif lainnya.
+                        </p>
+
+                        <h4 class="text-white text-[14px] mb-2.5 flex items-center gap-1.5">
+                            Cara Top Up:
+                        </h4>
+                        
+                        <ol class="pl-[15px] flex flex-col gap-2 mb-4 list-decimal">
+                            <li>Masukkan <b class="font-bold text-white">User ID</b> dan <b class="font-bold text-white">Zone ID</b> Anda.</li>
+                            <li>Pilih nominal Diamond atau Membership yang diinginkan.</li>
+                            <li>Pilih metode pembayaran yang tersedia (QRIS, E-Wallet, Virtual Account).</li>
+                            <li>Masukkan nomor WhatsApp Anda untuk menerima bukti pembelian dan invoice.</li>
+                            <li>Selesaikan pembayaran dan Diamond akan otomatis masuk ke akun Anda dalam hitungan detik!</li>
+                        </ol>
+
+                        <div class="p-3 bg-input border border-borderInput rounded-xl">
+                            <p class="mb-1 text-white font-semibold flex items-center gap-1.5">
+                                <i class="ph-fill ph-clock text-[#60a5fa] text-base"></i> 
+                                Proses Otomatis 24/7
+                            </p>
+                            <p class="text-xs text-[#94a3b8]">
+                                Layanan kami aktif 24 jam. Pesanan Anda akan diproses secara instan setelah pembayaran terkonfirmasi oleh sistem kami.
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+                
+                <div class="bg-card rounded-xl overflow-hidden mb-4">
+                <div class="flex items-center bg-card-header">
+                    <div class="bg-badge-grad text-[#0f172a] text-base font-extrabold py-3 px-5 rounded-br-xl flex items-center justify-center">
+                        <i class="ph-fill ph-chats-circle text-[#0f172a]"></i>
+                    </div>
+                    <div class="text-white text-sm font-bold pl-4">Ulasan Pembeli</div>
+                </div>
+                
+                <div class="p-4 pb-5 flex flex-col gap-4">
+                    
+                    <div class="flex items-center bg-input border border-borderInput rounded-xl p-4 mb-5 gap-4">
+                        <div class="flex flex-col items-center justify-center border-r border-borderInput pr-4 min-w-[90px]">
+                            <span class="text-[36px] font-extrabold text-white leading-none mb-1">4.9</span>
+                            <div class="text-yellow text-sm flex gap-0.5">
+                                <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                            </div>
+                            <span class="text-[11px] text-[#94a3b8] mt-1.5 text-center">62.21jt Ulasan</span>
+                        </div>
+                        
+                        <div class="flex-1 flex flex-col gap-1.5">
+                            <div class="flex items-center gap-2">
+                                <div class="flex items-center gap-1 text-xs text-white font-bold w-6">5 <i class="ph-fill ph-star text-yellow text-xs"></i></div>
+                                <div class="flex-1 h-2 bg-card-header rounded-[3px] overflow-hidden"><div class="h-full bg-yellow rounded-sm" style="width: 95%;"></div></div>
+                                <div class="text-[11px] text-[#94a3b8] font-medium w-[42px] text-right">62.21jt</div>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <div class="flex items-center gap-1 text-xs text-white font-bold w-6">4 <i class="ph-fill ph-star text-yellow text-xs"></i></div>
+                                <div class="flex-1 h-2 bg-card-header rounded-[3px] overflow-hidden"><div class="h-full bg-yellow rounded-sm" style="width: 10%;"></div></div>
+                                <div class="text-[11px] text-[#94a3b8] font-medium w-[42px] text-right">1.64rb</div>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <div class="flex items-center gap-1 text-xs text-white font-bold w-6">3 <i class="ph-fill ph-star text-yellow text-xs"></i></div>
+                                <div class="flex-1 h-2 bg-card-header rounded-[3px] overflow-hidden"><div class="h-full bg-yellow rounded-sm" style="width: 3%;"></div></div>
+                                <div class="text-[11px] text-[#94a3b8] font-medium w-[42px] text-right">288</div>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <div class="flex items-center gap-1 text-xs text-white font-bold w-6">2 <i class="ph-fill ph-star text-yellow text-xs"></i></div>
+                                <div class="flex-1 h-2 bg-card-header rounded-[3px] overflow-hidden"><div class="h-full bg-yellow rounded-sm" style="width: 1%;"></div></div>
+                                <div class="text-[11px] text-[#94a3b8] font-medium w-[42px] text-right">106</div>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <div class="flex items-center gap-1 text-xs text-white font-bold w-6">1 <i class="ph-fill ph-star text-yellow text-xs"></i></div>
+                                <div class="flex-1 h-2 bg-card-header rounded-[3px] overflow-hidden"><div class="h-full bg-yellow rounded-sm" style="width: 4%;"></div></div>
+                                <div class="text-[11px] text-[#94a3b8] font-medium w-[42px] text-right">295</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col gap-3">
+                        
+                        <div class="bg-transparent border border-borderHeader rounded-xl p-3.5 transition-colors duration-200 hover:bg-input">
+                            <div class="flex justify-between items-start mb-2">
+                                <div class="flex flex-col gap-0.5">
+                                    <div class="text-white text-[13px] font-bold flex items-center gap-1.5"><i class="ph-fill ph-user-circle text-[#64748b] text-sm"></i> zhy**********</div>
+                                    <div class="text-[#94a3b8] text-[11px]">16-05-2026 • 15:39 WIB</div>
+                                </div>
+                                <div class="text-yellow text-xs flex gap-0.5">
+                                    <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                                </div>
+                            </div>
+                            <div class="text-[#cbd5e1] text-[13px] leading-[1.5] mb-3">
+                                Prosesnya cepat banget, mantap deh pokoknya ngga nyesel langganan disini!
+                            </div>
+                            <div class="inline-flex items-center gap-1.5 bg-body border border-borderInput text-[#94a3b8] py-1.5 px-2.5 rounded-full text-[11px] font-semibold">
+                                <i class="ph-fill ph-diamond text-yellow"></i> Weekly Diamond Pass - (Limited)
+                            </div>
+                        </div>
+
+                        <div class="bg-transparent border border-borderHeader rounded-xl p-3.5 transition-colors duration-200 hover:bg-input">
+                            <div class="flex justify-between items-start mb-2">
+                                <div class="flex flex-col gap-0.5">
+                                    <div class="text-white text-[13px] font-bold flex items-center gap-1.5"><i class="ph-fill ph-user-circle text-[#64748b] text-sm"></i> jun**********</div>
+                                    <div class="text-[#94a3b8] text-[11px]">16-05-2026 • 08:06 WIB</div>
+                                </div>
+                                <div class="text-yellow text-xs flex gap-0.5">
+                                    <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                                </div>
+                            </div>
+                            <div class="text-[#cbd5e1] text-[13px] leading-[1.5] mb-3">
+                                Puas banget topup disini, admin responsif dan gampang pakenya.
+                            </div>
+                            <div class="inline-flex items-center gap-1.5 bg-body border border-borderInput text-[#94a3b8] py-1.5 px-2.5 rounded-full text-[11px] font-semibold">
+                                <i class="ph-fill ph-diamond text-yellow"></i> 70 (64+6) Diamonds
+                            </div>
+                        </div>
+
+                        <div class="bg-transparent border border-borderHeader rounded-xl p-3.5 transition-colors duration-200 hover:bg-input">
+                            <div class="flex justify-between items-start mb-2">
+                                <div class="flex flex-col gap-0.5">
+                                    <div class="text-white text-[13px] font-bold flex items-center gap-1.5"><i class="ph-fill ph-user-circle text-[#64748b] text-sm"></i> 23z**********</div>
+                                    <div class="text-[#94a3b8] text-[11px]">16-05-2026 • 01:51 WIB</div>
+                                </div>
+                                <div class="text-yellow text-xs flex gap-0.5">
+                                    <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                                </div>
+                            </div>
+                            <div class="text-[#cbd5e1] text-[13px] leading-[1.5] mb-3">
+                                Cepet masuknya padahal top up jam 2 pagi.
+                            </div>
+                            <div class="inline-flex items-center gap-1.5 bg-body border border-borderInput text-[#94a3b8] py-1.5 px-2.5 rounded-full text-[11px] font-semibold">
+                                <i class="ph-fill ph-diamond text-yellow"></i> 1000 (500+500) Diamonds - First Top Up
+                            </div>
+                        </div>
+
+                        <div class="bg-transparent border border-borderHeader rounded-xl p-3.5 transition-colors duration-200 hover:bg-input">
+                            <div class="flex justify-between items-start mb-2">
+                                <div class="flex flex-col gap-0.5">
+                                    <div class="text-white text-[13px] font-bold flex items-center gap-1.5"><i class="ph-fill ph-user-circle text-[#64748b] text-sm"></i> nan**********</div>
+                                    <div class="text-[#94a3b8] text-[11px]">16-05-2026 • 00:12 WIB</div>
+                                </div>
+                                <div class="text-yellow text-xs flex gap-0.5">
+                                    <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                                </div>
+                            </div>
+                            <div class="text-[#cbd5e1] text-[13px] leading-[1.5] mb-3">
+                                Josss, langganan terbaikk.
+                            </div>
+                            <div class="inline-flex items-center gap-1.5 bg-body border border-borderInput text-[#94a3b8] py-1.5 px-2.5 rounded-full text-[11px] font-semibold">
+                                <i class="ph-fill ph-diamond text-yellow"></i> Weekly Diamond Pass
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            </div>
+            <!-- SELESAI WRAPPER KONTEN KETERANGAN/DESKRIPSI -->
+
+        </section>
+    </main>
+</div>
+
+<script>
+    function switchTab(tabName) {
+        const tabTransaksi = document.getElementById('tab-transaksi');
+        const tabKeterangan = document.getElementById('tab-keterangan');
+        
+        const contentTransaksi = document.getElementById('content-transaksi'); 
+        const contentKeterangan = document.getElementById('content-keterangan');
+
+        if(tabName === 'transaksi') {
+            tabTransaksi.className = 'tab-btn active';
+            tabKeterangan.className = 'tab-btn inactive';
+            contentTransaksi.style.display = 'block';
+            contentKeterangan.style.display = 'none';
+        } else {
+            tabKeterangan.className = 'tab-btn active';
+            tabTransaksi.className = 'tab-btn inactive';
+            contentTransaksi.style.display = 'none';
+            contentKeterangan.style.display = 'block';
+        }
+    }
+</script>
+
+<script>
+    function switchProductTab(tabName) {
+        // Array kategori yang tersedia
+        const tabs = ['diamond', 'membership', 'flashsale'];
+        
+        tabs.forEach(tab => {
+            const tabBtn = document.getElementById('tab-' + tab);
+            const content = document.getElementById('content-' + tab);
+            
+            if (tabBtn && content) {
+                if (tab === tabName) {
+                    tabBtn.className = 'prod-tab-btn active';
+                    content.style.display = 'grid'; 
+                } else {
+                    tabBtn.className = 'prod-tab-btn';
+                    content.style.display = 'none';
+                }
+            }
+        });
+
+        // Handle form target URL / direct redirect berdasarkan struktur kategori
+        const activeElement = document.getElementById('tab-' + tabName);
+        if (activeElement && activeElement.hasAttribute('data-redirect-url')) {
+            const targetUrl = activeElement.getAttribute('data-redirect-url');
+            console.log("Kategori diakses, bersiap redirect ke form URL tujuan: " + targetUrl);
+            
+            // Uncomment baris di bawah jika klik tab ingin langsung memicu redirect halaman:
+            // window.location.href = targetUrl;
+        }
+    }
+</script>
+
+<script>
+    // Fungsi untuk membuka/tutup kategori pembayaran (Accordion)
+    function togglePayment(categoryId) {
+        const categories = document.querySelectorAll('.payment-category');
+        
+        categories.forEach(cat => {
+            if (cat.id === categoryId) {
+                cat.classList.toggle('active');
+            } else {
+                cat.classList.remove('active');
+            }
+        });
+    }
+
+    // Fungsi untuk memilih metode pembayaran
+    function selectPayment(element) {
+        // Hapus kelas 'selected' dari semua item pembayaran
+        const allItems = document.querySelectorAll('.payment-item');
+        allItems.forEach(item => {
+            item.classList.remove('selected');
+        });
+        
+        // Tambahkan kelas 'selected' ke item yang diklik
+        element.classList.add('selected');
+    }
+</script>
+</body>
+</html>
