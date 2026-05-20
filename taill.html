@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Up Mobile Legends</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'bg-main': '#121215',
+                        'bg-card': '#1c1c20',
+                        'bg-header': '#25252b',
+                        'bg-input': '#393940',
+                        'pink-main': '#e63e84',
+                        'pink-grad-1': '#ee438b',
+                        'pink-grad-2': '#df397d',
+                        'cat-maroon': '#672e4a',
+                        'cat-purple': '#783563',
+                        'border-color': '#2a2a30'
+                    },
+                    fontFamily: {
+                        'sans': ['"IBM Plex Sans Condensed"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .dotted-pattern {
+            background-image: radial-gradient(#3a3a42 1px, transparent 1px);
+            background-size: 8px 8px;
+        }
+        /* Responsif constraint agar UI tidak pecah di desktop namun tetap full di mobile */
+        .app-container {
+            max-width: 480px;
+            margin: 0 auto;
+            background-color: #121215;
+            min-height: 100vh;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+    </style>
+</head>
+<body class="bg-black text-white font-sans antialiased">
+
+    <div class="app-container pb-20">
+        <header class="fixed top-0 w-full max-w-[480px] z-50 bg-[#121215]/95 backdrop-blur flex items-center justify-between px-4 h-14 border-b border-white/5">
+            <div class="flex items-center">
+                <img src="https://images.unsplash.com/photo-1614680376593-902f74cf0d41?auto=format&fit=crop&q=80&w=100&h=40" alt="Logo" class="h-6 w-auto object-cover rounded">
+            </div>
+
+            <div class="flex items-center gap-2">
+                <button class="w-8 h-8 rounded-md border border-gray-700 flex items-center justify-center">
+    <svg class="w-4 h-4 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+    </svg>
+</button>
+                
+<button class="flex items-center gap-1.5 bg-[#1c1c20] border border-gray-700 rounded-md px-2.5 py-1">
+    <div class="w-3.5 h-3.5 rounded-full overflow-hidden flex flex-col border border-gray-600">
+        <div class="bg-red-600 h-1/2 w-full"></div>
+        <div class="bg-white h-1/2 w-full"></div>
+    </div>
+    <span class="text-[11px] font-semibold text-gray-200">ID / IDR</span>
+</button>
+
+                <button class="w-8 h-8 rounded border border-gray-700 flex items-center justify-center">
+                    <svg class="w-4 h-4 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                </button>
+            </div>
+        </header>
+
+        <div class="relative w-full h-[240px] pt-14">
+            <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=1000" alt="Banner" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#121215] via-[#121215]/60 to-transparent"></div>
+        </div>
+
+        <div class="relative z-10 flex items-start px-4 -mt-16">
+            <div class="w-[95px] h-[95px] rounded-lg overflow-hidden border-2 border-gray-600/50 flex-shrink-0 bg-black shadow-lg">
+                <img src="https://images.unsplash.com/photo-1627856013091-fed6e4e30025?auto=format&fit=crop&q=80&w=200" alt="Game Logo" class="w-full h-full object-cover">
+            </div>
+            <div class="ml-3 mt-6">
+                <h1 class="text-xl font-bold text-white leading-tight">Mobile Legends</h1>
+                <p class="text-gray-400 text-xs mt-0.5">Moonton</p>
+            </div>
+        </div>
+
+        <div class="flex items-center justify-between px-4 mt-5 mb-5 text-[10px] sm:text-[11px] font-medium text-gray-300">
+            <div class="flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-yellow-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.381z" clip-rule="evenodd" /></svg>
+                <span>Proses Cepat</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-[#5865F2]" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd" /></svg>
+                <span>Layanan Chat 24/7</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-blue-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                <span>Pembayaran Aman</span>
+            </div>
+        </div>
+
+        <div class="mx-4 bg-bg-card p-1 rounded-xl flex items-center mb-5 border border-white/5">
+            <button class="w-1/2 bg-pink-main text-white py-2 rounded-lg text-sm font-semibold shadow">
+                Transaksi
+            </button>
+            <button class="w-1/2 text-gray-400 py-2 rounded-lg text-sm font-medium">
+                Deskripsi
+            </button>
+        </div>
+
+        <section class="mx-4 bg-bg-card rounded-xl overflow-hidden mb-5 border border-border-color shadow-md">
+            <div class="flex items-center bg-bg-header h-12">
+                <div class="bg-pink-main w-12 h-full flex items-center justify-center text-white font-bold text-[17px]">
+                    1
+                </div>
+                <h2 class="ml-3 font-semibold text-[15px] text-gray-100 flex-1">Masukkan Data Akun</h2>
+                <svg class="w-4 h-4 text-gray-400 mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            </div>
+            
+            <div class="p-4 flex gap-3">
+                <div class="flex-1">
+                    <label class="block text-xs font-bold text-gray-100 mb-1.5">ID</label>
+                    <input type="text" placeholder="Masukkan ID" class="w-full bg-bg-input text-xs text-white placeholder-gray-500 rounded-lg px-3 py-3 outline-none">
+                </div>
+                <div class="flex-1">
+                    <label class="block text-xs font-bold text-gray-100 mb-1.5">Server</label>
+                    <input type="text" placeholder="Masukkan Server" class="w-full bg-bg-input text-xs text-white placeholder-gray-500 rounded-lg px-3 py-3 outline-none">
+                </div>
+            </div>
+        </section>
+
+        <section class="mx-4 bg-bg-card rounded-xl overflow-hidden mb-5 border border-border-color shadow-md">
+            <div class="flex items-center bg-bg-header h-12">
+                <div class="bg-pink-main w-12 h-full flex items-center justify-center text-white font-bold text-[17px]">
+                    2
+                </div>
+                <h2 class="ml-3 font-semibold text-[15px] text-gray-100">Pilih Nominal</h2>
+            </div>
+            
+            <div class="flex overflow-x-auto gap-2.5 p-4 no-scrollbar">
+                
+                <button class="flex-shrink-0 w-[110px] h-[85px] bg-pink-main rounded-xl flex flex-col items-center justify-center gap-1.5">
+                    <img src="https://images.unsplash.com/photo-1611996575749-76ce7e231175?auto=format&fit=crop&q=80&w=64&h=64" alt="All Region" class="w-8 h-8 object-cover mix-blend-screen rounded-full border border-white/20">
+                    <span class="text-[11px] font-semibold text-white">All Region</span>
+                </button>
+                
+                <button class="flex-shrink-0 w-[110px] h-[85px] bg-cat-maroon rounded-xl flex flex-col items-center justify-center gap-1.5 border border-white/5 relative">
+                    <img src="https://images.unsplash.com/photo-1599839619722-39751411ea63?auto=format&fit=crop&q=80&w=64&h=64" alt="First TopUp" class="w-7 h-7 object-cover mix-blend-screen rounded-full mt-3">
+                    <span class="text-[11px] font-medium text-gray-200">First TopUp</span>
+                </button>
+
+                <button class="flex-shrink-0 w-[110px] h-[85px] bg-cat-purple rounded-xl flex flex-col items-center justify-center gap-1.5 border border-white/5 relative">
+                    <div class="absolute top-1.5 right-1.5 bg-[#4c84ff] text-[7px] px-1 py-0.5 rounded-sm text-white font-bold leading-none">445%</div>
+                    <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?auto=format&fit=crop&q=80&w=64&h=64" alt="Weekly Pass" class="w-7 h-7 object-cover mix-blend-screen rounded-sm mt-1">
+                    <span class="text-[10px] font-medium text-gray-200 text-center leading-tight">Weekly Dia...<br>Pass</span>
+                </button>
+
+            </div>
+
+            <div class="grid grid-cols-2 gap-3 px-4 pb-5">
+                
+                <div class="bg-[#212126] dotted-pattern border border-border-color rounded-xl overflow-hidden relative flex flex-col h-[85px] pt-2.5">
+                    <div class="px-3">
+                        <h3 class="text-[11px] font-medium text-gray-300">5 Diamond</h3>
+                        <p class="text-pink-main font-bold text-[13px] mt-0.5">Rp 1.493</p>
+                    </div>
+                    <div class="absolute bottom-0 w-full h-[26px] bg-gradient-to-r from-pink-grad-2 to-pink-grad-1 flex items-center justify-end px-2">
+                        <div class="bg-white rounded px-1 py-[2px] flex items-center gap-[2px]">
+                            <svg class="w-2.5 h-2.5 text-green-700" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.
