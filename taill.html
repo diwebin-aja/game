@@ -8,1543 +8,273 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">    
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">    
     
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-
-    <style>
-        :root {
-            /* Color Palette based on image */
-            --bg-body: #0b1121;
-            --bg-header: #0b1121;
-            --bg-card: #151c2d;
-            --bg-card-header: #1c253a;
-            --bg-input: #0b1121;
-            
-            --text-white: #ffffff;
-            --text-gray: #94a3b8;
-            --text-dark: #0f172a;
-            
-            --accent-orange: #f97316;
-            --accent-yellow: #fbbf24;
-            
-            --tab-active-grad: linear-gradient(180deg, #9ae2ff 0%, #6ab7ff 100%);
-            --btn-grad: linear-gradient(90deg, #94a3b8 0%, #f79e1b 100%);
-            --badge-grad: linear-gradient(180deg, #94a3b8 0%, #f79e1b 100%);
-            
-            --border-input: rgba(148, 163, 184, 0.3);
-; /* 4d5e42 Greenish thin border */
-            --border-header: #1e293b;
-            
-            --border-radius-sm: 4px;
-            --border-radius-md: 12px; /*8px*/
-            --border-radius-lg: 10px;
-            --border-radius-xl: 100px;
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"IBM Plex Sans Condensed"', 'sans-serif'],
+                    }
+                }
+            }
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'IBM Plex Sans Condensed', sans-serif;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        body {
-            background-color: #000; /* Dark background for desktop wrapper */
-            display: flex;
-            justify-content: center;
-        }
-
-        .app-container {
-            width: 100%;
-            max-width: 480px;
-            min-height: 100vh;
-            background-color: var(--bg-body);
-            position: relative;
-            box-shadow: 0 0 20px rgba(0,0,0,0.8);
-            padding-bottom: 40px;
-        }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 16px;
-            background-color: var(--bg-header);
-            position: sticky;
-            top: 0;
-            z-index: 50;
-        }
-
-        .logo-pill {
-            display: flex;
-            align-items: center;
-            background-color: transparent;
-            padding: 6px 12px 6px 6px;
-            border-radius: 50px;
-            gap: 8px;
-            text-decoration: none;
-        }
-
-        .logo-pill img {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        .logo-text {
-            font-size: 13px;
-            font-weight: 800;
-            color: var(--text-dark);
-            letter-spacing: -0.2px;
-        }
-
-        .logo-text span {
-            color: var(--accent-orange);
-        }
-
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .action-btn {
-            background-color: var(--bg-card);
-            border: 0px solid var(--border-header);
-            color: var(--text-white);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 10px;
-            cursor: pointer;
-            height: 30px;
-        }
-
-        .btn-icon {
-            width: 36px;
-            font-size: 18px;
-        }
-
-        .btn-lang {
-            padding: 0 14px;
-            gap: 8px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .btn-lang img {
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-        }
-
-        .hero {
-            width: 100%;
-            height: 250px;
-            position: relative;
-        }
-
-        .hero-banner {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: top center;
-        }
-
-        .game-info {
-            display: flex;
-            padding: 0 16px;
-            position: relative;
-            z-index: 10;
-            background-color: var(--bg-card-header);
-        }
-
-.game-thumbnail {
-    margin-top: -50px;
-    flex-shrink: 0;
-    perspective: 500px; 
-}
-
-.game-thumbnail img {
-    width: 130px;
-    height: 120px;
-    border-radius: 18px;
-    object-fit: cover;
-    border: 0px solid var(--bg-body);
-    transform-origin: left center;
-    transform: rotateY(30deg);
-    box-shadow: -8px 8px 15px rgba(0,0,0,0.5); 
-    transition: transform 0.3s ease;
-}
-
-        .game-titles {
-            margin-top: 16px;
-            margin-left: -5px;
-        }
-
-        .game-titles h1 {
-            color: var(--text-white);
-            font-size: 15px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .game-titles p {
-            color: var(--text-gray);
-            font-size: 13px;
-            font-weight: 500;
-            margin-top: 4px;
-        }
-
-        .features {
-            display: flex;
-            justify-content: space-between;
-            padding: 20px 16px 20px 16px;
-            background-color: var(--bg-card);
-            border-bottom-right-radius: 12px;
-            border-bottom-left-radius: 12px;
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 11px;
-            font-weight: 600;
-            color: #cbd5e1;
-        }
-
-        .feature-item i {
-            font-size: 14px;
-        }
-
-        .icon-lightning { 
-          color: #facc15; 
-        }
-        .icon-chat { 
-          color: #60a5fa;
-        }
-        .icon-shield { 
-          color: #34d399;
-        }
-
-        .tabs-wrapper {
-            padding: 15px;
-        }
-
-        .tabs {
-            display: flex;
-            background-color: var(--bg-card);
-            border-radius: var(--border-radius-md);
-            padding: 4px;
-        }
-
-        .tab-btn {
-            flex: 1;
-            padding: 6.5px 0;
-            text-align: center;
-            border-radius: 12px;
-            font-size: 14px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .tab-btn.active {
-            background: var(--btn-grad);
-            color: var(--text-dark);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-
-        .tab-btn.inactive {
-            color: var(--text-gray);
-            background: transparent;
-        }
-
-        /* Form Card */
-        .form-section {
-            padding: 0 16px;
-        }
-
-        .card {
-            background-color: var(--bg-card);
-            border-radius: var(--border-radius-md);
-            overflow: hidden;
-            margin-bottom: 16px;
-        }
-
-        .card-header {
-            display: flex;
-            align-items: center;
-            background-color: var(--bg-card-header);
-        }
-
-        .step-badge {
-            background: var(--badge-grad);
-            color: var(--text-dark);
-            font-size: 16px;
-            font-weight: 800;
-            padding: 12px 20px;
-            border-bottom-right-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .step-title {
-            color: var(--text-white);
-            font-size: 14px;
-            font-weight: 700;
-            padding-left: 16px;
-        }
-
-        .card-body {
-            padding: 16px;
-            padding-bottom: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .input-group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .label-wrap {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .input-label {
-            color: #e2e8f0;
-            font-size: 13px;
-            font-weight: 600;
-        }
-
-        .info-icon {
-            color: var(--text-gray);
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        .input-field {
-            background-color: var(--bg-input);
-            border: 1px solid var(--border-input);
-            border-radius: 12px;
-            padding: 12px 16px;
-            color: var(--text-white);
-            font-size: 14px;
-            font-weight: 500;
-            outline: none;
-            transition: border-color 0.2s ease;
-        }
-
-        .input-field:focus {
-            border-color: #657e55;
-        }
-
-        .input-field::placeholder {
-            color: #475569;
-            font-weight: 400;
-        }
-
-        /* Submit Button */
-        .btn-submit {
-            background: var(--btn-grad);
-            color: var(--text-dark);
-            border: none;
-            border-radius: 50px;
-            padding: 6px;
-            font-size: 15px;
-            font-weight: 700;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 5px;
-            width: 100%;
-            cursor: pointer;
-            margin-top: 4px;
-            box-shadow: 0 4px 12px rgba(247, 158, 27, 0.2);
-            transition: opacity 0.2s ease;
-            display: none;
-        }
-
-        .btn-submit:active {
-            opacity: 0.8;
-        }
-
-        .btn-submit i {
-            font-size: 20px;
-        }
-        
-        /* CSS untuk Grid Produk dan Item */
-.prod-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    margin-top: 8px;
-}
-
-.prod-item {
-    background-color: var(--bg-card);
-    border: 1px solid var(--border-input);
-    border-radius: 12px;
-    padding: 14px 12px;
-    cursor: pointer;
-    text-align: left;
-    transition: all 0.2s ease;
-}
-
-/* Efek saat produk diklik / dipilih */
-.prod-item:active, .prod-item.selected {
-    border-color: #9ae2ff;
-    background-color: rgba(154, 226, 255, 0.1);
-}
-
-.prod-name {
-    color: var(--text-white);
-    font-size: 13px;
-    font-weight: 700;
-    margin-bottom: 8px;
-}
-
-.prod-price {
-    color: var(--text-gray);
-    font-size: 12px;
-    font-weight: 500;
-}
-
-.prod-tabs {
-    display: flex;
-    gap: 10px;
-    overflow-x: auto;
-}
-
-.prod-tab-btn {
-    padding: 8px 16px;
-    border-radius: 12px;
-    border: 1px solid var(--border-input);
-    background-color: var(--bg-card);
-    color: var(--text-gray);
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0s ease;
-    white-space: nowrap;
-}
-
-.prod-tab-btn.active {
-    border-color: var(--accent-yellow);
-    background-color: rgba(249, 115, 22, 0.1);
-    color: var(--accent-yellow);
-}
-/* CSS untuk Label Promo & Harga Coret */
-.prod-tags {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 6px; /* Jarak atas dengan harga utama */
-}
-
-/* Bentuk Label ala Voucher / Tiket */
-.tag-badge {
-    background-color: var(--border-input);
-    color: var(--text-white);
-    font-size: 9px;
-    font-weight: 700;
-    /* Padding kiri-kanan diperbesar agar teks tidak terkena potongan */
-    padding: 4px 10px; 
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    display: inline-flex;
-    align-items: center;
-
-    /* Trik membuat lubang setengah lingkaran di sisi kiri dan kanan */
-    -webkit-mask-image: radial-gradient(circle at 0% 50%, transparent 4px, black 4.5px), 
-                        radial-gradient(circle at 100% 50%, transparent 4px, black 4.5px);
-    -webkit-mask-size: 51% 100%;
-    -webkit-mask-repeat: no-repeat;
-    -webkit-mask-position: left, right;
-    
-    mask-image: radial-gradient(circle at 0% 50%, transparent 4px, black 4.5px), 
-                radial-gradient(circle at 100% 50%, transparent 4px, black 4.5px);
-    mask-size: 51% 100%;
-    mask-repeat: no-repeat;
-    mask-position: left, right;
-}
-
-
-
-.tag-strike {
-    color: var(--text-gray);
-    font-size: 11px;
-    text-decoration: line-through;
-    font-weight: 500;
-}
-
-.prod-price {
-    color: var(--accent-orange); 
-    font-size: 13px;
-    font-weight: 700;
-}
-
-
-/* CSS untuk Metode Pembayaran (Super Smooth Animation) */
-.payment-category {
-    background-color: var(--bg-card);
-    border: 1px solid var(--border-input);
-    border-radius: 12px;
-    overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.payment-header {
-    padding: 14px 16px;
-    cursor: pointer;
-}
-
-.payment-header-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.payment-title {
-    color: var(--text-white);
-    font-size: 14px;
-    font-weight: 700;
-}
-
-.payment-arrow {
-    color: var(--text-gray);
-    font-size: 16px;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Cuplikan logo dengan transisi memudar & mengecil yang sangat halus */
-.payment-preview {
-    display: flex;
-    gap: 8px;
-    margin-top: 10px;
-    opacity: 1;
-    max-height: 24px; /* Batas tinggi cuplikan */
-    overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.payment-preview-img {
-    height: 15px;
-    width: 28px; /* Diberi lebar 28px fix agar gambar unsplash rapi */
-    border-radius: 2px;
-    object-fit: cover;
-}
-
-.payment-body-wrapper {
-    display: grid;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.payment-body-inner {
-    overflow: hidden;
-}
-
-.payment-body-content {
-    padding: 0 16px 16px 16px;
-    border-top: 1px solid transparent;
-    transition: border-color 0.4s ease;
-}
-
-.payment-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 10px;
-    padding-top: 16px; /* Jarak atas saat terbuka */
-}
-
-.payment-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px 14px;
-    border: 1px solid var(--border-input);
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.payment-item:active, .payment-item.selected {
-    border-color: #9ae2ff;
-    background-color: rgba(154, 226, 255, 0.1);
-}
-
-.payment-item-left {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.payment-logo {
-    width: 45px;
-    height: 30px;
-    background-color: #fff;
-    padding: 2px;
-    border-radius: 6px;
-    object-fit: cover;
-}
-
-.payment-name {
-    color: var(--text-white);
-    font-size: 13px;
-    font-weight: 600;
-}
-
-.payment-price-tag {
-    color: var(--accent-orange);
-    font-size: 13px;
-    font-weight: 700;
-}
-
-/* ===== State saat Dropdown Terbuka ===== */
-.payment-category.active {
-    border-color: #657e55;
-}
-
-.payment-category.active .payment-arrow {
-    transform: rotate(180deg);
-}
-
-.payment-category.active .payment-body-wrapper {
-    grid-template-rows: 1fr;
-}
-
-.payment-category.active .payment-body-content {
-    border-top-color: var(--border-input); /* Memunculkan garis pembatas */
-}
-
-.payment-category.active .payment-preview {
-    opacity: 0;
-    max-height: 0;
-    margin-top: 0;
-}
-
-/* Styling untuk Rincian Pembayaran */
-.order-summary {
-    background-color: var(--bg-card);
-    border: 1px solid var(--border-input);
-    border-radius: var(--border-radius-md);
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-/* Styling Baru untuk Rincian */
-.order-section {
-    padding-bottom: 5px;
-    margin-bottom: 0px;
-    border-bottom: 1px dashed #1e293b;
-}
-
-.order-label {
-    font-size: 12px;
-    color: var(--text-white);
-    font-weight: 600;
-    margin-bottom: 6px;
-    letter-spacing: -0.2px;
-}
-
-.order-row {
-    display: flex;
-    justify-content: space-between;
-    font-size: 13px;
-    color: var(--text-gray);
-    margin-bottom: 4px;
-}
-
-.order-row.total {
-    margin-top: 8px;
-    color: var(--text-white);
-    font-weight: 700;
-    font-size: 14px;
-}
-
-.order-row span:last-child {
-    color: var(--accent-orange);
-    font-weight: 700;
-}
-
-.input-hint {
-    color: var(--text-gray);
-    font-size: 11px;
-    font-weight: 500;
-    margin-top: 4px;
-    padding-left: 2px;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-}
-
-/* Pastikan tombol terlihat */
-.btn-submit {
-    display: flex !important;
-}
-
-/* Styling untuk Tab Deskripsi & Ulasan */
-#content-keterangan {
-    display: none; /* Default disembunyikan oleh JavaScript */
-}
-
-.desc-body {
-    color: var(--text-gray);
-    font-size: 13px;
-    line-height: 1.6;
-}
-
-.desc-title {
-    color: var(--text-white);
-    font-size: 15px;
-    margin-bottom: 8px;
-}
-
-.desc-text {
-    margin-bottom: 16px;
-}
-
-.desc-subtitle {
-    color: var(--text-white);
-    font-size: 14px;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.desc-subtitle i {
-    color: var(--accent-yellow);
-    font-size: 16px;
-}
-
-.desc-list {
-    padding-left: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-bottom: 16px;
-}
-
-.desc-alert {
-    padding: 12px;
-    background-color: var(--bg-input);
-    border: 1px solid var(--border-input);
-    border-radius: 12px;
-}
-
-.desc-alert-title {
-    margin-bottom: 4px;
-    color: var(--text-white);
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.desc-alert-title i {
-    color: #60a5fa;
-    font-size: 16px;
-}
-
-.desc-alert-text {
-    font-size: 12px;
-    color: var(--text-gray);
-}
-
-/* =========================================
-   STYLING CARD ULASAN (KOLABORASI STRUKTUR & DESAIN UNIK)
-   ========================================= */
-
-/* Review Dashboard Box */
-.review-dashboard {
-    display: flex;
-    align-items: center;
-    background-color: var(--bg-input);
-    border: 1px solid var(--border-input);
-    border-radius: 12px;
-    padding: 16px;
-    margin-bottom: 20px;
-    gap: 16px;
-}
-
-.dash-left {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-right: 1px solid var(--border-input);
-    padding-right: 16px;
-    min-width: 90px;
-}
-
-.dash-score {
-    font-size: 36px;
-    font-weight: 800;
-    color: var(--text-white);
-    line-height: 1;
-    margin-bottom: 4px;
-}
-
-.dash-stars i {
-    color: var(--accent-yellow);
-    font-size: 14px;
-}
-
-.dash-total {
-    font-size: 11px;
-    color: var(--text-gray);
-    margin-top: 6px;
-    text-align: center;
-}
-
-.dash-right {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
-.dash-bar-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.dash-bar-label {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 12px;
-    color: var(--text-white);
-    font-weight: 700;
-    width: 24px; /* Lebar tetap agar bar sejajar */
-}
-
-.dash-bar-label i {
-    color: var(--accent-yellow);
-    font-size: 12px;
-}
-
-.dash-track {
-    flex: 1;
-    height: 8px;
-    background-color: var(--bg-card-header);
-    border-radius: 3px;
-    overflow: hidden;
-}
-
-.dash-fill {
-    height: 100%;
-    background-color: var(--accent-yellow);
-    border-radius: 2px;
-}
-
-.dash-bar-count {
-    font-size: 11px;
-    color: var(--text-gray);
-    font-weight: 500;
-    width: 42px; /* Lebar tetap agar sejajar di kanan */
-    text-align: right;
-}
-
-
-/* Review Bubble Cards */
-.review-modern-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.rev-bubble {
-    background-color: var(--bg-card);
-    border: 1px solid var(--border-header);
-    border-radius: 12px;
-    padding: 14px;
-    transition: background-color 0.2s ease;
-}
-
-.rev-bubble:hover {
-    background-color: var(--bg-input);
-}
-
-.rev-bubble-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 8px;
-}
-
-.rev-user-info {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
-.rev-username {
-    color: var(--text-white);
-    font-size: 13px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.rev-username i {
-    color: #64748b;
-    font-size: 14px;
-}
-
-.rev-date {
-    color: var(--text-gray);
-    font-size: 11px;
-}
-
-.rev-bubble-stars {
-    color: var(--accent-yellow);
-    font-size: 12px;
-    display: flex;
-    gap: 2px;
-}
-
-.rev-bubble-text {
-    color: #cbd5e1;
-    font-size: 13px;
-    line-height: 1.5;
-    margin-bottom: 12px;
-}
-
-/* Pill Varian Pembelian */
-.rev-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background-color: var(--bg-body);
-    border: 1px solid var(--border-input);
-    color: var(--text-gray);
-    padding: 6px 10px;
-    border-radius: 50px;
-    font-size: 11px;
-    font-weight: 600;
-}
-
-.rev-pill i {
-    color: var(--accent-yellow);
-}
-
-/* =========================================
-   STYLING CARD FLASH SALE (ELEGAN & SENADA)
-   ========================================= */
-.flash-voucher {
-    background-color: var(--bg-card);
-    border: 1px solid var(--border-input);
-    border-radius: 12px;
-    padding: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.flash-voucher:active, .flash-voucher.selected {
-    border-color: var(--accent-orange);
-    background-color: rgba(249, 115, 22, 0.05); /* Efek nyala tipis senada tema */
-}
-
-/* Header: Badge Diskon & Timer */
-.flash-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.flash-badge {
-    background: rgba(239, 68, 68, 0.1);
-    color: #ef4444; /* Merah kalem untuk diskon */
-    border: 1px solid rgba(239, 68, 68, 0.2);
-    font-size: 10px;
-    font-weight: 700;
-    padding: 4px 8px;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    letter-spacing: 0.3px;
-}
-
-.flash-timer {
-    color: var(--accent-orange);
-    font-size: 11px;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-}
-
-/* Informasi Produk */
-.flash-title {
-    color: var(--text-white);
-    font-size: 13px;
-    font-weight: 700;
-    margin-top: 2px;
-}
-
-.flash-prices {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.flash-price-new {
-    color: var(--accent-orange);
-    font-size: 13px;
-    font-weight: 700;
-}
-
-.flash-price-old {
-    color: var(--text-gray);
-    font-size: 11px;
-    text-decoration: line-through;
-    font-weight: 500;
-}
-
-/* Bar Sisa Stok */
-.flash-stock {
-    margin-top: 2px;
-}
-
-.flash-stock-info {
-    display: flex;
-    justify-content: space-between;
-    font-size: 10px;
-    color: var(--text-gray);
-    font-weight: 600;
-    margin-bottom: 5px;
-}
-
-.flash-stock-bar {
-    width: 100%;
-    height: 6px;
-    background-color: var(--bg-card-header);
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.flash-stock-fill {
-    height: 100%;
-    background: var(--btn-grad);
-    border-radius: 10px;
-}
-
-
-/* Banner Bantuan / Hubungi Admin */
-.help-banner {
-    background-color: var(--bg-card);
-    border: 1px solid var(--bg-card-header);
-    border-radius: var(--border-radius-md);
-    padding: 16px 16px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 20px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-}
-
-.help-banner:active {
-    background-color: #3f3f46;
-}
-
-.help-icon svg {
-    width: 28px;
-    height: 28px;
-    stroke: #ffffff;
-}
-
-.help-text {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.help-title {
-    color: #ffffff;
-    font-size: 14px;
-    font-weight: 700;
-}
-
-.help-desc {
-    color: #e2e8f0;
-    font-size: 12px;
-    font-weight: 500;
-}
-
-/* =========================================
-   STYLING POPUP MODAL (NATIVE BOTTOM SHEET)
-   ========================================= */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    bottom: 0; /* Menggantikan height: 100vh agar otomatis pas dengan layar browser */
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    max-width: 480px;
-    background: rgba(0, 0, 0, 0.7);
-    z-index: 999;
-    display: flex;
-    align-items: flex-end;
-    visibility: hidden;
-    opacity: 0;
-    transition: all 0.3s ease;
-}
-
-.modal-content {
-    background-color: var(--bg-card);
-    width: 100%;
-    max-height: 90%; /* Memastikan modal tidak melewati batas atas layar */
-    overflow-y: auto; /* Agar isi modal bisa discroll jika layar HP pendek */
-    border-top-left-radius: 24px;
-    border-top-right-radius: 24px;
-    padding: 24px 20px;
-    padding-bottom: 24px; /* Kurangi padding bawah karena tombolnya sudah aman */
-    transform: translateY(100%);
-    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.15); 
-    position: relative;
-    box-shadow: 0 -10px 40px rgba(0,0,0,0.6);
-}
-
-
-
-.modal-overlay.active {
-    visibility: visible;
-    opacity: 1;
-}
-
-
-
-.modal-overlay.active .modal-content {
-    transform: translateY(0);
-}
-
-/* Garis Handle di Atas Modal (Indikator Swipe) */
-.modal-handle {
-    width: 40px;
-    height: 4px;
-    background-color: var(--border-input);
-    border-radius: 4px;
-    margin: -10px auto 16px auto;
-}
-
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.modal-title {
-    color: var(--text-white);
-    font-size: 16px;
-    font-weight: 700;
-}
-
-.modal-close {
-    background: var(--bg-input);
-    border: 1px solid var(--border-input);
-    color: var(--text-gray);
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 16px;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-
-.modal-close:active {
-    transform: scale(0.9);
-    color: var(--text-white);
-    border-color: var(--accent-orange);
-}
-
-.modal-body .order-summary {
-    background-color: var(--bg-body);
-}
-
-.modal-footer {
-    margin-top: 20px;
-}
-
-.modal-btn-confirm {
-    height: 35px;
-    font-size: 16px;
-    box-shadow: 0 8px 20px rgba(247, 158, 27, 0.3);
-}
-
-/* =========================================
-   STYLING CARD FAQ (ACCORDION SMOOTH)
-   ========================================= */
-.faq-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.faq-item {
-    background-color: var(--bg-card);
-    border: 1px solid var(--border-input);
-    border-radius: 12px;
-    overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.faq-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 14px 16px;
-    cursor: pointer;
-    user-select: none;
-}
-
-.faq-question {
-    color: var(--text-white);
-    font-size: 13px;
-    font-weight: 700;
-}
-
-.faq-arrow {
-    color: var(--text-gray);
-    font-size: 16px;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s;
-}
-
-.faq-body-wrapper {
-    display: grid;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.faq-body-inner {
-    overflow: hidden;
-}
-
-.faq-content {
-    padding: 0 16px 16px 16px;
-    color: var(--text-gray);
-    font-size: 12.5px;
-    line-height: 1.6;
-}
-
-.faq-list {
-    padding-left: 18px;
-    margin-top: 8px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    color: #cbd5e1;
-}
-
-.faq-list li::marker {
-    color: var(--accent-orange);
-    font-weight: bold;
-}
-
-/* State Aktif (Saat Terbuka) */
-.faq-item.active {
-    border-color: #9ae2ff;
-    background-color: rgba(154, 226, 255, 0.05);
-}
-
-.faq-item.active .faq-arrow {
-    transform: rotate(180deg);
-    color: #9ae2ff;
-}
-
-.faq-item.active .faq-body-wrapper {
-    grid-template-rows: 1fr;
-}
-
-    </style>
+    </script>
 </head>
-<body>
+<body class="bg-black flex justify-center font-sans antialiased [-webkit-tap-highlight-color:transparent] m-0 p-0 box-border">
 
-<div class="app-container">
-    <header>
-        <a href="#" class="logo-pill">
-            <img src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f?q=80&w=200&auto=format&fit=crop" alt="Logo">
-            <div class="logo-text"><span>Order</span> Game.ID</div>
+<div class="w-full max-w-[480px] min-h-screen bg-[#0b1121] relative shadow-[0_0_20px_rgba(0,0,0,0.8)] pb-[40px]">
+    <header class="flex justify-between items-center px-4 py-[10px] bg-[#0b1121] sticky top-0 z-50">
+        <a href="#" class="flex items-center bg-transparent py-[6px] pr-[12px] pl-[6px] rounded-[50px] gap-2 no-underline">
+            <img class="w-6 h-6 rounded-full object-cover" src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f?q=80&w=200&auto=format&fit=crop" alt="Logo">
+            <div class="text-[13px] font-extrabold text-[#0f172a] tracking-[-0.2px]"><span class="text-[#f97316]">Order</span> Game.ID</div>
         </a>
-        <div class="header-actions">
-            <button class="action-btn btn-icon">
+        <div class="flex items-center gap-[10px]">
+            <button class="bg-[#151c2d] text-white flex items-center justify-center rounded-[10px] cursor-pointer h-[30px] border-0 w-[36px] text-[18px]">
                 <i class="ph ph-magnifying-glass"></i>
             </button>
-            <button class="action-btn btn-lang">
-                <img src="https://flagcdn.com/w20/id.png" alt="ID">
+            <button class="bg-[#151c2d] text-white flex items-center justify-center rounded-[10px] cursor-pointer h-[30px] border-0 px-[14px] gap-2 text-[12px] font-semibold">
+                <img class="w-4 h-4 rounded-full" src="https://flagcdn.com/w20/id.png" alt="ID">
                 ID / IDR
             </button>
-            <button class="action-btn btn-icon">
+            <button class="bg-[#151c2d] text-white flex items-center justify-center rounded-[10px] cursor-pointer h-[30px] border-0 w-[36px] text-[18px]">
                 <i class="ph ph-list"></i>
             </button>
         </div>
     </header>
 
     <main>
-        <section class="hero">
-            <img class="hero-banner" src="baner.jpg" alt="Hero Banner">
+        <section class="w-full h-[250px] relative">
+            <img class="w-full h-full object-cover object-top" src="baner.jpg" alt="Hero Banner">
         </section>
 
-        <section class="game-info">
-            <div class="game-thumbnail">
-                <img src="game.jpg" alt="Game Icon">
+        <section class="flex px-4 relative z-10 bg-[#1c253a]">
+            <div class="mt-[-50px] shrink-0 [perspective:500px]">
+                <img class="w-[130px] h-[120px] rounded-[18px] object-cover border-0 origin-left [transform:rotateY(30deg)] shadow-[-8px_8px_15px_rgba(0,0,0,0.5)] transition-transform duration-300 ease" src="game.jpg" alt="Game Icon">
             </div>
-            <div class="game-titles">
-                <h1>MOBILE LEGENDS (ALL REGION)</h1>
-                <p>Moonton</p>
+            <div class="mt-4 -ml-[5px]">
+                <h1 class="text-white text-[15px] font-bold uppercase tracking-[0.5px]">MOBILE LEGENDS (ALL REGION)</h1>
+                <p class="text-[#94a3b8] text-[13px] font-medium mt-1">Moonton</p>
             </div>
         </section>
 
-        <section class="features">
-            <div class="feature-item">
-                <i class="ph-fill ph-lightning icon-lightning"></i>
+        <section class="flex justify-between px-4 py-5 bg-[#151c2d] rounded-b-[12px]">
+            <div class="flex items-center gap-[6px] text-[11px] font-semibold text-[#cbd5e1]">
+                <i class="ph-fill ph-lightning text-[14px] text-[#facc15]"></i>
                 Proses Cepat
             </div>
-            <div class="feature-item">
-                <i class="ph-fill ph-chat-circle-dots icon-chat"></i>
+            <div class="flex items-center gap-[6px] text-[11px] font-semibold text-[#cbd5e1]">
+                <i class="ph-fill ph-chat-circle-dots text-[14px] text-[#60a5fa]"></i>
                 Layanan Chat 24/7
             </div>
-            <div class="feature-item">
-                <i class="ph-fill ph-shield-check icon-shield"></i>
+            <div class="flex items-center gap-[6px] text-[11px] font-semibold text-[#cbd5e1]">
+                <i class="ph-fill ph-shield-check text-[14px] text-[#34d399]"></i>
                 Pembayaran Aman!
             </div>
         </section>
 
-        <section class="tabs-wrapper">
-            <div class="tabs">
-                <div class="tab-btn active" id="tab-transaksi" onclick="switchTab('transaksi')">Transaksi</div>
-                <div class="tab-btn inactive" id="tab-keterangan" onclick="switchTab('keterangan')">Deskripsi & Ulasan</div>
+        <section class="p-[15px]">
+            <div class="flex bg-[#151c2d] rounded-[12px] p-1">
+                <div class="flex-1 py-[6.5px] text-center rounded-[12px] text-[14px] font-bold cursor-pointer transition-all duration-200 ease tab-btn active [&.active]:bg-gradient-to-b [&.active]:from-[#9ae2ff] [&.active]:to-[#6ab7ff] [&.active]:text-[#0f172a] [&.active]:shadow-[0_2px_4px_rgba(0,0,0,0.2)] [&:not(.active)]:text-[#94a3b8] [&:not(.active)]:bg-transparent" id="tab-transaksi" onclick="switchTab('transaksi')">Transaksi</div>
+                <div class="flex-1 py-[6.5px] text-center rounded-[12px] text-[14px] font-bold cursor-pointer transition-all duration-300 ease tab-btn [&.active]:bg-gradient-to-b [&.active]:from-[#9ae2ff] [&.active]:to-[#6ab7ff] [&.active]:text-[#0f172a] [&.active]:shadow-[0_2px_4px_rgba(0,0,0,0.2)] [&:not(.active)]:text-[#94a3b8] [&:not(.active)]:bg-transparent" id="tab-keterangan" onclick="switchTab('keterangan')">Deskripsi & Ulasan</div>
             </div>
         </section>
 
-        <section class="form-section">
+        <section class="px-4">
             
             <!-- MULAI WRAPPER KONTEN TRANSAKSI -->
             <div id="content-transaksi">
                 
-                <div class="card">
-                    <div class="card-header">
-                        <div class="step-badge">1</div>
-                        <div class="step-title">Masukkan Data Akun</div>
+                <div class="bg-[#151c2d] rounded-[12px] overflow-hidden mb-4">
+                    <div class="flex items-center bg-[#1c253a]">
+                        <div class="bg-gradient-to-b from-[#94a3b8] to-[#f79e1b] text-[#0f172a] text-[16px] font-extrabold py-3 px-5 rounded-br-[12px] flex items-center justify-center">1</div>
+                        <div class="text-white text-[14px] font-bold pl-4">Masukkan Data Akun</div>
                     </div>
-                    <div class="card-body">
+                    <div class="p-4 pb-5 flex flex-col gap-4">
                         
-                        <div class="input-group">
-                            <div class="label-wrap">
-                                <span class="input-label">ID</span>
-                                <i class="ph ph-info info-icon"></i>
+                        <div class="flex flex-col gap-2">
+                            <div class="flex items-center gap-[6px]">
+                                <span class="text-[#e2e8f0] text-[13px] font-semibold">ID</span>
+                                <i class="ph ph-info text-[#94a3b8] text-[16px] cursor-pointer"></i>
                             </div>
-                            <input type="text" class="input-field" placeholder="Masukkan ID">
+                            <input type="text" class="bg-[#0b1121] border border-[#94a3b8]/30 rounded-[12px] px-4 py-3 text-white text-[14px] font-medium outline-none transition-colors duration-200 ease focus:border-[#657e55] placeholder:text-[#475569] placeholder:font-normal w-full" placeholder="Masukkan ID">
                         </div>
 
-                        <div class="input-group">
-                            <div class="label-wrap">
-                                <span class="input-label">Server</span>
+                        <div class="flex flex-col gap-2">
+                            <div class="flex items-center gap-[6px]">
+                                <span class="text-[#e2e8f0] text-[13px] font-semibold">Server</span>
                             </div>
-                            <input type="text" class="input-field" placeholder="Masukkan Zone ID">
+                            <input type="text" class="bg-[#0b1121] border border-[#94a3b8]/30 rounded-[12px] px-4 py-3 text-white text-[14px] font-medium outline-none transition-colors duration-200 ease focus:border-[#657e55] placeholder:text-[#475569] placeholder:font-normal w-full" placeholder="Masukkan Zone ID">
                         </div>
 
-                        <button class="btn-submit">
-                            <i class="ph-fill ph-file-search"></i>
+                        <button class="bg-gradient-to-r from-[#94a3b8] to-[#f79e1b] text-[#0f172a] border-none rounded-[50px] p-[6px] text-[15px] font-bold flex justify-center items-center gap-[5px] w-full cursor-pointer mt-1 shadow-[0_4px_12px_rgba(247,158,27,0.2)] transition-opacity duration-200 ease active:opacity-80">
+                            <i class="ph-fill ph-file-search text-[20px]"></i>
                             Cek Akun
                         </button>
 
                     </div>
                 </div>
                 
-                <div class="card">
-                    <div class="card-header">
-                        <div class="step-badge">2</div>
-                        <div class="step-title">Pilih Produk</div>
+                <div class="bg-[#151c2d] rounded-[12px] overflow-hidden mb-4">
+                    <div class="flex items-center bg-[#1c253a]">
+                        <div class="bg-gradient-to-b from-[#94a3b8] to-[#f79e1b] text-[#0f172a] text-[16px] font-extrabold py-3 px-5 rounded-br-[12px] flex items-center justify-center">2</div>
+                        <div class="text-white text-[14px] font-bold pl-4">Pilih Produk</div>
                     </div>
-                    <div class="card-body">
+                    <div class="p-4 pb-5 flex flex-col gap-4">
                         
                    <!-- Tab Kategori Produk -->
-<div class="prod-tabs">
-    <div class="prod-tab-btn" id="tab-flashsale" data-redirect-url="/home/flash-sale" onclick="switchProductTab('flashsale')">Flash Sale
-    </div>
+<div class="flex gap-[10px] overflow-x-auto">
+    <div class="px-4 py-2 rounded-[12px] border bg-[#151c2d] text-[13px] font-semibold cursor-pointer transition-all duration-0 ease whitespace-nowrap prod-tab-btn [&.active]:border-[#fbbf24] [&.active]:bg-[#f97316]/10 [&.active]:text-[#fbbf24] [&:not(.active)]:border-[#94a3b8]/30 [&:not(.active)]:text-[#94a3b8]" id="tab-flashsale" data-redirect-url="/home/flash-sale" onclick="switchProductTab('flashsale')">Flash Sale</div>
     
-    <div class="prod-tab-btn active" id="tab-diamond" data-redirect-url="/home/diamond" onclick="switchProductTab('diamond')">
-        Diamond
-    </div>
+    <div class="px-4 py-2 rounded-[12px] border bg-[#151c2d] text-[13px] font-semibold cursor-pointer transition-all duration-0 ease whitespace-nowrap prod-tab-btn active [&.active]:border-[#fbbf24] [&.active]:bg-[#f97316]/10 [&.active]:text-[#fbbf24] [&:not(.active)]:border-[#94a3b8]/30 [&:not(.active)]:text-[#94a3b8]" id="tab-diamond" data-redirect-url="/home/diamond" onclick="switchProductTab('diamond')">Diamond</div>
     
-    <div class="prod-tab-btn" id="tab-membership" data-redirect-url="/home/membership" onclick="switchProductTab('membership')">
-        Membership
-    </div>
+    <div class="px-4 py-2 rounded-[12px] border bg-[#151c2d] text-[13px] font-semibold cursor-pointer transition-all duration-0 ease whitespace-nowrap prod-tab-btn [&.active]:border-[#fbbf24] [&.active]:bg-[#f97316]/10 [&.active]:text-[#fbbf24] [&:not(.active)]:border-[#94a3b8]/30 [&:not(.active)]:text-[#94a3b8]" id="tab-membership" data-redirect-url="/home/membership" onclick="switchProductTab('membership')">Membership</div>
 </div>
 
  <!-- Daftar Produk: Diamond -->
- <div class="prod-grid" id="content-diamond">
-                            <div class="prod-item">
-                                <div class="prod-name">344 Diamonds</div>
-                                <div class="prod-price">Rp 80.000</div>
-                                <div class="prod-tags">
-                                    <span class="tag-badge">Promo</span>
-                                    <span class="tag-strike">Rp 85.000</span>
+ <div class="grid grid-cols-2 gap-3 mt-2" id="content-diamond">
+                            <div class="bg-[#151c2d] border rounded-[12px] px-3 py-[14px] cursor-pointer text-left transition-all duration-200 ease prod-item active:border-[#9ae2ff] active:bg-[rgba(154,226,255,0.1)] [&.selected]:border-[#9ae2ff] [&.selected]:bg-[rgba(154,226,255,0.1)] [&:not(.selected)]:border-[#94a3b8]/30">
+                                <div class="text-white text-[13px] font-bold mb-2">344 Diamonds</div>
+                                <div class="text-[#f97316] text-[13px] font-bold">Rp 80.000</div>
+                                <div class="flex items-center flex-wrap gap-[6px] mt-[6px]">
+                                    <span class="bg-[#94a3b8]/30 text-white text-[9px] font-bold px-[10px] py-1 uppercase tracking-[0.5px] inline-flex items-center" style="-webkit-mask-image: radial-gradient(circle at 0% 50%, transparent 4px, black 4.5px), radial-gradient(circle at 100% 50%, transparent 4px, black 4.5px); -webkit-mask-size: 51% 100%; -webkit-mask-repeat: no-repeat; -webkit-mask-position: left, right; mask-image: radial-gradient(circle at 0% 50%, transparent 4px, black 4.5px), radial-gradient(circle at 100% 50%, transparent 4px, black 4.5px); mask-size: 51% 100%; mask-repeat: no-repeat; mask-position: left, right;">Promo</span>
+                                    <span class="text-[#94a3b8] text-[11px] line-through font-medium">Rp 85.000</span>
                                 </div>
                             </div>
-                            <div class="prod-item">
-                                <div class="prod-name">706 Diamonds</div>
-                                <div class="prod-price">Rp 160.000</div>
-                                <div class="prod-tags">
-                                    <span class="tag-badge">Cashback 5%</span>
+                            <div class="bg-[#151c2d] border rounded-[12px] px-3 py-[14px] cursor-pointer text-left transition-all duration-200 ease prod-item active:border-[#9ae2ff] active:bg-[rgba(154,226,255,0.1)] [&.selected]:border-[#9ae2ff] [&.selected]:bg-[rgba(154,226,255,0.1)] [&:not(.selected)]:border-[#94a3b8]/30">
+                                <div class="text-white text-[13px] font-bold mb-2">706 Diamonds</div>
+                                <div class="text-[#f97316] text-[13px] font-bold">Rp 160.000</div>
+                                <div class="flex items-center flex-wrap gap-[6px] mt-[6px]">
+                                    <span class="bg-[#94a3b8]/30 text-white text-[9px] font-bold px-[10px] py-1 uppercase tracking-[0.5px] inline-flex items-center" style="-webkit-mask-image: radial-gradient(circle at 0% 50%, transparent 4px, black 4.5px), radial-gradient(circle at 100% 50%, transparent 4px, black 4.5px); -webkit-mask-size: 51% 100%; -webkit-mask-repeat: no-repeat; -webkit-mask-position: left, right; mask-image: radial-gradient(circle at 0% 50%, transparent 4px, black 4.5px), radial-gradient(circle at 100% 50%, transparent 4px, black 4.5px); mask-size: 51% 100%; mask-repeat: no-repeat; mask-position: left, right;">Cashback 5%</span>
                                 </div>
                             </div>
-                            <div class="prod-item">
-                                <div class="prod-name">1050 Diamonds</div>
-                                <div class="prod-price">Rp 240.000</div>
-                                <div class="prod-tags">
-                                    <span class="tag-badge">Promo</span>
+                            <div class="bg-[#151c2d] border rounded-[12px] px-3 py-[14px] cursor-pointer text-left transition-all duration-200 ease prod-item active:border-[#9ae2ff] active:bg-[rgba(154,226,255,0.1)] [&.selected]:border-[#9ae2ff] [&.selected]:bg-[rgba(154,226,255,0.1)] [&:not(.selected)]:border-[#94a3b8]/30">
+                                <div class="text-white text-[13px] font-bold mb-2">1050 Diamonds</div>
+                                <div class="text-[#f97316] text-[13px] font-bold">Rp 240.000</div>
+                                <div class="flex items-center flex-wrap gap-[6px] mt-[6px]">
+                                    <span class="bg-[#94a3b8]/30 text-white text-[9px] font-bold px-[10px] py-1 uppercase tracking-[0.5px] inline-flex items-center" style="-webkit-mask-image: radial-gradient(circle at 0% 50%, transparent 4px, black 4.5px), radial-gradient(circle at 100% 50%, transparent 4px, black 4.5px); -webkit-mask-size: 51% 100%; -webkit-mask-repeat: no-repeat; -webkit-mask-position: left, right; mask-image: radial-gradient(circle at 0% 50%, transparent 4px, black 4.5px), radial-gradient(circle at 100% 50%, transparent 4px, black 4.5px); mask-size: 51% 100%; mask-repeat: no-repeat; mask-position: left, right;">Promo</span>
                                 </div>
                             </div>
-                            <div class="prod-item">
-                                <div class="prod-name">2195 Diamonds</div>
-                                <div class="prod-price">Rp 475.000</div>
-                                <div class="prod-tags">
-                                    <span class="tag-strike">Rp 500.000</span>
+                            <div class="bg-[#151c2d] border rounded-[12px] px-3 py-[14px] cursor-pointer text-left transition-all duration-200 ease prod-item active:border-[#9ae2ff] active:bg-[rgba(154,226,255,0.1)] [&.selected]:border-[#9ae2ff] [&.selected]:bg-[rgba(154,226,255,0.1)] [&:not(.selected)]:border-[#94a3b8]/30">
+                                <div class="text-white text-[13px] font-bold mb-2">2195 Diamonds</div>
+                                <div class="text-[#f97316] text-[13px] font-bold">Rp 475.000</div>
+                                <div class="flex items-center flex-wrap gap-[6px] mt-[6px]">
+                                    <span class="text-[#94a3b8] text-[11px] line-through font-medium">Rp 500.000</span>
                                 </div>
                             </div>
-                            <div class="prod-item">
-                                <div class="prod-name">3688 + (3688) Bonus Diamonds</div>
-                                <div class="prod-price">Rp 800.000</div>
-                                <div class="prod-tags">
+                            <div class="bg-[#151c2d] border rounded-[12px] px-3 py-[14px] cursor-pointer text-left transition-all duration-200 ease prod-item active:border-[#9ae2ff] active:bg-[rgba(154,226,255,0.1)] [&.selected]:border-[#9ae2ff] [&.selected]:bg-[rgba(154,226,255,0.1)] [&:not(.selected)]:border-[#94a3b8]/30">
+                                <div class="text-white text-[13px] font-bold mb-2">3688 + (3688) Bonus Diamonds</div>
+                                <div class="text-[#f97316] text-[13px] font-bold">Rp 800.000</div>
+                                <div class="flex items-center flex-wrap gap-[6px] mt-[6px]">
                                 </div>
                             </div>
-                            <div class="prod-item">
-                                <div class="prod-name">5532 Diamonds</div>
-                                <div class="prod-price">Rp 1.200.000</div>
-                                <div class="prod-tags">
-                                    <span class="tag-badge">Cashback 10%</span>
+                            <div class="bg-[#151c2d] border rounded-[12px] px-3 py-[14px] cursor-pointer text-left transition-all duration-200 ease prod-item active:border-[#9ae2ff] active:bg-[rgba(154,226,255,0.1)] [&.selected]:border-[#9ae2ff] [&.selected]:bg-[rgba(154,226,255,0.1)] [&:not(.selected)]:border-[#94a3b8]/30">
+                                <div class="text-white text-[13px] font-bold mb-2">5532 Diamonds</div>
+                                <div class="text-[#f97316] text-[13px] font-bold">Rp 1.200.000</div>
+                                <div class="flex items-center flex-wrap gap-[6px] mt-[6px]">
+                                    <span class="bg-[#94a3b8]/30 text-white text-[9px] font-bold px-[10px] py-1 uppercase tracking-[0.5px] inline-flex items-center" style="-webkit-mask-image: radial-gradient(circle at 0% 50%, transparent 4px, black 4.5px), radial-gradient(circle at 100% 50%, transparent 4px, black 4.5px); -webkit-mask-size: 51% 100%; -webkit-mask-repeat: no-repeat; -webkit-mask-position: left, right; mask-image: radial-gradient(circle at 0% 50%, transparent 4px, black 4.5px), radial-gradient(circle at 100% 50%, transparent 4px, black 4.5px); mask-size: 51% 100%; mask-repeat: no-repeat; mask-position: left, right;">Cashback 10%</span>
                                 </div>
                             </div>
-                            <div class="prod-item">
-                                <div class="prod-name">9288 Diamonds</div>
-                                <div class="prod-price">Rp 2.000.000</div>
-                                <div class="prod-tags">
-                                    <span class="tag-badge">Sultan</span>
-                                    <span class="tag-strike">Rp 2.200.000</span>
+                            <div class="bg-[#151c2d] border rounded-[12px] px-3 py-[14px] cursor-pointer text-left transition-all duration-200 ease prod-item active:border-[#9ae2ff] active:bg-[rgba(154,226,255,0.1)] [&.selected]:border-[#9ae2ff] [&.selected]:bg-[rgba(154,226,255,0.1)] [&:not(.selected)]:border-[#94a3b8]/30">
+                                <div class="text-white text-[13px] font-bold mb-2">9288 Diamonds</div>
+                                <div class="text-[#f97316] text-[13px] font-bold">Rp 2.000.000</div>
+                                <div class="flex items-center flex-wrap gap-[6px] mt-[6px]">
+                                    <span class="bg-[#94a3b8]/30 text-white text-[9px] font-bold px-[10px] py-1 uppercase tracking-[0.5px] inline-flex items-center" style="-webkit-mask-image: radial-gradient(circle at 0% 50%, transparent 4px, black 4.5px), radial-gradient(circle at 100% 50%, transparent 4px, black 4.5px); -webkit-mask-size: 51% 100%; -webkit-mask-repeat: no-repeat; -webkit-mask-position: left, right; mask-image: radial-gradient(circle at 0% 50%, transparent 4px, black 4.5px), radial-gradient(circle at 100% 50%, transparent 4px, black 4.5px); mask-size: 51% 100%; mask-repeat: no-repeat; mask-position: left, right;">Sultan</span>
+                                    <span class="text-[#94a3b8] text-[11px] line-through font-medium">Rp 2.200.000</span>
                                 </div>
                             </div>
                         </div>
   
-  
 <!-- Daftar Produk: Flash Sale (Desain Senada) -->
-<div class="prod-grid" id="content-flashsale" style="display: none;">
+<div class="grid grid-cols-2 gap-3 mt-2" id="content-flashsale" style="display: none;">
     
     <!-- Item Flash Sale 1 -->
-    <div class="flash-voucher">
-        <div class="flash-header">
-            <span class="flash-badge"><i class="ph-fill ph-lightning"></i> 30% OFF</span>
-            <div class="flash-timer"><i class="ph-fill ph-clock-countdown"></i> 02:15:30</div>
+    <div class="bg-[#151c2d] border rounded-[12px] p-3 flex flex-col gap-2 cursor-pointer transition-all duration-200 ease relative overflow-hidden flash-voucher active:border-[#f97316] active:bg-[rgba(249,115,22,0.05)] [&.selected]:border-[#f97316] [&.selected]:bg-[rgba(249,115,22,0.05)] [&:not(.selected)]:border-[#94a3b8]/30">
+        <div class="flex justify-between items-center">
+            <span class="bg-[#ef4444]/10 text-[#ef4444] border border-[#ef4444]/20 text-[10px] font-bold px-2 py-1 rounded-[6px] flex items-center gap-1 tracking-[0.3px]"><i class="ph-fill ph-lightning"></i> 30% OFF</span>
+            <div class="text-[#f97316] text-[11px] font-semibold flex items-center gap-1"><i class="ph-fill ph-clock-countdown"></i> 02:15:30</div>
         </div>
-        <div class="flash-title">2575 Diamonds</div>
-        <div class="flash-prices">
-            <span class="flash-price-new">Rp 455.000</span>
-            <span class="flash-price-old">Rp 650.000</span>
+        <div class="text-white text-[13px] font-bold mt-[2px]">2575 Diamonds</div>
+        <div class="flex items-center gap-[6px]">
+            <span class="text-[#f97316] text-[13px] font-bold">Rp 455.000</span>
+            <span class="text-[#94a3b8] text-[11px] line-through font-medium">Rp 650.000</span>
         </div>
-        <div class="flash-stock">
-            <div class="flash-stock-info">
+        <div class="mt-[2px]">
+            <div class="flex justify-between text-[10px] text-[#94a3b8] font-semibold mb-[5px]">
                 <span>Tersisa 2</span>
                 <span>Terjual 18</span>
             </div>
-            <div class="flash-stock-bar">
-                <div class="flash-stock-fill" style="width: 10%;"></div>
+            <div class="w-full h-[6px] bg-[#1c253a] rounded-[10px] overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-[#94a3b8] to-[#f79e1b] rounded-[10px]" style="width: 10%;"></div>
             </div>
         </div>
     </div>
 
     <!-- Item Flash Sale 2 -->
-    <div class="flash-voucher">
-        <div class="flash-header">
-            <span class="flash-badge"><i class="ph-fill ph-lightning"></i> 45% OFF</span>
-            <div class="flash-timer"><i class="ph-fill ph-clock-countdown"></i> 01:05:10</div>
+    <div class="bg-[#151c2d] border rounded-[12px] p-3 flex flex-col gap-2 cursor-pointer transition-all duration-200 ease relative overflow-hidden flash-voucher active:border-[#f97316] active:bg-[rgba(249,115,22,0.05)] [&.selected]:border-[#f97316] [&.selected]:bg-[rgba(249,115,22,0.05)] [&:not(.selected)]:border-[#94a3b8]/30">
+        <div class="flex justify-between items-center">
+            <span class="bg-[#ef4444]/10 text-[#ef4444] border border-[#ef4444]/20 text-[10px] font-bold px-2 py-1 rounded-[6px] flex items-center gap-1 tracking-[0.3px]"><i class="ph-fill ph-lightning"></i> 45% OFF</span>
+            <div class="text-[#f97316] text-[11px] font-semibold flex items-center gap-1"><i class="ph-fill ph-clock-countdown"></i> 01:05:10</div>
         </div>
-        <div class="flash-title">4000 Diamonds</div>
-        <div class="flash-prices">
-            <span class="flash-price-new">Rp 539.000</span>
-            <span class="flash-price-old">Rp 980.000</span>
+        <div class="text-white text-[13px] font-bold mt-[2px]">4000 Diamonds</div>
+        <div class="flex items-center gap-[6px]">
+            <span class="text-[#f97316] text-[13px] font-bold">Rp 539.000</span>
+            <span class="text-[#94a3b8] text-[11px] line-through font-medium">Rp 980.000</span>
         </div>
-        <div class="flash-stock">
-            <div class="flash-stock-info">
+        <div class="mt-[2px]">
+            <div class="flex justify-between text-[10px] text-[#94a3b8] font-semibold mb-[5px]">
                 <span>Tersisa 45</span>
                 <span>Terjual 55</span>
             </div>
-            <div class="flash-stock-bar">
-                <div class="flash-stock-fill" style="width: 45%;"></div>
+            <div class="w-full h-[6px] bg-[#1c253a] rounded-[10px] overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-[#94a3b8] to-[#f79e1b] rounded-[10px]" style="width: 45%;"></div>
             </div>
         </div>
     </div>
 
     <!-- Item Flash Sale 3 -->
-    <div class="flash-voucher">
-        <div class="flash-header">
-            <span class="flash-badge"><i class="ph-fill ph-fire"></i> HOT DEAL</span>
-            <div class="flash-timer"><i class="ph-fill ph-clock-countdown"></i> 00:45:00</div>
+    <div class="bg-[#151c2d] border rounded-[12px] p-3 flex flex-col gap-2 cursor-pointer transition-all duration-200 ease relative overflow-hidden flash-voucher active:border-[#f97316] active:bg-[rgba(249,115,22,0.05)] [&.selected]:border-[#f97316] [&.selected]:bg-[rgba(249,115,22,0.05)] [&:not(.selected)]:border-[#94a3b8]/30">
+        <div class="flex justify-between items-center">
+            <span class="bg-[#ef4444]/10 text-[#ef4444] border border-[#ef4444]/20 text-[10px] font-bold px-2 py-1 rounded-[6px] flex items-center gap-1 tracking-[0.3px]"><i class="ph-fill ph-fire"></i> HOT DEAL</span>
+            <div class="text-[#f97316] text-[11px] font-semibold flex items-center gap-1"><i class="ph-fill ph-clock-countdown"></i> 00:45:00</div>
         </div>
-        <div class="flash-title">Twilight Pass</div>
-        <div class="flash-prices">
-            <span class="flash-price-new">Rp 99.000</span>
-            <span class="flash-price-old">Rp 150.000</span>
+        <div class="text-white text-[13px] font-bold mt-[2px]">Twilight Pass</div>
+        <div class="flex items-center gap-[6px]">
+            <span class="text-[#f97316] text-[13px] font-bold">Rp 99.000</span>
+            <span class="text-[#94a3b8] text-[11px] line-through font-medium">Rp 150.000</span>
         </div>
-        <div class="flash-stock">
-            <div class="flash-stock-info">
+        <div class="mt-[2px]">
+            <div class="flex justify-between text-[10px] text-[#94a3b8] font-semibold mb-[5px]">
                 <span>Tersisa 40</span>
                 <span>Terjual 10</span>
             </div>
-            <div class="flash-stock-bar">
-                <div class="flash-stock-fill" style="width: 80%;"></div>
+            <div class="w-full h-[6px] bg-[#1c253a] rounded-[10px] overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-[#94a3b8] to-[#f79e1b] rounded-[10px]" style="width: 80%;"></div>
             </div>
         </div>
     </div>
 
     <!-- Item Flash Sale 4 -->
-    <div class="flash-voucher">
-        <div class="flash-header">
-            <span class="flash-badge"><i class="ph-fill ph-lightning"></i> 25% OFF</span>
-            <div class="flash-timer"><i class="ph-fill ph-clock-countdown"></i> 05:20:15</div>
+    <div class="bg-[#151c2d] border rounded-[12px] p-3 flex flex-col gap-2 cursor-pointer transition-all duration-200 ease relative overflow-hidden flash-voucher active:border-[#f97316] active:bg-[rgba(249,115,22,0.05)] [&.selected]:border-[#f97316] [&.selected]:bg-[rgba(249,115,22,0.05)] [&:not(.selected)]:border-[#94a3b8]/30">
+        <div class="flex justify-between items-center">
+            <span class="bg-[#ef4444]/10 text-[#ef4444] border border-[#ef4444]/20 text-[10px] font-bold px-2 py-1 rounded-[6px] flex items-center gap-1 tracking-[0.3px]"><i class="ph-fill ph-lightning"></i> 25% OFF</span>
+            <div class="text-[#f97316] text-[11px] font-semibold flex items-center gap-1"><i class="ph-fill ph-clock-countdown"></i> 05:20:15</div>
         </div>
-        <div class="flash-title">9288 Diamonds</div>
-        <div class="flash-prices">
-            <span class="flash-price-new">Rp 1.650.000</span>
-            <span class="flash-price-old">Rp 2.200.000</span>
+        <div class="text-white text-[13px] font-bold mt-[2px]">9288 Diamonds</div>
+        <div class="flex items-center gap-[6px]">
+            <span class="text-[#f97316] text-[13px] font-bold">Rp 1.650.000</span>
+            <span class="text-[#94a3b8] text-[11px] line-through font-medium">Rp 2.200.000</span>
         </div>
-        <div class="flash-stock">
-            <div class="flash-stock-info">
+        <div class="mt-[2px]">
+            <div class="flex justify-between text-[10px] text-[#94a3b8] font-semibold mb-[5px]">
                 <span>Tersisa 1</span>
                 <span>Terjual 19</span>
             </div>
-            <div class="flash-stock-bar">
-                <div class="flash-stock-fill" style="width: 5%;"></div>
+            <div class="w-full h-[6px] bg-[#1c253a] rounded-[10px] overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-[#94a3b8] to-[#f79e1b] rounded-[10px]" style="width: 5%;"></div>
             </div>
         </div>
     </div>
@@ -1557,180 +287,181 @@
  </div>
 </div>
 
-                <div class="card">
-                    <div class="card-header">
-                        <div class="step-badge">3</div>
-                        <div class="step-title">Pilih Pembayaran</div>
+                <div class="bg-[#151c2d] rounded-[12px] overflow-hidden mb-4">
+                    <div class="flex items-center bg-[#1c253a]">
+                        <div class="bg-gradient-to-b from-[#94a3b8] to-[#f79e1b] text-[#0f172a] text-[16px] font-extrabold py-3 px-5 rounded-br-[12px] flex items-center justify-center">3</div>
+                        <div class="text-white text-[14px] font-bold pl-4">Pilih Pembayaran</div>
                     </div>
-                    <div class="card-body">
-                        <div class="payment-item" onclick="selectPayment(this)" style="border-radius: 12px; padding: 14px 16px;">
-                            <div class="payment-item-left">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Logo_QRIS.svg" class="payment-logo" alt="QRIS" style="width: 48px; height: 32px; object-fit: contain; background-color: #ffffff;">
-                                <div class="payment-title" style="margin-left: 4px;">QRIS (E-Wallet/M-Banking)</div>
+                    <div class="p-4 pb-5 flex flex-col gap-4">
+                        <div class="flex items-center justify-between py-3 px-[14px] border rounded-[12px] p-[14px_16px] cursor-pointer transition-all duration-200 ease payment-item active:border-[#9ae2ff] active:bg-[#9ae2ff]/10 [&.selected]:border-[#9ae2ff] [&.selected]:bg-[#9ae2ff]/10 [&:not(.selected)]:border-[#94a3b8]/30" onclick="selectPayment(this)">
+                            <div class="flex items-center gap-3">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Logo_QRIS.svg" class="w-[48px] h-[32px] bg-white p-[2px] rounded-[6px] object-contain" alt="QRIS">
+                                <div class="text-white text-[14px] font-bold ml-1">QRIS (E-Wallet/M-Banking)</div>
                             </div>
-                            <div class="payment-price-tag" style="font-size: 14px;">Rp 9.980.000</div>
+                            <div class="text-[#f97316] text-[14px] font-bold">Rp 9.980.000</div>
                         </div>
 
-                        <!-- Kategori E-Wallet -->
-                        <div class="payment-category" id="cat-ewallet">
-                            <div class="payment-header" onclick="togglePayment('cat-ewallet')">
-                                <div class="payment-header-top">
-                                    <span class="payment-title">E-Wallet</span>
-                                    <i class="ph ph-caret-down payment-arrow"></i>
-                                </div>
-                                <div class="payment-preview">
-                                    <img src="https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?q=80&w=100&h=100&auto=format&fit=crop" class="payment-preview-img" alt="Logo">
-                                    <img src="https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=100&h=100&auto=format&fit=crop" class="payment-preview-img" alt="Logo">
-                                    <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=100&h=100&auto=format&fit=crop" class="payment-preview-img" alt="Logo">
-                                </div>
-                            </div>
-                            
-                            <div class="payment-body-wrapper">
-                                <div class="payment-body-inner">
-                                    <div class="payment-body-content">
-                                        <div class="payment-grid">
-                                            <div class="payment-item" onclick="selectPayment(this)">
-                                                <div class="payment-item-left">
-                                                    <img src="https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?q=80&w=100&h=100&auto=format&fit=crop" class="payment-logo" alt="Gopay">
-                                                    <div class="payment-name">GoPay</div>
-                                                </div>
-                                                <div class="payment-price-tag">Rp 80.000</div>
-                                            </div>
-                                            <div class="payment-item" onclick="selectPayment(this)">
-                                                <div class="payment-item-left">
-                                                    <img src="https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=100&h=100&auto=format&fit=crop" class="payment-logo" alt="OVO">
-                                                    <div class="payment-name">OVO</div>
-                                                </div>
-                                                <div class="payment-price-tag">Rp 81.500</div>
-                                            </div>
-                                            <div class="payment-item" onclick="selectPayment(this)">
-                                                <div class="payment-item-left">
-                                                    <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=100&h=100&auto=format&fit=crop" class="payment-logo" alt="Dana">
-                                                    <div class="payment-name">DANA</div>
-                                                </div>
-                                                <div class="payment-price-tag">Rp 80.500</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+<!-- Kategori E-Wallet -->
+<div class="bg-[#151c2d] border border-[#94a3b8]/30 rounded-[12px] overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] group payment-category [&.active]:border-[#657e55]" id="cat-ewallet">
+    <div class="p-[14px_16px] cursor-pointer" onclick="togglePayment('cat-ewallet')">
+        <div class="flex justify-between items-center">
+            <span class="text-white text-[14px] font-bold">E-Wall</span>
+            <i class="ph ph-caret-down text-[#94a3b8] text-[16px] transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] group-[.active]:rotate-180"></i>
+        </div>
+        <div class="flex gap-2 mt-[10px] opacity-100 max-h-[24px] overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] group-[.active]:opacity-0 group-[.active]:max-h-0 group-[.active]:mt-0">
+            <img src="https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?q=80&w=100&h=100&auto=format&fit=crop" class="h-[15px] w-[28px] rounded-[2px] object-cover" alt="Logo">
+            <img src="https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=100&h=100&auto=format&fit=crop" class="h-[15px] w-[28px] rounded-[2px] object-cover" alt="Logo">
+            <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=100&h=100&auto=format&fit=crop" class="h-[15px] w-[28px] rounded-[2px] object-cover" alt="Logo">
+        </div>
+    </div>
+    
+    <div class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] group-[.active]:grid-rows-[1fr]">
+        <!-- Efek fade & slide semulus pantat bayi ada di div ini -->
+        <div class="overflow-hidden opacity-0 -translate-y-3 transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] group-[.active]:opacity-100 group-[.active]:translate-y-0">
+            <div class="px-4 pb-4 border-t border-transparent transition-colors duration-500 ease group-[.active]:border-t-[#94a3b8]/30">
+                <div class="grid grid-cols-1 gap-[10px] pt-4">
+                    <div class="flex items-center justify-between py-3 px-[14px] border rounded-[10px] cursor-pointer transition-all duration-200 ease payment-item active:border-[#9ae2ff] active:bg-[#9ae2ff]/10 [&.selected]:border-[#9ae2ff] [&.selected]:bg-[#9ae2ff]/10 [&:not(.selected)]:border-[#94a3b8]/30" onclick="selectPayment(this)">
+                        <div class="flex items-center gap-3">
+                            <img src="https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?q=80&w=100&h=100&auto=format&fit=crop" class="w-[45px] h-[30px] bg-white p-[2px] rounded-[6px] object-cover" alt="Gopay">
+                            <div class="text-white text-[13px] font-semibold">GoPay</div>
                         </div>
+                        <div class="text-[#f97316] text-[13px] font-bold">Rp 80.000</div>
+                    </div>
+                    <div class="flex items-center justify-between py-3 px-[14px] border rounded-[10px] cursor-pointer transition-all duration-200 ease payment-item active:border-[#9ae2ff] active:bg-[#9ae2ff]/10 [&.selected]:border-[#9ae2ff] [&.selected]:bg-[#9ae2ff]/10 [&:not(.selected)]:border-[#94a3b8]/30" onclick="selectPayment(this)">
+                        <div class="flex items-center gap-3">
+                            <img src="https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=100&h=100&auto=format&fit=crop" class="w-[45px] h-[30px] bg-white p-[2px] rounded-[6px] object-cover" alt="OVO">
+                            <div class="text-white text-[13px] font-semibold">OVO</div>
+                        </div>
+                        <div class="text-[#f97316] text-[13px] font-bold">Rp 81.500</div>
+                    </div>
+                    <div class="flex items-center justify-between py-3 px-[14px] border rounded-[10px] cursor-pointer transition-all duration-200 ease payment-item active:border-[#9ae2ff] active:bg-[#9ae2ff]/10 [&.selected]:border-[#9ae2ff] [&.selected]:bg-[#9ae2ff]/10 [&:not(.selected)]:border-[#94a3b8]/30" onclick="selectPayment(this)">
+                        <div class="flex items-center gap-3">
+                            <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=100&h=100&auto=format&fit=crop" class="w-[45px] h-[30px] bg-white p-[2px] rounded-[6px] object-cover" alt="Dana">
+                            <div class="text-white text-[13px] font-semibold">DANA</div>
+                        </div>
+                        <div class="text-[#f97316] text-[13px] font-bold">Rp 80.500</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-                        <!-- Kategori Virtual Account -->
-                        <div class="payment-category" id="cat-va">
-                            <div class="payment-header" onclick="togglePayment('cat-va')">
-                                <div class="payment-header-top">
-                                    <span class="payment-title">Virtual Account</span>
-                                    <i class="ph ph-caret-down payment-arrow"></i>
-                                </div>
-                                <div class="payment-preview">
-                                    <img src="https://images.unsplash.com/photo-1557682250-33bd709cbe85?q=80&w=100&h=100&auto=format&fit=crop" class="payment-preview-img" alt="Logo">
-                                    <img src="https://images.unsplash.com/photo-1557682250-33bd709cbe85?q=80&w=100&h=100&auto=format&fit=crop" class="payment-preview-img" alt="Logo">
-                                </div>
-                            </div>
-                            
-                            <div class="payment-body-wrapper">
-                                <div class="payment-body-inner">
-                                    <div class="payment-body-content">
-                                        <div class="payment-grid">
-                                            <div class="payment-item" onclick="selectPayment(this)">
-                                                <div class="payment-item-left">
-                                                    <img src="https://images.unsplash.com/photo-1557682250-33bd709cbe85?q=80&w=100&h=100&auto=format&fit=crop" class="payment-logo" alt="BCA">
-                                                    <div class="payment-name">BCA Virtual Account</div>
-                                                </div>
-                                                <div class="payment-price-tag">Rp 82.000</div>
-                                            </div>
-                                            <div class="payment-item" onclick="selectPayment(this)">
-                                                <div class="payment-item-left">
-                                                    <img src="https://images.unsplash.com/photo-1557682250-33bd709cbe85?q=80&w=100&h=100&auto=format&fit=crop" class="payment-logo" alt="Mandiri">
-                                                    <div class="payment-name">Mandiri Virtual Account</div>
-                                                </div>
-                                                <div class="payment-price-tag">Rp 82.000</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+<!-- Kategori Virtual Account -->
+<div class="bg-[#151c2d] border border-[#94a3b8]/30 rounded-[12px] overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] group payment-category [&.active]:border-[#657e55]" id="cat-va">
+    <div class="p-[14px_16px] cursor-pointer" onclick="togglePayment('cat-va')">
+        <div class="flex justify-between items-center">
+            <span class="text-white text-[14px] font-bold">Virtual Account</span>
+            <i class="ph ph-caret-down text-[#94a3b8] text-[16px] transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] group-[.active]:rotate-180"></i>
+        </div>
+        <div class="flex gap-2 mt-[10px] opacity-100 max-h-[24px] overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] group-[.active]:opacity-0 group-[.active]:max-h-0 group-[.active]:mt-0">
+            <img src="https://images.unsplash.com/photo-1557682250-33bd709cbe85?q=80&w=100&h=100&auto=format&fit=crop" class="h-[15px] w-[28px] rounded-[2px] object-cover" alt="Logo">
+            <img src="https://images.unsplash.com/photo-1557682250-33bd709cbe85?q=80&w=100&h=100&auto=format&fit=crop" class="h-[15px] w-[28px] rounded-[2px] object-cover" alt="Logo">
+        </div>
+    </div>
+    
+    <div class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] group-[.active]:grid-rows-[1fr]">
+        <!-- Efek fade & slide semulus pantat bayi ada di div ini -->
+        <div class="overflow-hidden opacity-0 -translate-y-3 transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] group-[.active]:opacity-100 group-[.active]:translate-y-0">
+            <div class="px-4 pb-4 border-t border-transparent transition-colors duration-500 ease group-[.active]:border-t-[#94a3b8]/30">
+                <div class="grid grid-cols-1 gap-[10px] pt-4">
+                    <div class="flex items-center justify-between py-3 px-[14px] border rounded-[10px] cursor-pointer transition-all duration-200 ease payment-item active:border-[#9ae2ff] active:bg-[#9ae2ff]/10 [&.selected]:border-[#9ae2ff] [&.selected]:bg-[#9ae2ff]/10 [&:not(.selected)]:border-[#94a3b8]/30" onclick="selectPayment(this)">
+                        <div class="flex items-center gap-3">
+                            <img src="https://images.unsplash.com/photo-1557682250-33bd709cbe85?q=80&w=100&h=100&auto=format&fit=crop" class="w-[45px] h-[30px] bg-white p-[2px] rounded-[6px] object-cover" alt="BCA">
+                            <div class="text-white text-[13px] font-semibold">BCA Virtual Account</div>
                         </div>
+                        <div class="text-[#f97316] text-[13px] font-bold">Rp 82.000</div>
+                    </div>
+                    <div class="flex items-center justify-between py-3 px-[14px] border rounded-[10px] cursor-pointer transition-all duration-200 ease payment-item active:border-[#9ae2ff] active:bg-[#9ae2ff]/10 [&.selected]:border-[#9ae2ff] [&.selected]:bg-[#9ae2ff]/10 [&:not(.selected)]:border-[#94a3b8]/30" onclick="selectPayment(this)">
+                        <div class="flex items-center gap-3">
+                            <img src="https://images.unsplash.com/photo-1557682250-33bd709cbe85?q=80&w=100&h=100&auto=format&fit=crop" class="w-[45px] h-[30px] bg-white p-[2px] rounded-[6px] object-cover" alt="Mandiri">
+                            <div class="text-white text-[13px] font-semibold">Mandiri Virtual Account</div>
+                        </div>
+                        <div class="text-[#f97316] text-[13px] font-bold">Rp 82.000</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
                     </div>
                 </div>
 
-                <div class="card">
-                    <div class="card-header">
-                        <div class="step-badge">4</div>
-                        <div class="step-title">Rincian Pembayaran</div>
+                <div class="bg-[#151c2d] rounded-[12px] overflow-hidden mb-4">
+                    <div class="flex items-center bg-[#1c253a]">
+                        <div class="bg-gradient-to-b from-[#94a3b8] to-[#f79e1b] text-[#0f172a] text-[16px] font-extrabold py-3 px-5 rounded-br-[12px] flex items-center justify-center">4</div>
+                        <div class="text-white text-[14px] font-bold pl-4">Rincian Pembayaran</div>
                     </div>
-                    <div class="card-body">
+                    <div class="p-4 pb-5 flex flex-col gap-4">
                         
                         <!-- Bagian Rincian -->
-                        <div class="order-summary">
+                        <div class="bg-[#151c2d] border border-[#94a3b8]/30 rounded-[12px] p-4 flex flex-col gap-[10px]">
                             
                             <!-- Info Akun -->
-                            <div class="order-section">
-                                <div class="order-label">Data Akun</div>
-                                <div class="order-row">
+                            <div class="pb-[5px] mb-0 border-b border-dashed border-[#1e293b]">
+                                <div class="text-[12px] text-white font-semibold mb-[6px] tracking-[-0.2px]">Data Akun</div>
+                                <div class="flex justify-between text-[13px] text-[#94a3b8] mb-1 [&>span:last-child]:text-white [&>span:last-child]:font-bold">
                                     <span>User ID</span>
-                                    <span style="color: #ffffff;">123456789</span>
+                                    <span>123456789</span>
                                 </div>
-                                <div class="order-row">
+                                <div class="flex justify-between text-[13px] text-[#94a3b8] mb-1 [&>span:last-child]:text-white [&>span:last-child]:font-bold">
                                     <span>Server</span>
-                                    <span style="color: #ffffff;">(1234)</span>
+                                    <span>(1234)</span>
                                 </div>
                             </div>
 
                             <!-- Info Biaya -->
-                            <div class="order-section">
-                                <div class="order-label">Rincian Biaya</div>
-                                <div class="order-row">
+                            <div class="pb-[5px] mb-0 border-b border-dashed border-[#1e293b]">
+                                <div class="text-[12px] text-white font-semibold mb-[6px] tracking-[-0.2px]">Rincian Biaya</div>
+                                <div class="flex justify-between text-[13px] text-[#94a3b8] mb-1 [&>span:last-child]:text-[#f97316] [&>span:last-child]:font-bold">
                                     <span>344 Diamonds</span>
                                     <span>Rp 80.000</span>
                                 </div>
-                                <div class="order-row">
+                                <div class="flex justify-between text-[13px] text-[#94a3b8] mb-1 [&>span:last-child]:text-[#f97316] [&>span:last-child]:font-bold">
                                     <span>Biaya Layanan VA-BCA</span>
                                     <span>Rp 1.500</span>
                                 </div>
                             </div>
 
                             <!-- Total -->
-                            <div class="order-row total">
+                            <div class="flex justify-between text-white text-[14px] font-bold mt-2 [&>span:last-child]:text-[#f97316] [&>span:last-child]:font-bold">
                                 <span>Total Pembayaran</span>
-                                <span class="total-price">Rp 81.500</span>
+                                <span>Rp 81.500</span>
                             </div>
                         </div>
 
                         <!-- Input Nomor WA -->
-                        <div class="input-group">
-                            <div class="label-wrap">
-                                <span class="input-label">*Nomor WhatsApp</span>
+                        <div class="flex flex-col gap-2">
+                            <div class="flex items-center gap-[6px]">
+                                <span class="text-[#e2e8f0] text-[13px] font-semibold">*Nomor WhatsApp</span>
                             </div>
-                            <input type="tel" class="input-field" placeholder="08xxxxxxxxxx">
-                            <span class="input-hint">*Invoice akan dikirim melalui WA di atas.
+                            <input type="tel" class="bg-[#0b1121] border border-[#94a3b8]/30 rounded-[12px] px-4 py-3 text-white text-[14px] font-medium outline-none transition-colors duration-200 ease focus:border-[#657e55] placeholder:text-[#475569] placeholder:font-normal w-full" placeholder="08xxxxxxxxxx">
+                            <span class="text-[#94a3b8] text-[11px] font-medium mt-1 pl-[2px] flex items-center gap-1">*Invoice akan dikirim melalui WA di atas.
                             </span>
                         </div>
 
                         <!-- Tombol -->
-<!-- Tombol Beli di dalam Card Rincian Pembayaran -->
-<button class="btn-submit" style="display: flex;" onclick="openModal()">
-    <i class="ph ph-shopping-cart-simple"></i>
-    Beli Sekarang
-</button>
-
+                        <!-- Tombol Beli di dalam Card Rincian Pembayaran -->
+                           <button class="bg-gradient-to-r from-[#94a3b8] to-[#f79e1b] text-[#0f172a] border-none rounded-[50px] p-[6px] text-[15px] font-bold flex justify-center items-center gap-[5px] w-full cursor-pointer mt-1 shadow-[0_4px_12px_rgba(247,158,27,0.2)] transition-opacity duration-200 ease active:opacity-80 flex !important" onclick="openModal()">
+                           <i class="ph ph-shopping-cart-simple text-[20px]"></i>
+                           Beli Sekarang
+                           </button>
                     </div>
                 </div>
                 
 
 
-                <div class="help-banner">
-                    <div class="help-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <div class="bg-[#151c2d] border border-[#1c253a] rounded-[12px] p-4 flex items-center gap-4 mb-5 cursor-pointer transition-colors duration-200 ease active:bg-[#3f3f46]">
+                    <div>
+                        <svg class="w-[28px] h-[28px] stroke-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
                             <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
                         </svg>
                     </div>
-                    <div class="help-text">
-                        <div class="help-title">Butuh Bantuan?</div>
-                        <div class="help-desc">Kamu bisa hubungi admin disini.</div>
+                    <div class="flex flex-col gap-1">
+                        <div class="text-white text-[14px] font-bold">Butuh Bantuan?</div>
+                        <div class="text-[#e2e8f0] text-[12px] font-medium">Kamu bisa hubungi admin disini.</div>
                     </div>
                 </div>
             </div> 
@@ -1739,28 +470,27 @@
 
             
 <!-- MULAI WRAPPER KONTEN KETERANGAN/DESKRIPSI -->
-<div id="content-keterangan">
-    <div class="card">
-        <div class="card-header">
-            <div class="step-badge">
+<div id="content-keterangan" style="display: none;">
+    <div class="bg-[#151c2d] rounded-[12px] overflow-hidden mb-4">
+        <div class="flex items-center bg-[#1c253a]">
+            <div class="bg-gradient-to-b from-[#94a3b8] to-[#f79e1b] text-[#0f172a] text-[16px] font-extrabold py-3 px-5 rounded-br-[12px] flex items-center justify-center">
                 <i class="ph-fill ph-article"></i>
             </div>
-            <div class="step-title">Deskripsi Produk</div>
+            <div class="text-white text-[14px] font-bold pl-4">Deskripsi Produk</div>
         </div>
         
-        <!-- Menggunakan class CSS yang baru dibuat -->
-        <div class="card-body desc-body">
+        <div class="p-4 pb-5 flex flex-col gap-4 text-[#94a3b8] text-[13px] leading-[1.6]">
             
-            <h3 class="desc-title">Mobile Legends: Bang Bang</h3>
-            <p class="desc-text">
+            <h3 class="text-white text-[15px] mb-2 font-bold">Mobile Legends: Bang Bang</h3>
+            <p class="mb-4">
                 Mobile Legends: Bang Bang adalah game MOBA mobile 5v5 yang sangat populer. Top up Diamond MLBB sekarang untuk membeli skin premium, Starlight Member, hero baru, dan berbagai item in-game eksklusif lainnya.
             </p>
 
-            <h4 class="desc-subtitle">
+            <h4 class="text-white text-[14px] mb-[10px] flex items-center gap-[6px] font-bold">
                 Cara Top Up:
             </h4>
             
-            <ol class="desc-list">
+            <ol class="pl-[15px] flex flex-col gap-2 mb-4 list-decimal marker:font-bold">
                 <li>Masukkan <b>User ID</b> dan <b>Zone ID</b> Anda.</li>
                 <li>Pilih nominal Diamond atau Membership yang diinginkan.</li>
                 <li>Pilih metode pembayaran yang tersedia (QRIS, E-Wallet, Virtual Account).</li>
@@ -1768,12 +498,12 @@
                 <li>Selesaikan pembayaran dan Diamond akan otomatis masuk ke akun Anda dalam hitungan detik!</li>
             </ol>
 
-            <div class="desc-alert">
-                <p class="desc-alert-title">
-                    <i class="ph-fill ph-clock"></i> 
+            <div class="p-3 bg-[#0b1121] border border-[#94a3b8]/30 rounded-[12px]">
+                <p class="mb-1 text-white font-semibold flex items-center gap-[6px]">
+                    <i class="ph-fill ph-clock text-[#60a5fa] text-[16px]"></i> 
                     Proses Otomatis 24/7
                 </p>
-                <p class="desc-alert-text">
+                <p class="text-[12px] text-[#94a3b8]">
                     Layanan kami aktif 24 jam. Pesanan Anda akan diproses secara instan setelah pembayaran terkonfirmasi oleh sistem kami.
                 </p>
             </div>
@@ -1781,126 +511,126 @@
         </div>
     </div>
     
-    <div class="card">
-    <div class="card-header">
-        <div class="step-badge">
-            <i class="ph-fill ph-chats-circle" style="color: var(--text-dark);"></i>
+    <div class="bg-[#151c2d] rounded-[12px] overflow-hidden mb-4">
+    <div class="flex items-center bg-[#1c253a]">
+        <div class="bg-gradient-to-b from-[#94a3b8] to-[#f79e1b] text-[#0f172a] text-[16px] font-extrabold py-3 px-5 rounded-br-[12px] flex items-center justify-center">
+            <i class="ph-fill ph-chats-circle text-[#0f172a]"></i>
         </div>
-        <div class="step-title">Ulasan Pembeli</div>
+        <div class="text-white text-[14px] font-bold pl-4">Ulasan Pembeli</div>
     </div>
     
-    <div class="card-body">
+    <div class="p-4 pb-5 flex flex-col gap-4">
         
-        <div class="review-dashboard">
-            <div class="dash-left">
-                <span class="dash-score">4.9</span>
-                <div class="dash-stars">
+        <div class="flex items-center bg-[#0b1121] border border-[#94a3b8]/30 rounded-[12px] p-4 mb-5 gap-4">
+            <div class="flex flex-col items-center justify-center border-r border-[#94a3b8]/30 pr-4 min-w-[90px]">
+                <span class="text-[36px] font-extrabold text-white leading-none mb-1">4.9</span>
+                <div class="text-[#fbbf24] text-[14px] flex">
                     <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
                 </div>
-                <span class="dash-total">62.21jt Ulasan</span>
+                <span class="text-[11px] text-[#94a3b8] mt-[6px] text-center">62.21jt Ulasan</span>
             </div>
             
-<div class="dash-right">
-    <div class="dash-bar-row">
-        <div class="dash-bar-label">5 <i class="ph-fill ph-star"></i></div>
-        <div class="dash-track"><div class="dash-fill" style="width: 95%;"></div></div>
-        <div class="dash-bar-count">62.21jt</div>
+<div class="flex-1 flex flex-col gap-[6px]">
+    <div class="flex items-center gap-2">
+        <div class="flex items-center gap-1 text-[12px] text-white font-bold w-[24px]">5 <i class="ph-fill ph-star text-[#fbbf24] text-[12px]"></i></div>
+        <div class="flex-1 h-2 bg-[#1c253a] rounded-[3px] overflow-hidden"><div class="h-full bg-[#fbbf24] rounded-[2px]" style="width: 95%;"></div></div>
+        <div class="text-[11px] text-[#94a3b8] font-medium w-[42px] text-right">62.21jt</div>
     </div>
-    <div class="dash-bar-row">
-        <div class="dash-bar-label">4 <i class="ph-fill ph-star"></i></div>
-        <div class="dash-track"><div class="dash-fill" style="width: 10%;"></div></div>
-        <div class="dash-bar-count">1.64rb</div>
+    <div class="flex items-center gap-2">
+        <div class="flex items-center gap-1 text-[12px] text-white font-bold w-[24px]">4 <i class="ph-fill ph-star text-[#fbbf24] text-[12px]"></i></div>
+        <div class="flex-1 h-2 bg-[#1c253a] rounded-[3px] overflow-hidden"><div class="h-full bg-[#fbbf24] rounded-[2px]" style="width: 10%;"></div></div>
+        <div class="text-[11px] text-[#94a3b8] font-medium w-[42px] text-right">1.64rb</div>
     </div>
-    <div class="dash-bar-row">
-        <div class="dash-bar-label">3 <i class="ph-fill ph-star"></i></div>
-        <div class="dash-track"><div class="dash-fill" style="width: 3%;"></div></div>
-        <div class="dash-bar-count">288</div>
+    <div class="flex items-center gap-2">
+        <div class="flex items-center gap-1 text-[12px] text-white font-bold w-[24px]">3 <i class="ph-fill ph-star text-[#fbbf24] text-[12px]"></i></div>
+        <div class="flex-1 h-2 bg-[#1c253a] rounded-[3px] overflow-hidden"><div class="h-full bg-[#fbbf24] rounded-[2px]" style="width: 3%;"></div></div>
+        <div class="text-[11px] text-[#94a3b8] font-medium w-[42px] text-right">288</div>
     </div>
-    <div class="dash-bar-row">
-        <div class="dash-bar-label">2 <i class="ph-fill ph-star"></i></div>
-        <div class="dash-track"><div class="dash-fill" style="width: 1%;"></div></div>
-        <div class="dash-bar-count">106</div>
+    <div class="flex items-center gap-2">
+        <div class="flex items-center gap-1 text-[12px] text-white font-bold w-[24px]">2 <i class="ph-fill ph-star text-[#fbbf24] text-[12px]"></i></div>
+        <div class="flex-1 h-2 bg-[#1c253a] rounded-[3px] overflow-hidden"><div class="h-full bg-[#fbbf24] rounded-[2px]" style="width: 1%;"></div></div>
+        <div class="text-[11px] text-[#94a3b8] font-medium w-[42px] text-right">106</div>
     </div>
-    <div class="dash-bar-row">
-        <div class="dash-bar-label">1 <i class="ph-fill ph-star"></i></div>
-        <div class="dash-track"><div class="dash-fill" style="width: 4%;"></div></div>
-        <div class="dash-bar-count">295</div>
+    <div class="flex items-center gap-2">
+        <div class="flex items-center gap-1 text-[12px] text-white font-bold w-[24px]">1 <i class="ph-fill ph-star text-[#fbbf24] text-[12px]"></i></div>
+        <div class="flex-1 h-2 bg-[#1c253a] rounded-[3px] overflow-hidden"><div class="h-full bg-[#fbbf24] rounded-[2px]" style="width: 4%;"></div></div>
+        <div class="text-[11px] text-[#94a3b8] font-medium w-[42px] text-right">295</div>
     </div>
 </div>
 
         </div>
 
-        <div class="review-modern-list">
+        <div class="flex flex-col gap-3">
             
-            <div class="rev-bubble">
-                <div class="rev-bubble-top">
-                    <div class="rev-user-info">
-                        <div class="rev-username"><i class="ph-fill ph-user-circle"></i> zhy**********</div>
-                        <div class="rev-date">16-05-2026 • 15:39 WIB</div>
+            <div class="bg-[#151c2d] border border-[#1e293b] rounded-[12px] p-[14px] transition-colors duration-200 ease hover:bg-[#0b1121]">
+                <div class="flex justify-between items-start mb-2">
+                    <div class="flex flex-col gap-[2px]">
+                        <div class="text-white text-[13px] font-bold flex items-center gap-[6px]"><i class="ph-fill ph-user-circle text-[#64748b] text-[14px]"></i> zhy**********</div>
+                        <div class="text-[#94a3b8] text-[11px]">16-05-2026 • 15:39 WIB</div>
                     </div>
-                    <div class="rev-bubble-stars">
+                    <div class="text-[#fbbf24] text-[12px] flex gap-[2px]">
                         <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
                     </div>
                 </div>
-                <div class="rev-bubble-text">
+                <div class="text-[#cbd5e1] text-[13px] leading-[1.5] mb-3">
                     Prosesnya cepat banget, mantap deh pokoknya ngga nyesel langganan disini!
                 </div>
-                <div class="rev-pill">
-                    <i class="ph-fill ph-diamond"></i> Weekly Diamond Pass - (Limited)
+                <div class="inline-flex items-center gap-[6px] bg-[#0b1121] border border-[#94a3b8]/30 text-[#94a3b8] px-[10px] py-[6px] rounded-[50px] text-[11px] font-semibold">
+                    <i class="ph-fill ph-diamond text-[#fbbf24]"></i> Weekly Diamond Pass - (Limited)
                 </div>
             </div>
 
-            <div class="rev-bubble">
-                <div class="rev-bubble-top">
-                    <div class="rev-user-info">
-                        <div class="rev-username"><i class="ph-fill ph-user-circle"></i> jun**********</div>
-                        <div class="rev-date">16-05-2026 • 08:06 WIB</div>
+            <div class="bg-[#151c2d] border border-[#1e293b] rounded-[12px] p-[14px] transition-colors duration-200 ease hover:bg-[#0b1121]">
+                <div class="flex justify-between items-start mb-2">
+                    <div class="flex flex-col gap-[2px]">
+                        <div class="text-white text-[13px] font-bold flex items-center gap-[6px]"><i class="ph-fill ph-user-circle text-[#64748b] text-[14px]"></i> jun**********</div>
+                        <div class="text-[#94a3b8] text-[11px]">16-05-2026 • 08:06 WIB</div>
                     </div>
-                    <div class="rev-bubble-stars">
+                    <div class="text-[#fbbf24] text-[12px] flex gap-[2px]">
                         <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
                     </div>
                 </div>
-                <div class="rev-bubble-text">
+                <div class="text-[#cbd5e1] text-[13px] leading-[1.5] mb-3">
                     Puas banget topup disini, admin responsif dan gampang pakenya.
                 </div>
-                <div class="rev-pill">
-                    <i class="ph-fill ph-diamond"></i> 70 (64+6) Diamonds
+                <div class="inline-flex items-center gap-[6px] bg-[#0b1121] border border-[#94a3b8]/30 text-[#94a3b8] px-[10px] py-[6px] rounded-[50px] text-[11px] font-semibold">
+                    <i class="ph-fill ph-diamond text-[#fbbf24]"></i> 70 (64+6) Diamonds
                 </div>
             </div>
 
-            <div class="rev-bubble">
-                <div class="rev-bubble-top">
-                    <div class="rev-user-info">
-                        <div class="rev-username"><i class="ph-fill ph-user-circle"></i> 23z**********</div>
-                        <div class="rev-date">16-05-2026 • 01:51 WIB</div>
+            <div class="bg-[#151c2d] border border-[#1e293b] rounded-[12px] p-[14px] transition-colors duration-200 ease hover:bg-[#0b1121]">
+                <div class="flex justify-between items-start mb-2">
+                    <div class="flex flex-col gap-[2px]">
+                        <div class="text-white text-[13px] font-bold flex items-center gap-[6px]"><i class="ph-fill ph-user-circle text-[#64748b] text-[14px]"></i> 23z**********</div>
+                        <div class="text-[#94a3b8] text-[11px]">16-05-2026 • 01:51 WIB</div>
                     </div>
-                    <div class="rev-bubble-stars">
+                    <div class="text-[#fbbf24] text-[12px] flex gap-[2px]">
                         <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
                     </div>
                 </div>
-                <div class="rev-bubble-text">
+                <div class="text-[#cbd5e1] text-[13px] leading-[1.5] mb-3">
                     Cepet masuknya padahal top up jam 2 pagi.
                 </div>
-                <div class="rev-pill">
-                    <i class="ph-fill ph-diamond"></i> 1000 (500+500) Diamonds - First Top Up
+                <div class="inline-flex items-center gap-[6px] bg-[#0b1121] border border-[#94a3b8]/30 text-[#94a3b8] px-[10px] py-[6px] rounded-[50px] text-[11px] font-semibold">
+                    <i class="ph-fill ph-diamond text-[#fbbf24]"></i> 1000 (500+500) Diamonds - First Top Up
                 </div>
             </div>
 
-            <div class="rev-bubble">
-                <div class="rev-bubble-top">
-                    <div class="rev-user-info">
-                        <div class="rev-username"><i class="ph-fill ph-user-circle"></i> nan**********</div>
-                        <div class="rev-date">16-05-2026 • 00:12 WIB</div>
+            <div class="bg-[#151c2d] border border-[#1e293b] rounded-[12px] p-[14px] transition-colors duration-200 ease hover:bg-[#0b1121]">
+                <div class="flex justify-between items-start mb-2">
+                    <div class="flex flex-col gap-[2px]">
+                        <div class="text-white text-[13px] font-bold flex items-center gap-[6px]"><i class="ph-fill ph-user-circle text-[#64748b] text-[14px]"></i> nan**********</div>
+                        <div class="text-[#94a3b8] text-[11px]">16-05-2026 • 00:12 WIB</div>
                     </div>
-                    <div class="rev-bubble-stars">
+                    <div class="text-[#fbbf24] text-[12px] flex gap-[2px]">
                         <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
                     </div>
                 </div>
-                <div class="rev-bubble-text">
+                <div class="text-[#cbd5e1] text-[13px] leading-[1.5] mb-3">
                     Josss, langganan terbaikk.
                 </div>
-                <div class="rev-pill">
-                    <i class="ph-fill ph-diamond"></i> Weekly Diamond Pass
+                <div class="inline-flex items-center gap-[6px] bg-[#0b1121] border border-[#94a3b8]/30 text-[#94a3b8] px-[10px] py-[6px] rounded-[50px] text-[11px] font-semibold">
+                    <i class="ph-fill ph-diamond text-[#fbbf24]"></i> Weekly Diamond Pass
                 </div>
             </div>
 
@@ -1909,26 +639,26 @@
 </div>
 
     <!-- Card FAQ -->
-    <div class="card">
-        <div class="card-header">
-            <div class="step-badge">
-                <i class="ph-fill ph-question" style="color: var(--text-dark);"></i>
+    <div class="bg-[#151c2d] rounded-[12px] overflow-hidden mb-4">
+        <div class="flex items-center bg-[#1c253a]">
+            <div class="bg-gradient-to-b from-[#94a3b8] to-[#f79e1b] text-[#0f172a] text-[16px] font-extrabold py-3 px-5 rounded-br-[12px] flex items-center justify-center">
+                <i class="ph-fill ph-question text-[#0f172a]"></i>
             </div>
-            <div class="step-title">Pertanyaan Umum (FAQ)</div>
+            <div class="text-white text-[14px] font-bold pl-4">Pertanyaan Umum (FAQ)</div>
         </div>
         
-        <div class="card-body">
-            <div class="faq-container">
+        <div class="p-4 pb-5 flex flex-col gap-4">
+            <div class="flex flex-col gap-[10px]">
                 
                 <!-- FAQ 1 -->
-                <div class="faq-item">
-                    <div class="faq-header" onclick="toggleFaq(this)">
-                        <span class="faq-question">Berapa lama proses top up masuk ke akun?</span>
-                        <i class="ph ph-caret-down faq-arrow"></i>
+                <div class="bg-[#151c2d] border border-[#94a3b8]/30 rounded-[12px] overflow-hidden transition-all duration-400 ease-[cubic-bezier(0.4,0,0.2,1)] group faq-item [&.active]:border-[#9ae2ff] [&.active]:bg-[rgba(154,226,255,0.05)]">
+                    <div class="flex justify-between items-center p-[14px_16px] cursor-pointer select-none" onclick="toggleFaq(this)">
+                        <span class="text-white text-[13px] font-bold">Berapa lama proses top up masuk ke akun?</span>
+                        <i class="ph ph-caret-down text-[#94a3b8] text-[16px] transition-all duration-400 ease-[cubic-bezier(0.4,0,0.2,1)] group-[.active]:rotate-180 group-[.active]:text-[#9ae2ff]"></i>
                     </div>
-                    <div class="faq-body-wrapper">
-                        <div class="faq-body-inner">
-                            <div class="faq-content">
+                    <div class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-400 ease-[cubic-bezier(0.4,0,0.2,1)] group-[.active]:grid-rows-[1fr]">
+                        <div class="overflow-hidden">
+                            <div class="px-4 pb-4 text-[#94a3b8] text-[12.5px] leading-[1.6]">
                                 Secara normal, proses top up memakan waktu <strong>1 - 3 menit</strong> setelah pembayaran berhasil dikonfirmasi oleh sistem. Proses ini berjalan secara otomatis 24/7.
                             </div>
                         </div>
@@ -1936,16 +666,16 @@
                 </div>
 
                 <!-- FAQ 2 (Berisi Daftar/List) -->
-                <div class="faq-item">
-                    <div class="faq-header" onclick="toggleFaq(this)">
-                        <span class="faq-question">Bagaimana jika diamond belum masuk?</span>
-                        <i class="ph ph-caret-down faq-arrow"></i>
+                <div class="bg-[#151c2d] border border-[#94a3b8]/30 rounded-[12px] overflow-hidden transition-all duration-400 ease-[cubic-bezier(0.4,0,0.2,1)] group faq-item [&.active]:border-[#9ae2ff] [&.active]:bg-[rgba(154,226,255,0.05)]">
+                    <div class="flex justify-between items-center p-[14px_16px] cursor-pointer select-none" onclick="toggleFaq(this)">
+                        <span class="text-white text-[13px] font-bold">Bagaimana jika diamond belum masuk?</span>
+                        <i class="ph ph-caret-down text-[#94a3b8] text-[16px] transition-all duration-400 ease-[cubic-bezier(0.4,0,0.2,1)] group-[.active]:rotate-180 group-[.active]:text-[#9ae2ff]"></i>
                     </div>
-                    <div class="faq-body-wrapper">
-                        <div class="faq-body-inner">
-                            <div class="faq-content">
+                    <div class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-400 ease-[cubic-bezier(0.4,0,0.2,1)] group-[.active]:grid-rows-[1fr]">
+                        <div class="overflow-hidden">
+                            <div class="px-4 pb-4 text-[#94a3b8] text-[12.5px] leading-[1.6]">
                                 Jika diamond belum masuk setelah 10 menit, mohon jangan panik. Silakan lakukan pengecekan berikut:
-                                <ol class="faq-list">
+                                <ol class="pl-[18px] mt-2 flex flex-col gap-[6px] text-[#cbd5e1] list-decimal marker:text-[#f97316] marker:font-bold">
                                     <li>Pastikan <b>User ID</b> dan <b>Zone ID</b> yang Anda masukkan sudah benar.</li>
                                     <li>Relogin (keluar dan masuk kembali) ke dalam game Mobile Legends Anda.</li>
                                     <li>Jika masih belum masuk, klik tombol <b>Hubungi Admin</b> di halaman utama dengan menyertakan Nomor Invoice transaksi.</li>
@@ -1956,14 +686,14 @@
                 </div>
 
                 <!-- FAQ 3 -->
-                <div class="faq-item">
-                    <div class="faq-header" onclick="toggleFaq(this)">
-                        <span class="faq-question">Apakah pembayaran di sini aman?</span>
-                        <i class="ph ph-caret-down faq-arrow"></i>
+                <div class="bg-[#151c2d] border border-[#94a3b8]/30 rounded-[12px] overflow-hidden transition-all duration-400 ease-[cubic-bezier(0.4,0,0.2,1)] group faq-item [&.active]:border-[#9ae2ff] [&.active]:bg-[rgba(154,226,255,0.05)]">
+                    <div class="flex justify-between items-center p-[14px_16px] cursor-pointer select-none" onclick="toggleFaq(this)">
+                        <span class="text-white text-[13px] font-bold">Apakah pembayaran di sini aman?</span>
+                        <i class="ph ph-caret-down text-[#94a3b8] text-[16px] transition-all duration-400 ease-[cubic-bezier(0.4,0,0.2,1)] group-[.active]:rotate-180 group-[.active]:text-[#9ae2ff]"></i>
                     </div>
-                    <div class="faq-body-wrapper">
-                        <div class="faq-body-inner">
-                            <div class="faq-content">
+                    <div class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-400 ease-[cubic-bezier(0.4,0,0.2,1)] group-[.active]:grid-rows-[1fr]">
+                        <div class="overflow-hidden">
+                            <div class="px-4 pb-4 text-[#94a3b8] text-[12.5px] leading-[1.6]">
                                 Sangat aman! Kami menggunakan jalur pembayaran resmi (Payment Gateway) dan transaksi dijamin 100% legal. Akun Anda aman dari resiko banned.
                             </div>
                         </div>
@@ -1981,67 +711,67 @@
         </section>
     </main>
         <!-- POPUP KONFIRMASI (Letakkan di dalam .app-container sebelum tag penutup) -->
-    <div class="modal-overlay" id="modal-confirm">
-        <div class="modal-content">
+    <div class="fixed inset-y-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] bg-black/70 z-[999] flex items-end invisible opacity-0 transition-all duration-300 ease group modal-overlay [&.active]:visible [&.active]:opacity-100" id="modal-confirm">
+        <div class="bg-[#151c2d] w-full max-h-[90%] overflow-y-auto rounded-t-[24px] px-5 pt-6 pb-6 translate-y-full transition-transform duration-500 ease-[cubic-bezier(0.175,0.885,0.32,1.15)] relative shadow-[0_-10px_40px_rgba(0,0,0,0.6)] group-[.active]:translate-y-0">
             <!-- Wadah untuk animasi bintang -->
-            <div class="festive-stars" id="star-container"></div>
+            <div id="star-container"></div>
             
-            <div class="modal-handle"></div>
+            <div class="w-[40px] h-1 bg-[#94a3b8]/30 rounded-[4px] -mt-[10px] mx-auto mb-4"></div>
             
-            <div class="modal-header">
-                <div class="modal-title">Konfirmasi Pesanan</div>
-                <button class="modal-close" onclick="closeModal()">
+            <div class="flex justify-between items-center mb-5">
+                <div class="text-white text-[16px] font-bold">Konfirmasi Pesanan</div>
+                <button class="bg-[#0b1121] border border-[#94a3b8]/30 text-[#94a3b8] w-8 h-8 rounded-full flex justify-center items-center text-[16px] cursor-pointer transition-all duration-200 active:scale-90 active:text-white active:border-[#f97316]" onclick="closeModal()">
                     <i class="ph ph-x"></i>
                 </button>
             </div>
             
-            <div class="modal-body">
-                <div class="order-summary">
+            <div>
+                <div class="bg-[#151c2d] border border-[#94a3b8]/30 rounded-[12px] p-4 flex flex-col gap-[10px] !bg-[#0b1121]">
                     <!-- Info Akun -->
-                    <div class="order-section">
-                        <div class="order-label">Data Tujuan</div>
-                        <div class="order-row">
+                    <div class="pb-[5px] mb-0 border-b border-dashed border-[#1e293b]">
+                        <div class="text-[12px] text-white font-semibold mb-[6px] tracking-[-0.2px]">Data Tujuan</div>
+                        <div class="flex justify-between text-[13px] text-[#94a3b8] mb-1 [&>span:last-child]:text-[#f97316] [&>span:last-child]:font-bold">
                             <span>User ID / Zone ID</span>
-                            <span style="color: #ffffff;">123456789 (1234)</span>
+                            <span class="!text-white">123456789 (1234)</span>
                         </div>
-                        <div class="order-row">
+                        <div class="flex justify-between text-[13px] text-[#94a3b8] mb-1 [&>span:last-child]:text-[#f97316] [&>span:last-child]:font-bold">
                             <span>Nickname In-Game</span>
-                            <span style="color: #ffffff;">ProPlayer2026</span>
+                            <span class="!text-white">ProPlayer2026</span>
                         </div>
                     </div>
 
                     <!-- Info Biaya -->
-                    <div class="order-section">
-                        <div class="order-label">Rincian Pembelian</div>
-                        <div class="order-row">
+                    <div class="pb-[5px] mb-0 border-b border-dashed border-[#1e293b]">
+                        <div class="text-[12px] text-white font-semibold mb-[6px] tracking-[-0.2px]">Rincian Pembelian</div>
+                        <div class="flex justify-between text-[13px] text-[#94a3b8] mb-1 [&>span:last-child]:text-[#f97316] [&>span:last-child]:font-bold">
                             <span>Item Produk</span>
-                            <span style="color: #ffffff;">344 Diamonds</span>
+                            <span class="!text-white">344 Diamonds</span>
                         </div>
-                        <div class="order-row">
+                        <div class="flex justify-between text-[13px] text-[#94a3b8] mb-1 [&>span:last-child]:text-[#f97316] [&>span:last-child]:font-bold">
                             <span>Metode Pembayaran</span>
-                            <span style="color: #ffffff;">BCA Virtual Account</span>
+                            <span class="!text-white">BCA Virtual Account</span>
                         </div>
-                        <div class="order-row">
+                        <div class="flex justify-between text-[13px] text-[#94a3b8] mb-1 [&>span:last-child]:text-[#f97316] [&>span:last-child]:font-bold">
                             <span>Harga Produk</span>
                             <span>Rp 80.000</span>
                         </div>
-                        <div class="order-row">
+                        <div class="flex justify-between text-[13px] text-[#94a3b8] mb-1 [&>span:last-child]:text-[#f97316] [&>span:last-child]:font-bold">
                             <span>Biaya Layanan</span>
                             <span>Rp 1.500</span>
                         </div>
                     </div>
 
                     <!-- Total -->
-                    <div class="order-row total">
+                    <div class="flex justify-between text-white text-[14px] font-bold mt-2 [&>span:last-child]:text-[#f97316] [&>span:last-child]:font-bold">
                         <span>Total Pembayaran</span>
-                        <span class="total-price" style="font-size: 18px;">Rp 81.500</span>
+                        <span style="font-size: 18px;">Rp 81.500</span>
                     </div>
                 </div>
             </div>
             
-            <div class="modal-footer">
-                <button class="btn-submit modal-btn-confirm" style="display: flex; width: 100%;">
-                    Bayar Sekarang <i class="ph-fill ph-check-circle" style="font-size: 18px;"></i>
+            <div class="mt-5">
+                <button class="bg-gradient-to-r from-[#94a3b8] to-[#f79e1b] text-[#0f172a] border-none rounded-[50px] p-[6px] font-bold justify-center items-center gap-[5px] cursor-pointer mt-1 transition-opacity duration-200 ease active:opacity-80 h-[35px] text-[16px] shadow-[0_8px_20px_rgba(247,158,27,0.3)] flex w-full">
+                    Bayar Sekarang <i class="ph-fill ph-check-circle text-[18px]"></i>
                 </button>
             </div>
         </div>
@@ -2055,18 +785,17 @@
     const tabTransaksi = document.getElementById('tab-transaksi');
     const tabKeterangan = document.getElementById('tab-keterangan');
     
-    // Asumsi ID kontennya adalah ini
     const contentTransaksi = document.getElementById('content-transaksi'); 
     const contentKeterangan = document.getElementById('content-keterangan');
 
     if(tabName === 'transaksi') {
-        tabTransaksi.className = 'tab-btn active';
-        tabKeterangan.className = 'tab-btn inactive';
+        tabTransaksi.classList.add('active');
+        tabKeterangan.classList.remove('active');
         contentTransaksi.style.display = 'block';
         contentKeterangan.style.display = 'none';
     } else {
-        tabKeterangan.className = 'tab-btn active';
-        tabTransaksi.className = 'tab-btn inactive';
+        tabKeterangan.classList.add('active');
+        tabTransaksi.classList.remove('active');
         contentTransaksi.style.display = 'none';
         contentKeterangan.style.display = 'block';
     }
@@ -2076,7 +805,6 @@
 
 <script>
   function switchProductTab(tabName) {
-    // Array kategori yang tersedia
     const tabs = ['diamond', 'membership', 'flashsale'];
     
     tabs.forEach(tab => {
@@ -2085,30 +813,25 @@
         
         if (tabBtn && content) {
             if (tab === tabName) {
-                tabBtn.className = 'prod-tab-btn active';
+                tabBtn.classList.add('active');
                 content.style.display = 'grid'; 
             } else {
-                tabBtn.className = 'prod-tab-btn';
+                tabBtn.classList.remove('active');
                 content.style.display = 'none';
             }
         }
     });
 
-    // Handle form target URL / direct redirect berdasarkan struktur kategori
     const activeElement = document.getElementById('tab-' + tabName);
     if (activeElement && activeElement.hasAttribute('data-redirect-url')) {
         const targetUrl = activeElement.getAttribute('data-redirect-url');
         console.log("Kategori diakses, bersiap redirect ke form URL tujuan: " + targetUrl);
-        
-        // Uncomment baris di bawah jika klik tab ingin langsung memicu redirect halaman:
-        // window.location.href = targetUrl;
     }
 }
 
 
 </script>
 <script>
-  // Fungsi untuk membuka/tutup kategori pembayaran (Accordion)
 function togglePayment(categoryId) {
     const categories = document.querySelectorAll('.payment-category');
     
@@ -2116,77 +839,60 @@ function togglePayment(categoryId) {
         if (cat.id === categoryId) {
             cat.classList.toggle('active');
         } else {
-            // Hapus kelas 'active' pada kategori lain jika ingin hanya 1 dropdown terbuka (opsional)
             cat.classList.remove('active');
         }
     });
 }
 
-// Fungsi untuk memilih metode pembayaran
 function selectPayment(element) {
-    // Hapus kelas 'selected' dari semua item pembayaran
     const allItems = document.querySelectorAll('.payment-item');
     allItems.forEach(item => {
         item.classList.remove('selected');
     });
     
-    // Tambahkan kelas 'selected' ke item yang diklik
     element.classList.add('selected');
 }
 
 </script>
 <script>
-// Fungsi Buka Modal & Triger Animasi Bintang
-// Fungsi Buka Modal & Kunci Scroll
 function openModal() {
     const modal = document.getElementById('modal-confirm');
     modal.classList.add('active');
     
-    // KUNCI SCROLL: Mencegah background ikut ke-scroll (Kesan Native App)
     document.body.style.overflow = 'hidden';
     
-    // Memberikan delay kecil agar bintang meledak saat modal sedang naik
     setTimeout(() => {
-        fireFestiveStars();
+        if(typeof fireFestiveStars === 'function') fireFestiveStars();
     }, 150);
 }
 
-// Fungsi Tutup Modal & Buka Scroll
 function closeModal() {
     const modal = document.getElementById('modal-confirm');
     modal.classList.remove('active');
     
-    // BUKA SCROLL: Mengembalikan background agar bisa di-scroll lagi
     document.body.style.overflow = '';
 }
 
-
-// Menutup modal jika user klik area gelap (overlay)
 document.getElementById('modal-confirm').addEventListener('click', function(e) {
     if(e.target === this) {
         closeModal();
     }
 });
 
-
 </script>
 <script>
-  // Fungsi untuk membuka/tutup Accordion FAQ
 function toggleFaq(headerElement) {
     const currentItem = headerElement.parentElement;
     const allItems = document.querySelectorAll('.faq-item');
     
-    // Opsi: Menutup FAQ lain saat salah satu dibuka (bisa dihapus jika ingin buka multi-tab)
     allItems.forEach(item => {
         if(item !== currentItem) {
             item.classList.remove('active');
         }
     });
 
-    // Toggle (Buka/Tutup) item yang diklik
     currentItem.classList.toggle('active');
 }
-
 </script>
 
 </body>
