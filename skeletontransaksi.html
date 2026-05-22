@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Game.ID - Mobile Legends (Skeleton)</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">    
+    
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        :root {
+            /* Backgrounds */
+            --bg-root: #000000;
+            --bg-body: #0b1121;
+            --bg-header: #0b1121;
+            --bg-card: #151c2d;
+            --bg-card-header: #1c253a;
+            --bg-input: #0b1121;
+            --bg-overlay: rgba(0, 0, 0, 0.7);
+            --bg-hover: #3f3f46;
+            
+            /* Text Colors */
+            --text-white: #ffffff;
+            --text-gray: #94a3b8;
+            --text-dark: #0f172a;
+            --text-light: #e2e8f0;
+            --text-lighter: #cbd5e1;
+            --text-placeholder: #475569;
+            
+            /* Accents & Icons */
+            --accent-orange: #f97316;
+            --accent-yellow: #fbbf24;
+            --accent-red: #ef4444;
+            --icon-yellow: #facc15;
+            --icon-blue: #60a5fa;
+            --icon-green: #34d399;
+            --icon-gray: #64748b;
+            
+            /* Opacity Variants */
+            --accent-orange-10: rgba(249, 115, 22, 0.1);
+            --accent-orange-05: rgba(249, 115, 22, 0.05);
+            --bg-red-10: rgba(239, 68, 68, 0.1);
+            --border-red-20: rgba(239, 68, 68, 0.2);
+            --bg-active-light: rgba(154, 226, 255, 0.1);
+            --bg-active-light-05: rgba(154, 226, 255, 0.05);
+            
+            /* Gradients */
+            --tab-active-grad: linear-gradient(180deg, #9ae2ff 0%, #6ab7ff 100%);
+            --btn-grad: linear-gradient(90deg, #94a3b8 0%, #f79e1b 100%);
+            --badge-grad: linear-gradient(180deg, #94a3b8 0%, #f79e1b 100%);
+            --progress-grad: linear-gradient(90deg, #94a3b8 0%, #f79e1b 100%);
+            
+            /* Borders */
+            --border-input: rgba(148, 163, 184, 0.3);
+            --border-header: #1e293b;
+            --border-focus: #657e55;
+            --border-active: #9ae2ff;
+            
+            /* Border Radius */
+            --border-radius-xs: 2px;
+            --border-radius-xs2: 3px;
+            --border-radius-sm: 4px;
+            --border-radius-sm2: 6px;
+            --border-radius-lg: 10px;
+            --border-radius-md: 12px;
+            --border-radius-3xl: 18px;
+            --border-radius-2xl: 24px;
+            --border-radius-xl: 50px;
+            
+            /* Shadows */
+            --shadow-main: 0 0 20px rgba(0,0,0,0.8);
+            --shadow-icon: -8px 8px 15px rgba(0,0,0,0.5);
+            --shadow-tab: 0 2px 4px rgba(0,0,0,0.2);
+            --shadow-btn: 0 4px 12px rgba(247, 158, 27, 0.2);
+            --shadow-btn-lg: 0 8px 20px rgba(247, 158, 27, 0.3);
+            --shadow-modal: 0 -10px 40px rgba(0,0,0,0.6);
+        }
+    </style>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"IBM Plex Sans Condensed"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-[var(--bg-root)] flex justify-center font-sans antialiased [-webkit-tap-highlight-color:transparent] m-0 p-0 box-border">
+
+<div class="w-full max-w-[480px] md:max-w-[768px] lg:max-w-[1300px] mx-auto min-h-screen bg-[var(--bg-body)] relative shadow-[var(--shadow-main)] pb-[40px] transition-all duration-300">
+    <!-- HEADER -->
+    <header class="flex justify-between items-center px-4 py-[10px] bg-[var(--bg-header)] sticky top-0 z-50">
+        <a href="#" class="flex items-center bg-transparent py-[6px] pr-[12px] pl-[6px] rounded-[var(--border-radius-xl)] gap-2 no-underline">
+            <img class="w-6 h-6 rounded-full object-cover" src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f?q=80&w=200&auto=format&fit=crop" alt="Logo">
+            <div class="text-[13px] font-extrabold text-[var(--text-dark)] tracking-[-0.2px]"><span class="text-[var(--accent-orange)]">Order</span> Game.ID</div>
+        </a>
+        <div class="flex items-center gap-[10px]">
+            <button class="bg-[var(--bg-card)] text-[var(--text-white)] flex items-center justify-center rounded-[var(--border-radius-lg)] cursor-pointer h-[30px] border-0 w-[36px] text-[18px]">
+                <i class="ph ph-magnifying-glass"></i>
+            </button>
+            <button class="bg-[var(--bg-card)] text-[var(--text-white)] flex items-center justify-center rounded-[var(--border-radius-lg)] cursor-pointer h-[30px] border-0 px-[14px] gap-2 text-[12px] font-semibold">
+                <img class="w-4 h-4 rounded-full" src="https://flagcdn.com/w20/id.png" alt="ID">
+                ID / IDR
+            </button>
+            <button class="bg-[var(--bg-card)] text-[var(--text-white)] flex items-center justify-center rounded-[var(--border-radius-lg)] cursor-pointer h-[30px] border-0 w-[36px] text-[18px]">
+                <i class="ph ph-list"></i>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- BANNER (Skeleton) -->
+        <section class="w-full h-[250px] md:h-[350px] lg:h-[420px] relative">
+            <div class="w-full h-full bg-[var(--bg-card-header)] animate-pulse"></div>
+        </section>
+
+        <!-- INFO GAME (Skeleton) -->
+        <section class="flex px-4 relative z-10 bg-[var(--bg-card-header)]">
+            <div class="mt-[-50px] shrink-0 [perspective:500px]">
+                <div class="w-[130px] h-[120px] rounded-[var(--border-radius-3xl)] bg-[var(--border-input)] border-0 origin-left [transform:rotateY(30deg)] shadow-[var(--shadow-icon)] animate-pulse"></div>
+            </div>
+            <div class="mt-4 -ml-[5px] flex flex-col gap-2 w-full pt-[6px]">
+                <div class="h-[15px] bg-[var(--border-input)] rounded w-3/4 animate-pulse"></div>
+                <div class="h-3 bg-[var(--border-input)] rounded w-1/3 animate-pulse mt-1"></div>
+            </div>
+        </section>
+
+        <!-- KEUNGGULAN (Tetap karena ini elemen UI statis) -->
+        <section class="flex justify-between px-4 py-5 bg-[var(--bg-card)] rounded-b-[var(--border-radius-md)]">
+            <div class="flex items-center gap-[6px] text-[11px] font-semibold text-[var(--text-lighter)]">
+                <i class="ph-fill ph-lightning text-[14px] text-[var(--icon-yellow)]"></i>
+                Proses Cepat
+            </div>
+            <div class="flex items-center gap-[6px] text-[11px] font-semibold text-[var(--text-lighter)]">
+                <i class="ph-fill ph-chat-circle-dots text-[14px] text-[var(--icon-blue)]"></i>
+                Layanan Chat 24/7
+            </div>
+            <div class="flex items-center gap-[6px] text-[11px] font-semibold text-[var(--text-lighter)]">
+                <i class="ph-fill ph-shield-check text-[14px] text-[var(--icon-green)]"></i>
+                Pembayaran Aman!
+            </div>
+        </section>
+
+        <!-- TABS NAVIGASI -->
+        <section class="p-[15px]">
+            <div class="flex bg-[var(--bg-card)] rounded-[var(--border-radius-md)] p-1">
+                <div class="flex-1 py-[6.5px] text-center rounded-[var(--border-radius-md)] text-[14px] font-bold cursor-pointer transition-all duration-200 ease tab-btn active [&.active]:bg-[image:var(--btn-grad)] [&.active]:text-[var(--text-dark)] [&.active]:shadow-[var(--shadow-tab)] [&:not(.active)]:text-[var(--text-gray)] [&:not(.active)]:bg-transparent" id="tab-transaksi" onclick="switchTab('transaksi')">Transaksi</div>
+                <div class="flex-1 py-[6.5px] text-center rounded-[var(--border-radius-md)] text-[14px] font-bold cursor-pointer transition-all duration-200 ease tab-btn [&.active]:bg-[image:var(--btn-grad)] [&.active]:text-[var(--text-dark)] [&.active]:shadow-[var(--shadow-tab)] [&:not(.active)]:text-[var(--text-gray)] [&:not(.active)]:bg-transparent" id="tab-keterangan" onclick="switchTab('keterangan')">Deskripsi & Ulasan</div>
+            </div>
+        </section>
+
+        <section class="px-4">
+            
+            <!-- TAB: TRANSAKSI -->
+            <div id="content-transaksi" class="lg:grid lg:grid-cols-12 lg:gap-6 lg:items-start">
+                
+                <div class="lg:col-span-7">
+                
+                    <!-- 1. DATA AKUN (Skeleton) -->
+                    <div class="bg-[var(--bg-card)] rounded-[var(--border-radius-md)] overflow-hidden mb-4">
+                        <div class="flex items-center bg-[var(--bg-card-header)]">
+                            <div class="bg-[image:var(--badge-grad)] text-[var(--text-dark)] text-[16px] font-extrabold py-3 px-5 rounded-br-[var(--border-radius-md)] flex items-center justify-center">1</div>
+                            <div class="text-[var(--text-white)] text-[14px] font-bold pl-4">Masukkan Data Akun</div>
+                        </div>
+                        <div class="p-4 pb-5 flex flex-col gap-4">
+                            
+                            <div class="flex flex-col gap-2">
+                                <div class="h-3.5 bg-[var(--bg-card-header)] rounded w-8 animate-pulse mb-1"></div>
+                                <div class="h-[46px] bg-[var(--bg-card-header)] rounded-[var(--border-radius-md)] w-full animate-pulse"></div>
+                            </div>
+
+                            <div class="flex flex-col gap-2">
+                                <div class="h-3.5 bg-[var(--bg-card-header)] rounded w-12 animate-pulse mb-1"></div>
+                                <div class="h-[46px] bg-[var(--bg-card-header)] rounded-[var(--border-radius-md)] w-full animate-pulse"></div>
+                            </div>
+
+                            <div class="h-[40px] bg-[var(--bg-card-header)] rounded-[var(--border-radius-xl)] w-full mt-1 animate-pulse"></div>
+
+                        </div>
+                    </div>
+                    
+                    <!-- 2. PILIH PRODUK (Skeleton) -->
+                    <div class="bg-[var(--bg-card)] rounded-[var(--border-radius-md)] overflow-hidden mb-4">
+                        <div class="flex items-center bg-[var(--bg-card-header)]">
+                            <div class="bg-[image:var(--badge-grad)] text-[var(--text-dark)] text-[16px] font-extrabold py-3 px-5 rounded-br-[var(--border-radius-md)] flex items-center justify-center">2</div>
+                            <div class="text-[var(--text-white)] text-[14px] font-bold pl-4">Pilih Produk</div>
+                        </div>
+                        <div class="p-4 pb-5 flex flex-col gap-4">
+                            
+                            <!-- Tab Produk tetap UI -->
+                            <div class="flex gap-[10px] overflow-x-auto">
+                                <div class="px-4 py-2 rounded-[var(--border-radius-md)] border bg-[var(--bg-card)] text-[13px] font-semibold cursor-pointer transition-all duration-0 ease whitespace-nowrap prod-tab-btn [&.active]:border-[var(--accent-yellow)] [&.active]:bg-[var(--accent-orange-10)] [&.active]:text-[var(--accent-yellow)] [&:not(.active)]:border-[var(--border-input)] [&:not(.active)]:text-[var(--text-gray)]" id="tab-flashsale" data-redirect-url="/home/flash-sale" onclick="switchProductTab('flashsale')">Flash Sale</div>
+                                
+                                <div class="px-4 py-2 rounded-[var(--border-radius-md)] border bg-[var(--bg-card)] text-[13px] font-semibold cursor-pointer transition-all duration-0 ease whitespace-nowrap prod-tab-btn active [&.active]:border-[var(--accent-yellow)] [&.active]:bg-[var(--accent-orange-10)] [&.active]:text-[var(--accent-yellow)] [&:not(.active)]:border-[var(--border-input)] [&:not(.active)]:text-[var(--text-gray)]" id="tab-diamond" data-redirect-url="/home/diamond" onclick="switchProductTab('diamond')">Diamond</div>
+                                
+                                <div class="px-4 py-2 rounded-[var(--border-radius-md)] border bg-[var(--bg-card)] text-[13px] font-semibold cursor-pointer transition-all duration-0 ease whitespace-nowrap prod-tab-btn [&.active]:border-[var(--accent-yellow)] [&.active]:bg-[var(--accent-orange-10)] [&.active]:text-[var(--accent-yellow)] [&:not(.active)]:border-[var(--border-input)] [&:not(.active)]:text-[var(--text-gray)]" id="tab-membership" data-redirect-url="/home/membership" onclick="switchProductTab('membership')">Membership</div>
+                            </div>
+
+                            <!-- KONTEN DIAMOND (SKELETON) -->
+                            <div class="grid grid-cols-2 lg:grid-cols-3 gap-3 mt-2" id="content-diamond">
+                                <!-- Ulang 6x Skeleton Card Diamond -->
+                                <div class="bg-[var(--bg-card)] border border-[var(--border-input)] rounded-[var(--border-radius-md)] px-3 py-[14px] flex flex-col h-[85px] animate-pulse">
+                                    <div class="h-3.5 bg-[var(--bg-card-header)] rounded w-2/3 mb-2"></div>
+                                    <div class="h-3.5 bg-[var(--bg-card-header)] rounded w-1/2"></div>
+                                    <div class="mt-auto h-4 bg-[var(--bg-card-header)] rounded w-1/3"></div>
+                                </div>
+                                <div class="bg-[var(--bg-card)] border border-[var(--border-input)] rounded-[var(--border-radius-md)] px-3 py-[14px] flex flex-col h-[85px] animate-pulse">
+                                    <div class="h-3.5 bg-[var(--bg-card-header)] rounded w-2/3 mb-2"></div>
+                                    <div class="h-3.5 bg-[var(--bg-card-header)] rounded w-1/2"></div>
+                                    <div class="mt-auto h-4 bg-[var(--bg-card-header)] rounded w-1/3"></div>
+                                </div>
+                                <div class="bg-[var(--bg-card)] border border-[var(--border-input)] rounded-[var(--border-radius-md)] px-3 py-[14px] flex flex-col h-[85px] animate-pulse">
+                                    <div class="h-3.5 bg-[var(--bg-card-header)] rounded w-2/3 mb-2"></div>
+                                    <div class="h-3.5 bg-[var(--bg-card-header)] rounded w-1/2"></div>
+                                    <div class="mt-auto h-4 bg-[var(--bg-card-header)] rounded w-1/3"></div>
+                                </div>
+                                <div class="bg-[var(--bg-card)] border border-[var(--border-input)] rounded-[var(--border-radius-md)] px-3 py-[14px] flex flex-col h-[85px] animate-pulse">
+                                    <div class="h-3.5 bg-[var(--bg-card-header)] rounded w-2/3 mb-2"></div>
+                                    <div class="h-3.5 bg-[var(--bg-card-header)] rounded w-1/2"></div>
+                                    <div class="mt-auto h-4 bg-[var(--bg-card-header)] rounded w-1/3"></div>
+                                </div>
+                                <div class="bg-[var(--bg-card)] border border-[var(--border-input)] rounded-[var(--border-radius-md)] px-3 py-[14px] flex flex-col h-[85px] animate-pulse">
+                                    <div class="h-3.5 bg-[var(--bg-card-header)] rounded w-2/3 mb-2"></div>
+                                    <div class="h-3.5 bg-[var(--bg-card-header)] rounded w-1/2"></div>
+                                    <div class="mt-auto h-4 bg-[var(--bg-card-header)] rounded w-1/3"></div>
+                                </div>
+                                <div class="bg-[var(--bg-card)] border border-[var(--border-input)] rounded-[var(--border-radius-md)] px-3 py-[14px] flex flex-col h-[85px] animate-pulse">
+                                    <div class="h-3.5 bg-[var(--bg-card-header)] rounded w-2/3 mb-2"></div>
+                                    <div class="h-3.5 bg-[var(--bg-card-header)] rounded w-1/2"></div>
+                                    <div class="mt-auto h-4 bg-[var(--bg-card-header)] rounded w-1/3"></div>
+                                </div>
+                            </div>
+              
+                            <!-- KONTEN FLASHSALE (SKELETON) -->
+                            <div class="grid grid-cols-2 lg:grid-cols-3 gap-3 mt-2" id="content-flashsale" style="display: none;">
+                                <!-- Ulang 3x Skeleton Card Flash Sale -->
+                                <div class="bg-[var(--bg-card)] border border-[var(--border-input)] rounded-[var(--border-radius-md)] p-3 flex flex-col h-[98px] animate-pulse">
+                                    <div class="flex justify-between items-center mb-[6px]">
+                                        <div class="h-4 w-14 bg-[var(--bg-card-header)] rounded-[var(--border-radius-sm2)]"></div>
+                                        <div class="h-3 w-16 bg-[var(--bg-card-header)] rounded"></div>
+                                    </div>
+                                    <div class="h-3.5 bg-[var(--bg-card-header)] rounded w-3/4 mb-[6px]"></div>
+                                    <div class="h-3.5 bg-[var(--bg-card-header)] rounded w-1/2"></div>
+                                    <div class="mt-auto h-2 bg-[var(--bg-card-header)] rounded w-full"></div>
+                                </div>
+                                <div class="bg-[var(--bg-card)] border border-[var(--border-input)] rounded-[var(--border-radius-md)] p-3 flex flex-col h-[98px] animate-pulse">
+                                    <div class="flex justify-between items-center mb-[6px]">
+                                        <div class="h-4 w-14 bg-[var(--bg-card-header)] rounded-[var(--border-radius-sm2)]"></div>
+                                        <div class="h-3 w-16 bg-[var(--bg-card-header)] rounded"></div>
+                                    </div>
+                                    <div class="h-3.5 bg-[var(--bg-card-header)] rounded w-3/4 mb-[6px]"></div>
+                                    <div class="h-3.5 bg-[var(--bg-card-header)] rounded w-1/2"></div>
+                                    <div class="mt-auto h-2 bg-[var(--bg-card-header)] rounded w-full"></div>
+                                </div>
+                                <div class="bg-[var(--bg-card)] border border-[var(--border-input)] rounded-[var(--border-radius-md)] p-3 flex flex-col h-[98px] animate-pulse">
+                                    <div class="flex justify-between items-center mb-[6px]">
+                                        <div class="h-4 w-14 bg-[var(--bg-card-header)] rounded-[var(--border-radius-sm2)]"></div>
+                                        <div class="h-3 w-16 bg-[var(--bg-card-header)] rounded"></div>
+                                    </div>
+                                    <div class="h-3.5 bg-[var(--bg-card-header)] rounded w-3/4 mb-[6px]"></div>
+                                    <div class="h-3.5 bg-[var(--bg-card-header)] rounded w-1/2"></div>
+                                    <div class="mt-auto h-2 bg-[var(--bg-card-header)] rounded w-full"></div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div> 
+                
+                <div class="lg:col-span-5 lg:sticky lg:top-[80px]">
+                    <!-- 3. PILIH PEMBAYARAN (Skeleton) -->
+                    <div class="bg-[var(--bg-card)] rounded-[var(--border-radius-md)] overflow-hidden mb-4">
+                        <div class="flex items-center bg-[var(--bg-card-header)]">
+                            <div class="bg-[image:var(--badge-grad)] text-[var(--text-dark)] text-[16px] font-extrabold py-3 px-5 rounded-br-[var(--border-radius-md)] flex items-center justify-center">3</div>
+                            <div class="text-[var(--text-white)] text-[14px] font-bold pl-4">Pilih Pembayaran</div>
+                        </div>
+                        <div class="p-4 pb-5 flex flex-col gap-4">
+                            
+                            <!-- QRIS -->
+                            <div class="flex items-center justify-between py-3 px-[14px] border border-[var(--border-input)] rounded-[var(--border-radius-md)] animate-pulse">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-[48px] h-[32px] bg-[var(--bg-card-header)] rounded-[var(--border-radius-sm2)]"></div>
+                                    <div class="h-3.5 bg-[var(--bg-card-header)] rounded w-32"></div>
+                                </div>
+                                <div class="h-3.5 bg-[var(--bg-card-header)] rounded w-16"></div>
+                            </div>
+
+                            <!-- E-Wallet Accordion -->
+                            <div class="bg-[var(--bg-card)] border border-[var(--border-input)] rounded-[var(--border-radius-md)] overflow-hidden transition-all duration-500 group payment-category" id="cat-ewallet">
+                                 <div class="p-[14px_16px] cursor-pointer" onclick="togglePayment('cat-ewallet')">
+                                    <div class="flex justify-between items-center">
+                                        <div class="h-3.5 bg-[var(--bg-card-header)] rounded w-24 animate-pulse"></div>
+                                        <i class="ph ph-caret-down text-[var(--text-gray)] transition-transform duration-500 group-[.active]:rotate-180"></i>
+                                    </div>
+                                    <div class="flex gap-2 mt-[10px] opacity-100 max-h-[24px] overflow-hidden transition-all duration-500 group-[.active]:opacity-0 group-[.active]:max-h-0 group-[.active]:mt-0 animate-pulse">
+                                        <div class="h-[15px] w-[28px] bg-[var(--bg-card-header)] rounded-[var(--border-radius-xs)]"></div>
+                                        <div class="h-[15px] w-[28px] bg-[var(--bg-card-header)] rounded-[var(--border-radius-xs)]"></div>
+                                        <div class="h-[15px] w-[28px] bg-[var(--bg-card-header)] rounded-[var(--border-radius-xs)]"></div>
+                                     </div>
+                                </div>
+                                <div class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 group-[.active]:grid-rows-[1fr]">
+                                    <div class="overflow-hidden opacity-0 -translate-y-3 transition-all duration-500 group-[.active]:opacity-100 group-[.active]:translate-y-0">
+                                        <div class="px-4 pb-4 border-t border-[var(--border-input)]">
+                                            <div class="grid grid-cols-1 gap-[10px] pt-4">
+                                                <!-- List E-Wallet -->
+                                                <div class="flex items-center justify-between py-3 px-[14px] border border-[var(--border-input)] rounded-[var(--border-radius-lg)] animate-pulse">
+                                                    <div class="flex items-center gap-3">
+                                                        <div class="w-[45px] h-[30px] bg-[var(--bg-card-header)] rounded-[var(--border-radius-sm2)]"></div>
+                                                        <div class="h-3 bg-[var(--bg-card-header)] rounded w-16"></div>
+                                                    </div>
+                                                    <div class="h-3 bg-[var(--bg-card-header)] rounded w-16"></div>
+                                                </div>
+                                                <div class="flex items-center justify-between py-3 px-[14px] border border-[var(--border-input)] rounded-[var(--border-radius-lg)] animate-pulse">
+                                                    <div class="flex items-center gap-3">
+                                                        <div class="w-[45px] h-[30px] bg-[var(--bg-card-header)] rounded-[var(--border-radius-sm2)]"></div>
+                                                        <div class="h-3 bg-[var(--bg-card-header)] rounded w-12"></div>
+                                                    </div>
+                                                    <div class="h-3 bg-[var(--bg-card-header)] rounded w-16"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- VA Accordion -->
+                            <div class="bg-[var(--bg-card)] border border-[var(--border-input)] rounded-[var(--border-radius-md)] overflow-hidden transition-all duration-500 group payment-category" id="cat-va">
+                                <div class="p-[14px_16px] cursor-pointer" onclick="togglePayment('cat-va')">
+                                    <div class="flex justify-between items-center">
+                                        <div class="h-3.5 bg-[var(--bg-card-header)] rounded w-32 animate-pulse"></div>
+                                        <i class="ph ph-caret-down text-[var(--text-gray)] transition-transform duration-500 group-[.active]:rotate-180"></i>
+                                    </div>
+                                    <div class="flex gap-2 mt-[10px] opacity-100 max-h-[24px] overflow-hidden transition-all duration-500 group-[.active]:opacity-0 group-[.active]:max-h-0 group-[.active]:mt-0 animate-pulse">
+                                        <div class="h-[15px] w-[28px] bg-[var(--bg-card-header)] rounded-[var(--border-radius-xs)]"></div>
+                                        <div class="h-[15px] w-[28px] bg-[var(--bg-card-header)] rounded-[var(--border-radius-xs)]"></div>
+                                        <div class="h-[15px] w-[28px] bg-[var(--bg-card-header)] rounded-[var(--border-radius-xs)]"></div>
+                                    </div>
+                                </div>
+                                <div class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 group-[.active]:grid-rows-[1fr]">
+                                    <div class="overflow-hidden opacity-0 -translate-y-3 transition-all duration-500 group-[.active]:opacity-100 group-[.active]:translate-y-0">
+                                        <div class="px-4 pb-4 border-t border-[var(--border-input)]">
+                                            <div class="grid grid-cols-1 gap-[10px] pt-4">
+                                                <!-- List VA -->
+                                                <div class="flex items-center justify-between py-3 px-[14px] border border-[var(--border-input)] rounded-[var(--border-radius-lg)] animate-pulse">
+                                                    <div class="flex items-center gap-3">
+                                                        <div class="w-[45px] h-[30px] bg-[var(--bg-card-header)] rounded-[var(--border-radius-sm2)]"></div>
+                                                        <div class="h-3 bg-[var(--bg-card-header)] rounded w-12"></div>
+                                                    </div>
+                                                    <div class="h-3 bg-[var(--bg-card-header)] rounded w-16"></div>
+                                                </div>
+                                                <div class="flex items-center justify-between py-3 px-[14px] border border-[var(--border-input)] rounded-[var(--border-radius-lg)] animate-pulse">
+                                                    <div class="flex items-center gap-3">
+                                                        <div class="w-[45px] h-[30px] bg-[var(--bg-card-header)] rounded-[var(--border-radius-sm2)]"></div>
+                                                        <div class="h-3 bg-[var(--bg-card-header)] rounded w-14"></div>
+                                                    </div>
+                                                    <div class="h-3 bg-[var(--bg-card-header)] rounded w-16"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- 4. RINCIAN PEMBAYARAN (Skeleton) -->
+                    <div class="bg-[var(--bg-card)] rounded-[var(--border-radius-md)] overflow-hidden mb-4">
+                        <div class="flex items-center bg-[var(--bg-card-header)]">
+                            <div class="bg-[image:var(--badge-grad)] text-[var(--text-dark)] text-[16px] font-extrabold py-3 px-5 rounded-br-[var(--border-radius-md)] flex items-center justify-center">4</div>
+                            <div class="text-[var(--text-white)] text-[14px] font-bold pl-4">Rincian Pembayaran</div>
+                        </div>
+                        <div class="p-4 pb-5 flex flex-col gap-4">
+                            
+                            <div class="bg-[var(--bg-card)] border border-[var(--border-input)] rounded-[var(--border-radius-md)] p-4 flex flex-col gap-[10px] animate-pulse">
+                                
+                                <div class="pb-[5px] mb-0 border-b border-dashed border-[var(--border-header)]">
+                                    <div class="h-3 bg-[var(--bg-card-header)] rounded w-20 mb-[10px]"></div>
+                                    <div class="flex justify-between mb-2"><div class="h-3 w-16 bg-[var(--bg-card-header)] rounded"></div><div class="h-3 w-24 bg-[var(--bg-card-header)] rounded"></div></div>
+                                    <div class="flex justify-between mb-2"><div class="h-3 w-12 bg-[var(--bg-card-header)] rounded"></div><div class="h-3 w-16 bg-[var(--bg-card-header)] rounded"></div></div>
+                                </div>
+
+                                <div class="pb-[5px] mb-0 border-b border-dashed border-[var(--border-header)]">
+                                    <div class="h-3 bg-[var(--bg-card-header)] rounded w-24 mb-[10px]"></div>
+                                    <div class="flex justify-between mb-2"><div class="h-3 w-24 bg-[var(--bg-card-header)] rounded"></div><div class="h-3 w-16 bg-[var(--bg-card-header)] rounded"></div></div>
+                                    <div class="flex justify-between mb-2"><div class="h-3 w-32 bg-[var(--bg-card-header)] rounded"></div><div class="h-3 w-16 bg-[var(--bg-card-header)] rounded"></div></div>
+                                </div>
+
+                                <div class="flex justify-between mt-2">
+                                    <div class="h-3.5 w-32 bg-[var(--bg-card-header)] rounded"></div>
+                                    <div class="h-3.5 w-20 bg-[var(--bg-card-header)] rounded"></div>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col gap-2 mt-1 animate-pulse">
+                                <div class="h-3 bg-[var(--bg-card-header)] rounded w-24"></div>
+                                <div class="h-[46px] bg-[var(--bg-card-header)] rounded-[var(--border-radius-md)] w-full"></div>
+                                <div class="h-2.5 bg-[var(--bg-card-header)] rounded w-2/3 mt-[2px]"></div>
+                            </div>
+
+                            <div class="h-[40px] bg-[var(--bg-card-header)] rounded-[var(--border-radius-xl)] w-full mt-2 animate-pulse"></div>
+                        </div>
+                    </div>
+
+                    <!-- BANTUAN -->
+                    <div class="bg-[var(--bg-card)] border border-[var(--bg-card-header)] rounded-[var(--border-radius-md)] p-4 flex items-center gap-4 mb-5 cursor-pointer transition-colors duration-200 ease">
+                        <div>
+                            <svg class="w-[28px] h-[28px] stroke-[var(--text-gray)]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+                                <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
+                            </svg>
+                        </div>
+                        <div class="flex flex-col gap-[6px] w-full animate-pulse">
+                            <div class="h-3.5 bg-[var(--bg-card-header)] rounded w-1/3"></div>
+                            <div class="h-2.5 bg-[var(--bg-card-header)] rounded w-2/3"></div>
+                        </div>
+                    </div>
+                    
+                </div> 
+            </div> 
+            
+            <!-- TAB: KETERANGAN (SKELETON) -->
+            <div id="content-keterangan" class="hidden">
+                <div class="bg-[var(--bg-card)] rounded-[var(--border-radius-md)] overflow-hidden mb-4">
+                    <div class="flex items-center bg-[var(--bg-card-header)]">
+                        <div class="bg-[image:var(--badge-grad)] text-[var(--text-dark)] text-[16px] font-extrabold py-3 px-5 rounded-br-[var(--border-radius-md)] flex items-center justify-center">
+                            <i class="ph-fill ph-article"></i>
+                        </div>
+                        <div class="text-[var(--text-white)] text-[14px] font-bold pl-4">Deskripsi Produk</div>
+                    </div>
+                    
+                    <div class="p-4 pb-5 flex flex-col gap-3 animate-pulse">
+                        <div class="h-4 bg-[var(--bg-card-header)] rounded w-1/2 mb-1"></div>
+                        <div class="h-3 bg-[var(--bg-card-header)] rounded w-full"></div>
+                        <div class="h-3 bg-[var(--bg-card-header)] rounded w-full"></div>
+                        <div class="h-3 bg-[var(--bg-card-header)] rounded w-3/4 mb-3"></div>
+                        
+                        <div class="h-3.5 bg-[var(--bg-card-header)] rounded w-1/4 mb-2"></div>
+                        <div class="h-3 bg-[var(--bg-card-header)] rounded w-5/6 mb-1"></div>
+                        <div class="h-3 bg-[var(--bg-card-header)] rounded w-4/5 mb-1"></div>
+                        <div class="h-3 bg-[var(--bg-card-header)] rounded w-full mb-1"></div>
+                        <div class="h-3 bg-[var(--bg-card-header)] rounded w-3/4 mb-1"></div>
+                        <div class="h-3 bg-[var(--bg-card-header)] rounded w-5/6 mb-3"></div>
+                        
+                        <div class="h-[75px] bg-[var(--bg-card-header)] rounded-[var(--border-radius-md)] w-full"></div>
+                    </div>
+                </div>
+                
+                <div class="bg-[var(--bg-card)] rounded-[var(--border-radius-md)] overflow-hidden mb-4">
+                <div class="flex items-center bg-[var(--bg-card-header)]">
+                    <div class="bg-[image:var(--badge-grad)] text-[var(--text-dark)] text-[16px] font-extrabold py-3 px-5 rounded-br-[var(--border-radius-md)] flex items-center justify-center">
+                        <i class="ph-fill ph-chats-circle text-[var(--text-dark)]"></i>
+                    </div>
+                    <div class="text-[var(--text-white)] text-[14px] font-bold pl-4">Ulasan Pembeli</div>
+                </div>
+                
+                <div class="p-4 pb-5 flex flex-col gap-4 animate-pulse">
+                    
+                    <!-- Stats Skeleton -->
+                    <div class="flex items-center bg-[var(--bg-input)] border border-[var(--border-input)] rounded-[var(--border-radius-md)] p-4 mb-2 gap-4">
+                        <div class="flex flex-col items-center justify-center border-r border-[var(--border-input)] pr-4 min-w-[90px] gap-2">
+                            <div class="h-8 w-12 bg-[var(--bg-card-header)] rounded"></div>
+                            <div class="h-3 w-16 bg-[var(--bg-card-header)] rounded"></div>
+                            <div class="h-2 w-14 bg-[var(--bg-card-header)] rounded"></div>
+                        </div>
+                        <div class="flex-1 flex flex-col gap-[10px]">
+                            <div class="h-2 bg-[var(--bg-card-header)] rounded w-full"></div>
+                            <div class="h-2 bg-[var(--bg-card-header)] rounded w-4/5"></div>
+                            <div class="h-2 bg-[var(--bg-card-header)] rounded w-3/5"></div>
+                            <div class="h-2 bg-[var(--bg-card-header)] rounded w-2/5"></div>
+                            <div class="h-2 bg-[var(--bg-card-header)] rounded w-1/5"></div>
+                        </div>
+                    </div>
+
+                    <!-- Review Cards Skeleton (x3) -->
+                    <div class="bg-[var(--bg-card)] border border-[var(--border-header)] rounded-[var(--border-radius-md)] p-[14px] flex flex-col gap-3">
+                        <div class="flex justify-between items-start">
+                            <div class="flex flex-col gap-[6px] w-1/2">
+                                <div class="h-3 bg-[var(--bg-card-header)] rounded w-24"></div>
+                                <div class="h-2 bg-[var(--bg-card-header)] rounded w-32"></div>
+                            </div>
+                            <div class="h-3 w-16 bg-[var(--bg-card-header)] rounded"></div>
+                        </div>
+                        <div class="h-3 bg-[var(--bg-card-header)] rounded w-full"></div>
+                        <div class="h-3 bg-[var(--bg-card-header)] rounded w-3/4 mb-1"></div>
+                        <div class="h-[26px] w-2/3 bg-[var(--bg-card-header)] rounded-[var(--border-radius-xl)]"></div>
+                    </div>
+
+                    <div class="bg-[var(--bg-card)] border border-[var(--border-header)] rounded-[var(--border-radius-md)] p-[14px] flex flex-col gap-3">
+                        <div class="flex justify-between items-start">
+                            <div class="flex flex-col gap-[6px] w-1/2">
+                                <div class="h-3 bg-[var(--bg-card-header)] rounded w-24"></div>
+                                <div class="h-2 bg-[var(--bg-card-header)] rounded w-32"></div>
+                            </div>
+                            <div class="h-3 w-16 bg-[var(--bg-card-header)] rounded"></div>
+                        </div>
+                        <div class="h-3 bg-[var(--bg-card-header)] rounded w-full"></div>
+                        <div class="h-3 bg-[var(--bg-card-header)] rounded w-3/4 mb-1"></div>
+                        <div class="h-[26px] w-2/3 bg-[var(--bg-card-header)] rounded-[var(--border-radius-xl)]"></div>
+                    </div>
+
+                    <div class="bg-[var(--bg-card)] border border-[var(--border-header)] rounded-[var(--border-radius-md)] p-[14px] flex flex-col gap-3">
+                        <div class="flex justify-between items-start">
+                            <div class="flex flex-col gap-[6px] w-1/2">
+                                <div class="h-3 bg-[var(--bg-card-header)] rounded w-24"></div>
+                                <div class="h-2 bg-[var(--bg-card-header)] rounded w-32"></div>
+                            </div>
+                            <div class="h-3 w-16 bg-[var(--bg-card-header)] rounded"></div>
+                        </div>
+                        <div class="h-3 bg-[var(--bg-card-header)] rounded w-full"></div>
+                        <div class="h-3 bg-[var(--bg-card-header)] rounded w-3/4 mb-1"></div>
+                        <div class="h-[26px] w-2/3 bg-[var(--bg-card-header)] rounded-[var(--border-radius-xl)]"></div>
+                    </div>
+
+                </div>
+                </div>
+
+                <div class="bg-[var(--bg-card)] rounded-[var(--border-radius-md)] overflow-hidden mb-4">
+                    <div class="flex items-center bg-[var(--bg-card-header)]">
+                        <div class="bg-[image:var(--badge-grad)] text-[var(--text-dark)] text-[16px] font-extrabold py-3 px-5 rounded-br-[var(--border-radius-md)] flex items-center justify-center">
+                            <i class="ph-fill ph-question text-[var(--text-dark)]"></i>
+                        </div>
+                        <div class="text-[var(--text-white)] text-[14px] font-bold pl-4">Pertanyaan Umum (FAQ)</div>
+                    </div>
+                    
+                    <div class="p-4 pb-5 flex flex-col gap-[10px] animate-pulse">
+                        <div class="bg-[var(--bg-card)] border border-[var(--border-input)] rounded-[var(--border-radius-md)] p-[14px_16px] flex justify-between items-center">
+                            <div class="h-3.5 bg-[var(--bg-card-header)] rounded w-2/3"></div>
+                            <i class="ph ph-caret-down text-[var(--text-gray)]"></i>
+                        </div>
+                        <div class="bg-[var(--bg-card)] border border-[var(--border-input)] rounded-[var(--border-radius-md)] p-[14px_16px] flex justify-between items-center">
+                            <div class="h-3.5 bg-[var(--bg-card-header)] rounded w-3/4"></div>
+                            <i class="ph ph-caret-down text-[var(--text-gray)]"></i>
+                        </div>
+                        <div class="bg-[var(--bg-card)] border border-[var(--border-input)] rounded-[var(--border-radius-md)] p-[14px_16px] flex justify-between items-center">
+                            <div class="h-3.5 bg-[var(--bg-card-header)] rounded w-1/2"></div>
+                            <i class="ph ph-caret-down text-[var(--text-gray)]"></i>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- MODAL CONFIRM (SKELETON) -->
+    <div class="fixed inset-y-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] bg-[var(--bg-overlay)] z-[999] flex items-end invisible opacity-0 transition-all duration-300 ease group modal-overlay [&.active]:visible [&.active]:opacity-100" id="modal-confirm">
+        <div class="bg-[var(--bg-card)] w-full max-h-[90%] overflow-y-auto rounded-t-[var(--border-radius-2xl)] px-5 pt-6 pb-6 translate-y-full transition-transform duration-500 ease-[cubic-bezier(0.175,0.885,0.32,1.15)] relative shadow-[var(--shadow-modal)] group-[.active]:translate-y-0">
+            <div id="star-container"></div>
+            
+            <div class="w-[40px] h-1 bg-[var(--border-input)] rounded-[var(--border-radius-sm)] -mt-[10px] mx-auto mb-4"></div>
+            
+            <div class="flex justify-between items-center mb-5 animate-pulse">
+                <div class="h-4 bg-[var(--bg-card-header)] rounded w-1/2"></div>
+                <button class="bg-[var(--bg-input)] border border-[var(--border-input)] text-[var(--text-gray)] w-8 h-8 rounded-full flex justify-center items-center text-[16px] cursor-pointer transition-all duration-200" onclick="closeModal()">
+                    <i class="ph ph-x"></i>
+                </button>
+            </div>
+            
+            <div>
+                <div class="bg-[var(--bg-input)] border border-[var(--border-input)] rounded-[var(--border-radius-md)] p-4 flex flex-col gap-[10px] animate-pulse">
+                    <div class="pb-[5px] mb-0 border-b border-dashed border-[var(--border-header)]">
+                        <div class="h-3 bg-[var(--bg-card-header)] rounded w-24 mb-[10px]"></div>
+                        <div class="flex justify-between mb-2"><div class="h-3 w-20 bg-[var(--bg-card-header)] rounded"></div><div class="h-3 w-32 bg-[var(--bg-card-header)] rounded"></div></div>
+                        <div class="flex justify-between mb-2"><div class="h-3 w-24 bg-[var(--bg-card-header)] rounded"></div><div class="h-3 w-24 bg-[var(--bg-card-header)] rounded"></div></div>
+                    </div>
+
+                    <div class="pb-[5px] mb-0 border-b border-dashed border-[var(--border-header)]">
+                        <div class="h-3 bg-[var(--bg-card-header)] rounded w-32 mb-[10px]"></div>
+                        <div class="flex justify-between mb-2"><div class="h-3 w-20 bg-[var(--bg-card-header)] rounded"></div><div class="h-3 w-24 bg-[var(--bg-card-header)] rounded"></div></div>
+                        <div class="flex justify-between mb-2"><div class="h-3 w-32 bg-[var(--bg-card-header)] rounded"></div><div class="h-3 w-32 bg-[var(--bg-card-header)] rounded"></div></div>
+                        <div class="flex justify-between mb-2"><div class="h-3 w-24 bg-[var(--bg-card-header)] rounded"></div><div class="h-3 w-16 bg-[var(--bg-card-header)] rounded"></div></div>
+                        <div class="flex justify-between mb-2"><div class="h-3 w-24 bg-[var(--bg-card-header)] rounded"></div><div class="h-3 w-16 bg-[var(--bg-card-header)] rounded"></div></div>
+                    </div>
+
+                    <div class="flex justify-between mt-2">
+                        <div class="h-3.5 w-32 bg-[var(--bg-card-header)] rounded"></div>
+                        <div class="h-4 w-24 bg-[var(--bg-card-header)] rounded"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-5 animate-pulse">
+                <div class="h-[45px] bg-[var(--bg-card-header)] rounded-[var(--border-radius-xl)] w-full"></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- SCRIPT TETAP DIPERTAHANKAN 100% -->
+<script>
+    function switchTab(tabName) {
+        const tabTransaksi = document.getElementById('tab-transaksi');
+        const tabKeterangan = document.getElementById('tab-keterangan');
+        
+        const contentTransaksi = document.getElementById('content-transaksi'); 
+        const contentKeterangan = document.getElementById('content-keterangan');
+
+        if(tabName === 'transaksi') {
+            tabTransaksi.classList.add('active');
+            tabKeterangan.classList.remove('active');
+            
+            contentTransaksi.classList.remove('hidden');
+            contentKeterangan.style.display = 'none';
+        } else {
+            tabKeterangan.classList.add('active');
+            tabTransaksi.classList.remove('active');
+            
+            contentTransaksi.classList.add('hidden'); 
+            contentKeterangan.style.display = 'block';
+        }
+    }
+</script>
+
+<script>
+  function switchProductTab(tabName) {
+    const tabs = ['diamond', 'membership', 'flashsale'];
+    
+    tabs.forEach(tab => {
+        const tabBtn = document.getElementById('tab-' + tab);
+        const content = document.getElementById('content-' + tab);
+        
+        if (tabBtn && content) {
+            if (tab === tabName) {
+                tabBtn.classList.add('active');
+                content.style.display = 'grid'; 
+            } else {
+                tabBtn.classList.remove('active');
+                content.style.display = 'none';
+            }
+        }
+    });
+
+    const activeElement = document.getElementById('tab-' + tabName);
+    if (activeElement && activeElement.hasAttribute('data-redirect-url')) {
+        const targetUrl = activeElement.getAttribute('data-redirect-url');
+        console.log("Kategori diakses, bersiap redirect ke form URL tujuan: " + targetUrl);
+    }
+}
+</script>
+<script>
+function togglePayment(categoryId) {
+    const categories = document.querySelectorAll('.payment-category');
+    
+    categories.forEach(cat => {
+        if (cat.id === categoryId) {
+            cat.classList.toggle('active');
+        } else {
+            cat.classList.remove('active');
+        }
+    });
+}
+
+function selectPayment(element) {
+    const allItems = document.querySelectorAll('.payment-item');
+    allItems.forEach(item => {
+        item.classList.remove('selected');
+    });
+    
+    element.classList.add('selected');
+}
+</script>
+<script>
+function openModal() {
+    const modal = document.getElementById('modal-confirm');
+    modal.classList.add('active');
+    
+    document.body.style.overflow = 'hidden';
+    
+    setTimeout(() => {
+        if(typeof fireFestiveStars === 'function') fireFestiveStars();
+    }, 150);
+}
+
+function closeModal() {
+    const modal = document.getElementById('modal-confirm');
+    modal.classList.remove('active');
+    
+    document.body.style.overflow = '';
+}
+
+document.getElementById('modal-confirm').addEventListener('click', function(e) {
+    if(e.target === this) {
+        closeModal();
+    }
+});
+</script>
+<script>
+function toggleFaq(headerElement) {
+    const currentItem = headerElement.parentElement;
+    const allItems = document.querySelectorAll('.faq-item');
+    
+    allItems.forEach(item => {
+        if(item !== currentItem) {
+            item.classList.remove('active');
+        }
+    });
+
+    currentItem.classList.toggle('active');
+}
+</script>
+
+</body>
+</html>
