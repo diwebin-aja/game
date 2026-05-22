@@ -12,6 +12,77 @@
     
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        :root {
+            /* Backgrounds */
+            --bg-root: #000000;
+            --bg-body: #0b1121;
+            --bg-header: #0b1121;
+            --bg-card: #151c2d;
+            --bg-card-header: #1c253a;
+            --bg-input: #0b1121;
+            --bg-overlay: rgba(0, 0, 0, 0.7);
+            --bg-hover: #3f3f46;
+            
+            /* Text Colors */
+            --text-white: #ffffff;
+            --text-gray: #94a3b8;
+            --text-dark: #0f172a;
+            --text-light: #e2e8f0;
+            --text-lighter: #cbd5e1;
+            --text-placeholder: #475569;
+            
+            /* Accents & Icons */
+            --accent-orange: #f97316;
+            --accent-yellow: #fbbf24;
+            --accent-red: #ef4444;
+            --icon-yellow: #facc15;
+            --icon-blue: #60a5fa;
+            --icon-green: #34d399;
+            --icon-gray: #64748b;
+            
+            /* Opacity Variants */
+            --accent-orange-10: rgba(249, 115, 22, 0.1);
+            --accent-orange-05: rgba(249, 115, 22, 0.05);
+            --bg-red-10: rgba(239, 68, 68, 0.1);
+            --border-red-20: rgba(239, 68, 68, 0.2);
+            --bg-active-light: rgba(154, 226, 255, 0.1);
+            --bg-active-light-05: rgba(154, 226, 255, 0.05);
+            
+            /* Gradients */
+            --tab-active-grad: linear-gradient(180deg, #9ae2ff 0%, #6ab7ff 100%);
+            --btn-grad: linear-gradient(90deg, #94a3b8 0%, #f79e1b 100%);
+            --badge-grad: linear-gradient(180deg, #94a3b8 0%, #f79e1b 100%);
+            --progress-grad: linear-gradient(90deg, #94a3b8 0%, #f79e1b 100%);
+            
+            /* Borders */
+            --border-input: rgba(148, 163, 184, 0.3);
+            --border-header: #1e293b;
+            --border-focus: #657e55;
+            --border-active: #9ae2ff;
+            
+            /* Border Radius */
+            --border-radius-xs: 2px;
+            --border-radius-xs2: 3px;
+            --border-radius-sm: 4px;
+            --border-radius-sm2: 6px;
+            --border-radius-lg: 10px;
+            --border-radius-md: 12px;
+            --border-radius-3xl: 18px;
+            --border-radius-2xl: 24px;
+            --border-radius-xl: 50px;
+            
+            /* Shadows */
+            --shadow-main: 0 0 20px rgba(0,0,0,0.8);
+            --shadow-icon: -8px 8px 15px rgba(0,0,0,0.5);
+            --shadow-tab: 0 2px 4px rgba(0,0,0,0.2);
+            --shadow-btn: 0 4px 12px rgba(247, 158, 27, 0.2);
+            --shadow-btn-lg: 0 8px 20px rgba(247, 158, 27, 0.3);
+            --shadow-modal: 0 -10px 40px rgba(0,0,0,0.6);
+        }
+    </style>
+
     <script>
         tailwind.config = {
             theme: {
@@ -24,23 +95,23 @@
         }
     </script>
 </head>
-<body class="bg-black flex justify-center font-sans antialiased [-webkit-tap-highlight-color:transparent] m-0 p-0 box-border">
+<body class="bg-[var(--bg-root)] flex justify-center font-sans antialiased [-webkit-tap-highlight-color:transparent] m-0 p-0 box-border">
 
-<div class="w-full max-w-[480px] min-h-screen bg-[#0b1121] relative shadow-[0_0_20px_rgba(0,0,0,0.8)] pb-[40px]">
-    <header class="flex justify-between items-center px-4 py-[10px] bg-[#0b1121] sticky top-0 z-50">
-        <a href="#" class="flex items-center bg-transparent py-[6px] pr-[12px] pl-[6px] rounded-[50px] gap-2 no-underline">
+<div class="w-full max-w-[480px] min-h-screen bg-[var(--bg-body)] relative shadow-[var(--shadow-main)] pb-[40px]">
+    <header class="flex justify-between items-center px-4 py-[10px] bg-[var(--bg-header)] sticky top-0 z-50">
+        <a href="#" class="flex items-center bg-transparent py-[6px] pr-[12px] pl-[6px] rounded-[var(--border-radius-xl)] gap-2 no-underline">
             <img class="w-6 h-6 rounded-full object-cover" src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f?q=80&w=200&auto=format&fit=crop" alt="Logo">
-            <div class="text-[13px] font-extrabold text-[#0f172a] tracking-[-0.2px]"><span class="text-[#f97316]">Order</span> Game.ID</div>
+            <div class="text-[13px] font-extrabold text-[var(--text-dark)] tracking-[-0.2px]"><span class="text-[var(--accent-orange)]">Order</span> Game.ID</div>
         </a>
         <div class="flex items-center gap-[10px]">
-            <button class="bg-[#151c2d] text-white flex items-center justify-center rounded-[10px] cursor-pointer h-[30px] border-0 w-[36px] text-[18px]">
+            <button class="bg-[var(--bg-card)] text-[var(--text-white)] flex items-center justify-center rounded-[var(--border-radius-lg)] cursor-pointer h-[30px] border-0 w-[36px] text-[18px]">
                 <i class="ph ph-magnifying-glass"></i>
             </button>
-            <button class="bg-[#151c2d] text-white flex items-center justify-center rounded-[10px] cursor-pointer h-[30px] border-0 px-[14px] gap-2 text-[12px] font-semibold">
+            <button class="bg-[var(--bg-card)] text-[var(--text-white)] flex items-center justify-center rounded-[var(--border-radius-lg)] cursor-pointer h-[30px] border-0 px-[14px] gap-2 text-[12px] font-semibold">
                 <img class="w-4 h-4 rounded-full" src="https://flagcdn.com/w20/id.png" alt="ID">
                 ID / IDR
             </button>
-            <button class="bg-[#151c2d] text-white flex items-center justify-center rounded-[10px] cursor-pointer h-[30px] border-0 w-[36px] text-[18px]">
+            <button class="bg-[var(--bg-card)] text-[var(--text-white)] flex items-center justify-center rounded-[var(--border-radius-lg)] cursor-pointer h-[30px] border-0 w-[36px] text-[18px]">
                 <i class="ph ph-list"></i>
             </button>
         </div>
@@ -51,35 +122,35 @@
             <img class="w-full h-full object-cover object-top" src="baner.jpg" alt="Hero Banner">
         </section>
 
-        <section class="flex px-4 relative z-10 bg-[#1c253a]">
+        <section class="flex px-4 relative z-10 bg-[var(--bg-card-header)]">
             <div class="mt-[-50px] shrink-0 [perspective:500px]">
-                <img class="w-[130px] h-[120px] rounded-[18px] object-cover border-0 origin-left [transform:rotateY(30deg)] shadow-[-8px_8px_15px_rgba(0,0,0,0.5)] transition-transform duration-300 ease" src="game.jpg" alt="Game Icon">
+                <img class="w-[130px] h-[120px] rounded-[var(--border-radius-3xl)] object-cover border-0 origin-left [transform:rotateY(30deg)] shadow-[var(--shadow-icon)] transition-transform duration-300 ease" src="game.jpg" alt="Game Icon">
             </div>
             <div class="mt-4 -ml-[5px]">
-                <h1 class="text-white text-[15px] font-bold uppercase tracking-[0.5px]">MOBILE LEGENDS (ALL REGION)</h1>
-                <p class="text-[#94a3b8] text-[13px] font-medium mt-1">Moonton</p>
+                <h1 class="text-[var(--text-white)] text-[15px] font-bold uppercase tracking-[0.5px]">MOBILE LEGENDS (ALL REGION)</h1>
+                <p class="text-[var(--text-gray)] text-[13px] font-medium mt-1">Moonton</p>
             </div>
         </section>
 
-        <section class="flex justify-between px-4 py-5 bg-[#151c2d] rounded-b-[12px]">
-            <div class="flex items-center gap-[6px] text-[11px] font-semibold text-[#cbd5e1]">
-                <i class="ph-fill ph-lightning text-[14px] text-[#facc15]"></i>
+        <section class="flex justify-between px-4 py-5 bg-[var(--bg-card)] rounded-b-[var(--border-radius-md)]">
+            <div class="flex items-center gap-[6px] text-[11px] font-semibold text-[var(--text-lighter)]">
+                <i class="ph-fill ph-lightning text-[14px] text-[var(--icon-yellow)]"></i>
                 Proses Cepat
             </div>
-            <div class="flex items-center gap-[6px] text-[11px] font-semibold text-[#cbd5e1]">
-                <i class="ph-fill ph-chat-circle-dots text-[14px] text-[#60a5fa]"></i>
+            <div class="flex items-center gap-[6px] text-[11px] font-semibold text-[var(--text-lighter)]">
+                <i class="ph-fill ph-chat-circle-dots text-[14px] text-[var(--icon-blue)]"></i>
                 Layanan Chat 24/7
             </div>
-            <div class="flex items-center gap-[6px] text-[11px] font-semibold text-[#cbd5e1]">
-                <i class="ph-fill ph-shield-check text-[14px] text-[#34d399]"></i>
+            <div class="flex items-center gap-[6px] text-[11px] font-semibold text-[var(--text-lighter)]">
+                <i class="ph-fill ph-shield-check text-[14px] text-[var(--icon-green)]"></i>
                 Pembayaran Aman!
             </div>
         </section>
 
         <section class="p-[15px]">
-            <div class="flex bg-[#151c2d] rounded-[12px] p-1">
-                <div class="flex-1 py-[6.5px] text-center rounded-[12px] text-[14px] font-bold cursor-pointer transition-all duration-200 ease tab-btn active [&.active]:bg-gradient-to-b [&.active]:from-[#9ae2ff] [&.active]:to-[#6ab7ff] [&.active]:text-[#0f172a] [&.active]:shadow-[0_2px_4px_rgba(0,0,0,0.2)] [&:not(.active)]:text-[#94a3b8] [&:not(.active)]:bg-transparent" id="tab-transaksi" onclick="switchTab('transaksi')">Transaksi</div>
-                <div class="flex-1 py-[6.5px] text-center rounded-[12px] text-[14px] font-bold cursor-pointer transition-all duration-300 ease tab-btn [&.active]:bg-gradient-to-b [&.active]:from-[#9ae2ff] [&.active]:to-[#6ab7ff] [&.active]:text-[#0f172a] [&.active]:shadow-[0_2px_4px_rgba(0,0,0,0.2)] [&:not(.active)]:text-[#94a3b8] [&:not(.active)]:bg-transparent" id="tab-keterangan" onclick="switchTab('keterangan')">Deskripsi & Ulasan</div>
+            <div class="flex bg-[var(--bg-card)] rounded-[var(--border-radius-md)] p-1">
+                <div class="flex-1 py-[6.5px] text-center rounded-[var(--border-radius-md)] text-[14px] font-bold cursor-pointer transition-all duration-200 ease tab-btn active [&.active]:bg-[image:var(--btn-grad)] [&.active]:text-[var(--text-dark)] [&.active]:shadow-[var(--shadow-tab)] [&:not(.active)]:text-[var(--text-gray)] [&:not(.active)]:bg-transparent" id="tab-transaksi" onclick="switchTab('transaksi')">Transaksi</div>
+                <div class="flex-1 py-[6.5px] text-center rounded-[var(--border-radius-md)] text-[14px] font-bold cursor-pointer transition-all duration-200 ease tab-btn [&.active]:bg-[image:var(--btn-grad)] [&.active]:text-[var(--text-dark)] [&.active]:shadow-[var(--shadow-tab)] [&:not(.active)]:text-[var(--text-gray)] [&:not(.active)]:bg-transparent" id="tab-keterangan" onclick="switchTab('keterangan')">Deskripsi & Ulasan</div>
             </div>
         </section>
 
@@ -88,29 +159,29 @@
             <!-- MULAI WRAPPER KONTEN TRANSAKSI -->
             <div id="content-transaksi">
                 
-                <div class="bg-[#151c2d] rounded-[12px] overflow-hidden mb-4">
-                    <div class="flex items-center bg-[#1c253a]">
-                        <div class="bg-gradient-to-b from-[#94a3b8] to-[#f79e1b] text-[#0f172a] text-[16px] font-extrabold py-3 px-5 rounded-br-[12px] flex items-center justify-center">1</div>
-                        <div class="text-white text-[14px] font-bold pl-4">Masukkan Data Akun</div>
+                <div class="bg-[var(--bg-card)] rounded-[var(--border-radius-md)] overflow-hidden mb-4">
+                    <div class="flex items-center bg-[var(--bg-card-header)]">
+                        <div class="bg-[image:var(--badge-grad)] text-[var(--text-dark)] text-[16px] font-extrabold py-3 px-5 rounded-br-[var(--border-radius-md)] flex items-center justify-center">1</div>
+                        <div class="text-[var(--text-white)] text-[14px] font-bold pl-4">Masukkan Data Akun</div>
                     </div>
                     <div class="p-4 pb-5 flex flex-col gap-4">
                         
                         <div class="flex flex-col gap-2">
                             <div class="flex items-center gap-[6px]">
-                                <span class="text-[#e2e8f0] text-[13px] font-semibold">ID</span>
-                                <i class="ph ph-info text-[#94a3b8] text-[16px] cursor-pointer"></i>
+                                <span class="text-[var(--text-light)] text-[13px] font-semibold">ID</span>
+                                <i class="ph ph-info text-[var(--text-gray)] text-[16px] cursor-pointer"></i>
                             </div>
-                            <input type="text" class="bg-[#0b1121] border border-[#94a3b8]/30 rounded-[12px] px-4 py-3 text-white text-[14px] font-medium outline-none transition-colors duration-200 ease focus:border-[#657e55] placeholder:text-[#475569] placeholder:font-normal w-full" placeholder="Masukkan ID">
+                            <input type="text" class="bg-[var(--bg-input)] border border-[var(--border-input)] rounded-[var(--border-radius-md)] px-4 py-3 text-[var(--text-white)] text-[14px] font-medium outline-none transition-colors duration-200 ease focus:border-[var(--border-focus)] placeholder:text-[var(--text-placeholder)] placeholder:font-normal w-full" placeholder="Masukkan ID">
                         </div>
 
                         <div class="flex flex-col gap-2">
                             <div class="flex items-center gap-[6px]">
-                                <span class="text-[#e2e8f0] text-[13px] font-semibold">Server</span>
+                                <span class="text-[var(--text-light)] text-[13px] font-semibold">Server</span>
                             </div>
-                            <input type="text" class="bg-[#0b1121] border border-[#94a3b8]/30 rounded-[12px] px-4 py-3 text-white text-[14px] font-medium outline-none transition-colors duration-200 ease focus:border-[#657e55] placeholder:text-[#475569] placeholder:font-normal w-full" placeholder="Masukkan Zone ID">
+                            <input type="text" class="bg-[var(--bg-input)] border border-[var(--border-input)] rounded-[var(--border-radius-md)] px-4 py-3 text-[var(--text-white)] text-[14px] font-medium outline-none transition-colors duration-200 ease focus:border-[var(--border-focus)] placeholder:text-[var(--text-placeholder)] placeholder:font-normal w-full" placeholder="Masukkan Zone ID">
                         </div>
 
-                        <button class="bg-gradient-to-r from-[#94a3b8] to-[#f79e1b] text-[#0f172a] border-none rounded-[50px] p-[6px] text-[15px] font-bold flex justify-center items-center gap-[5px] w-full cursor-pointer mt-1 shadow-[0_4px_12px_rgba(247,158,27,0.2)] transition-opacity duration-200 ease active:opacity-80">
+                        <button class="bg-[image:var(--btn-grad)] text-[var(--text-dark)] border-none rounded-[var(--border-radius-xl)] p-[6px] text-[15px] font-bold flex justify-center items-center gap-[5px] w-full cursor-pointer mt-1 shadow-[var(--shadow-btn)] transition-opacity duration-200 ease active:opacity-80">
                             <i class="ph-fill ph-file-search text-[20px]"></i>
                             Cek Akun
                         </button>
@@ -118,72 +189,72 @@
                     </div>
                 </div>
                 
-                <div class="bg-[#151c2d] rounded-[12px] overflow-hidden mb-4">
-                    <div class="flex items-center bg-[#1c253a]">
-                        <div class="bg-gradient-to-b from-[#94a3b8] to-[#f79e1b] text-[#0f172a] text-[16px] font-extrabold py-3 px-5 rounded-br-[12px] flex items-center justify-center">2</div>
-                        <div class="text-white text-[14px] font-bold pl-4">Pilih Produk</div>
+                <div class="bg-[var(--bg-card)] rounded-[var(--border-radius-md)] overflow-hidden mb-4">
+                    <div class="flex items-center bg-[var(--bg-card-header)]">
+                        <div class="bg-[image:var(--badge-grad)] text-[var(--text-dark)] text-[16px] font-extrabold py-3 px-5 rounded-br-[var(--border-radius-md)] flex items-center justify-center">2</div>
+                        <div class="text-[var(--text-white)] text-[14px] font-bold pl-4">Pilih Produk</div>
                     </div>
                     <div class="p-4 pb-5 flex flex-col gap-4">
                         
                    <!-- Tab Kategori Produk -->
 <div class="flex gap-[10px] overflow-x-auto">
-    <div class="px-4 py-2 rounded-[12px] border bg-[#151c2d] text-[13px] font-semibold cursor-pointer transition-all duration-0 ease whitespace-nowrap prod-tab-btn [&.active]:border-[#fbbf24] [&.active]:bg-[#f97316]/10 [&.active]:text-[#fbbf24] [&:not(.active)]:border-[#94a3b8]/30 [&:not(.active)]:text-[#94a3b8]" id="tab-flashsale" data-redirect-url="/home/flash-sale" onclick="switchProductTab('flashsale')">Flash Sale</div>
+    <div class="px-4 py-2 rounded-[var(--border-radius-md)] border bg-[var(--bg-card)] text-[13px] font-semibold cursor-pointer transition-all duration-0 ease whitespace-nowrap prod-tab-btn [&.active]:border-[var(--accent-yellow)] [&.active]:bg-[var(--accent-orange-10)] [&.active]:text-[var(--accent-yellow)] [&:not(.active)]:border-[var(--border-input)] [&:not(.active)]:text-[var(--text-gray)]" id="tab-flashsale" data-redirect-url="/home/flash-sale" onclick="switchProductTab('flashsale')">Flash Sale</div>
     
-    <div class="px-4 py-2 rounded-[12px] border bg-[#151c2d] text-[13px] font-semibold cursor-pointer transition-all duration-0 ease whitespace-nowrap prod-tab-btn active [&.active]:border-[#fbbf24] [&.active]:bg-[#f97316]/10 [&.active]:text-[#fbbf24] [&:not(.active)]:border-[#94a3b8]/30 [&:not(.active)]:text-[#94a3b8]" id="tab-diamond" data-redirect-url="/home/diamond" onclick="switchProductTab('diamond')">Diamond</div>
+    <div class="px-4 py-2 rounded-[var(--border-radius-md)] border bg-[var(--bg-card)] text-[13px] font-semibold cursor-pointer transition-all duration-0 ease whitespace-nowrap prod-tab-btn active [&.active]:border-[var(--accent-yellow)] [&.active]:bg-[var(--accent-orange-10)] [&.active]:text-[var(--accent-yellow)] [&:not(.active)]:border-[var(--border-input)] [&:not(.active)]:text-[var(--text-gray)]" id="tab-diamond" data-redirect-url="/home/diamond" onclick="switchProductTab('diamond')">Diamond</div>
     
-    <div class="px-4 py-2 rounded-[12px] border bg-[#151c2d] text-[13px] font-semibold cursor-pointer transition-all duration-0 ease whitespace-nowrap prod-tab-btn [&.active]:border-[#fbbf24] [&.active]:bg-[#f97316]/10 [&.active]:text-[#fbbf24] [&:not(.active)]:border-[#94a3b8]/30 [&:not(.active)]:text-[#94a3b8]" id="tab-membership" data-redirect-url="/home/membership" onclick="switchProductTab('membership')">Membership</div>
+    <div class="px-4 py-2 rounded-[var(--border-radius-md)] border bg-[var(--bg-card)] text-[13px] font-semibold cursor-pointer transition-all duration-0 ease whitespace-nowrap prod-tab-btn [&.active]:border-[var(--accent-yellow)] [&.active]:bg-[var(--accent-orange-10)] [&.active]:text-[var(--accent-yellow)] [&:not(.active)]:border-[var(--border-input)] [&:not(.active)]:text-[var(--text-gray)]" id="tab-membership" data-redirect-url="/home/membership" onclick="switchProductTab('membership')">Membership</div>
 </div>
 
  <!-- Daftar Produk: Diamond -->
  <div class="grid grid-cols-2 gap-3 mt-2" id="content-diamond">
-                            <div class="bg-[#151c2d] border rounded-[12px] px-3 py-[14px] cursor-pointer text-left transition-all duration-200 ease prod-item active:border-[#9ae2ff] active:bg-[rgba(154,226,255,0.1)] [&.selected]:border-[#9ae2ff] [&.selected]:bg-[rgba(154,226,255,0.1)] [&:not(.selected)]:border-[#94a3b8]/30">
-                                <div class="text-white text-[13px] font-bold mb-2">344 Diamonds</div>
-                                <div class="text-[#f97316] text-[13px] font-bold">Rp 80.000</div>
+                            <div class="bg-[var(--bg-card)] border rounded-[var(--border-radius-md)] px-3 py-[14px] cursor-pointer text-left transition-all duration-200 ease prod-item active:border-[var(--border-active)] active:bg-[var(--bg-active-light)] [&.selected]:border-[var(--border-active)] [&.selected]:bg-[var(--bg-active-light)] [&:not(.selected)]:border-[var(--border-input)]">
+                                <div class="text-[var(--text-white)] text-[13px] font-bold mb-2">344 Diamonds</div>
+                                <div class="text-[var(--accent-orange)] text-[13px] font-bold">Rp 80.000</div>
                                 <div class="flex items-center flex-wrap gap-[6px] mt-[6px]">
-                                    <span class="bg-[#94a3b8]/30 text-white text-[9px] font-bold px-[10px] py-1 uppercase tracking-[0.5px] inline-flex items-center" style="-webkit-mask-image: radial-gradient(circle at 0% 50%, transparent 4px, black 4.5px), radial-gradient(circle at 100% 50%, transparent 4px, black 4.5px); -webkit-mask-size: 51% 100%; -webkit-mask-repeat: no-repeat; -webkit-mask-position: left, right; mask-image: radial-gradient(circle at 0% 50%, transparent 4px, black 4.5px), radial-gradient(circle at 100% 50%, transparent 4px, black 4.5px); mask-size: 51% 100%; mask-repeat: no-repeat; mask-position: left, right;">Promo</span>
-                                    <span class="text-[#94a3b8] text-[11px] line-through font-medium">Rp 85.000</span>
+                                    <span class="bg-[var(--border-input)] text-[var(--text-white)] text-[9px] font-bold px-[10px] py-1 uppercase tracking-[0.5px] inline-flex items-center" style="-webkit-mask-image: radial-gradient(circle at 0% 50%, transparent 4px, black 4.5px), radial-gradient(circle at 100% 50%, transparent 4px, black 4.5px); -webkit-mask-size: 51% 100%; -webkit-mask-repeat: no-repeat; -webkit-mask-position: left, right; mask-image: radial-gradient(circle at 0% 50%, transparent 4px, black 4.5px), radial-gradient(circle at 100% 50%, transparent 4px, black 4.5px); mask-size: 51% 100%; mask-repeat: no-repeat; mask-position: left, right;">Promo</span>
+                                    <span class="text-[var(--text-gray)] text-[11px] line-through font-medium">Rp 85.000</span>
                                 </div>
                             </div>
-                            <div class="bg-[#151c2d] border rounded-[12px] px-3 py-[14px] cursor-pointer text-left transition-all duration-200 ease prod-item active:border-[#9ae2ff] active:bg-[rgba(154,226,255,0.1)] [&.selected]:border-[#9ae2ff] [&.selected]:bg-[rgba(154,226,255,0.1)] [&:not(.selected)]:border-[#94a3b8]/30">
-                                <div class="text-white text-[13px] font-bold mb-2">706 Diamonds</div>
-                                <div class="text-[#f97316] text-[13px] font-bold">Rp 160.000</div>
+                            <div class="bg-[var(--bg-card)] border rounded-[var(--border-radius-md)] px-3 py-[14px] cursor-pointer text-left transition-all duration-200 ease prod-item active:border-[var(--border-active)] active:bg-[var(--bg-active-light)] [&.selected]:border-[var(--border-active)] [&.selected]:bg-[var(--bg-active-light)] [&:not(.selected)]:border-[var(--border-input)]">
+                                <div class="text-[var(--text-white)] text-[13px] font-bold mb-2">706 Diamonds</div>
+                                <div class="text-[var(--accent-orange)] text-[13px] font-bold">Rp 160.000</div>
                                 <div class="flex items-center flex-wrap gap-[6px] mt-[6px]">
-                                    <span class="bg-[#94a3b8]/30 text-white text-[9px] font-bold px-[10px] py-1 uppercase tracking-[0.5px] inline-flex items-center" style="-webkit-mask-image: radial-gradient(circle at 0% 50%, transparent 4px, black 4.5px), radial-gradient(circle at 100% 50%, transparent 4px, black 4.5px); -webkit-mask-size: 51% 100%; -webkit-mask-repeat: no-repeat; -webkit-mask-position: left, right; mask-image: radial-gradient(circle at 0% 50%, transparent 4px, black 4.5px), radial-gradient(circle at 100% 50%, transparent 4px, black 4.5px); mask-size: 51% 100%; mask-repeat: no-repeat; mask-position: left, right;">Cashback 5%</span>
+                                    <span class="bg-[var(--border-input)] text-[var(--text-white)] text-[9px] font-bold px-[10px] py-1 uppercase tracking-[0.5px] inline-flex items-center" style="-webkit-mask-image: radial-gradient(circle at 0% 50%, transparent 4px, black 4.5px), radial-gradient(circle at 100% 50%, transparent 4px, black 4.5px); -webkit-mask-size: 51% 100%; -webkit-mask-repeat: no-repeat; -webkit-mask-position: left, right; mask-image: radial-gradient(circle at 0% 50%, transparent 4px, black 4.5px), radial-gradient(circle at 100% 50%, transparent 4px, black 4.5px); mask-size: 51% 100%; mask-repeat: no-repeat; mask-position: left, right;">Cashback 5%</span>
                                 </div>
                             </div>
-                            <div class="bg-[#151c2d] border rounded-[12px] px-3 py-[14px] cursor-pointer text-left transition-all duration-200 ease prod-item active:border-[#9ae2ff] active:bg-[rgba(154,226,255,0.1)] [&.selected]:border-[#9ae2ff] [&.selected]:bg-[rgba(154,226,255,0.1)] [&:not(.selected)]:border-[#94a3b8]/30">
-                                <div class="text-white text-[13px] font-bold mb-2">1050 Diamonds</div>
-                                <div class="text-[#f97316] text-[13px] font-bold">Rp 240.000</div>
+                            <div class="bg-[var(--bg-card)] border rounded-[var(--border-radius-md)] px-3 py-[14px] cursor-pointer text-left transition-all duration-200 ease prod-item active:border-[var(--border-active)] active:bg-[var(--bg-active-light)] [&.selected]:border-[var(--border-active)] [&.selected]:bg-[var(--bg-active-light)] [&:not(.selected)]:border-[var(--border-input)]">
+                                <div class="text-[var(--text-white)] text-[13px] font-bold mb-2">1050 Diamonds</div>
+                                <div class="text-[var(--accent-orange)] text-[13px] font-bold">Rp 240.000</div>
                                 <div class="flex items-center flex-wrap gap-[6px] mt-[6px]">
-                                    <span class="bg-[#94a3b8]/30 text-white text-[9px] font-bold px-[10px] py-1 uppercase tracking-[0.5px] inline-flex items-center" style="-webkit-mask-image: radial-gradient(circle at 0% 50%, transparent 4px, black 4.5px), radial-gradient(circle at 100% 50%, transparent 4px, black 4.5px); -webkit-mask-size: 51% 100%; -webkit-mask-repeat: no-repeat; -webkit-mask-position: left, right; mask-image: radial-gradient(circle at 0% 50%, transparent 4px, black 4.5px), radial-gradient(circle at 100% 50%, transparent 4px, black 4.5px); mask-size: 51% 100%; mask-repeat: no-repeat; mask-position: left, right;">Promo</span>
+                                    <span class="bg-[var(--border-input)] text-[var(--text-white)] text-[9px] font-bold px-[10px] py-1 uppercase tracking-[0.5px] inline-flex items-center" style="-webkit-mask-image: radial-gradient(circle at 0% 50%, transparent 4px, black 4.5px), radial-gradient(circle at 100% 50%, transparent 4px, black 4.5px); -webkit-mask-size: 51% 100%; -webkit-mask-repeat: no-repeat; -webkit-mask-position: left, right; mask-image: radial-gradient(circle at 0% 50%, transparent 4px, black 4.5px), radial-gradient(circle at 100% 50%, transparent 4px, black 4.5px); mask-size: 51% 100%; mask-repeat: no-repeat; mask-position: left, right;">Promo</span>
                                 </div>
                             </div>
-                            <div class="bg-[#151c2d] border rounded-[12px] px-3 py-[14px] cursor-pointer text-left transition-all duration-200 ease prod-item active:border-[#9ae2ff] active:bg-[rgba(154,226,255,0.1)] [&.selected]:border-[#9ae2ff] [&.selected]:bg-[rgba(154,226,255,0.1)] [&:not(.selected)]:border-[#94a3b8]/30">
-                                <div class="text-white text-[13px] font-bold mb-2">2195 Diamonds</div>
-                                <div class="text-[#f97316] text-[13px] font-bold">Rp 475.000</div>
+                            <div class="bg-[var(--bg-card)] border rounded-[var(--border-radius-md)] px-3 py-[14px] cursor-pointer text-left transition-all duration-200 ease prod-item active:border-[var(--border-active)] active:bg-[var(--bg-active-light)] [&.selected]:border-[var(--border-active)] [&.selected]:bg-[var(--bg-active-light)] [&:not(.selected)]:border-[var(--border-input)]">
+                                <div class="text-[var(--text-white)] text-[13px] font-bold mb-2">2195 Diamonds</div>
+                                <div class="text-[var(--accent-orange)] text-[13px] font-bold">Rp 475.000</div>
                                 <div class="flex items-center flex-wrap gap-[6px] mt-[6px]">
-                                    <span class="text-[#94a3b8] text-[11px] line-through font-medium">Rp 500.000</span>
+                                    <span class="text-[var(--text-gray)] text-[11px] line-through font-medium">Rp 500.000</span>
                                 </div>
                             </div>
-                            <div class="bg-[#151c2d] border rounded-[12px] px-3 py-[14px] cursor-pointer text-left transition-all duration-200 ease prod-item active:border-[#9ae2ff] active:bg-[rgba(154,226,255,0.1)] [&.selected]:border-[#9ae2ff] [&.selected]:bg-[rgba(154,226,255,0.1)] [&:not(.selected)]:border-[#94a3b8]/30">
-                                <div class="text-white text-[13px] font-bold mb-2">3688 + (3688) Bonus Diamonds</div>
-                                <div class="text-[#f97316] text-[13px] font-bold">Rp 800.000</div>
+                            <div class="bg-[var(--bg-card)] border rounded-[var(--border-radius-md)] px-3 py-[14px] cursor-pointer text-left transition-all duration-200 ease prod-item active:border-[var(--border-active)] active:bg-[var(--bg-active-light)] [&.selected]:border-[var(--border-active)] [&.selected]:bg-[var(--bg-active-light)] [&:not(.selected)]:border-[var(--border-input)]">
+                                <div class="text-[var(--text-white)] text-[13px] font-bold mb-2">3688 + (3688) Bonus Diamonds</div>
+                                <div class="text-[var(--accent-orange)] text-[13px] font-bold">Rp 800.000</div>
                                 <div class="flex items-center flex-wrap gap-[6px] mt-[6px]">
                                 </div>
                             </div>
-                            <div class="bg-[#151c2d] border rounded-[12px] px-3 py-[14px] cursor-pointer text-left transition-all duration-200 ease prod-item active:border-[#9ae2ff] active:bg-[rgba(154,226,255,0.1)] [&.selected]:border-[#9ae2ff] [&.selected]:bg-[rgba(154,226,255,0.1)] [&:not(.selected)]:border-[#94a3b8]/30">
-                                <div class="text-white text-[13px] font-bold mb-2">5532 Diamonds</div>
-                                <div class="text-[#f97316] text-[13px] font-bold">Rp 1.200.000</div>
+                            <div class="bg-[var(--bg-card)] border rounded-[var(--border-radius-md)] px-3 py-[14px] cursor-pointer text-left transition-all duration-200 ease prod-item active:border-[var(--border-active)] active:bg-[var(--bg-active-light)] [&.selected]:border-[var(--border-active)] [&.selected]:bg-[var(--bg-active-light)] [&:not(.selected)]:border-[var(--border-input)]">
+                                <div class="text-[var(--text-white)] text-[13px] font-bold mb-2">5532 Diamonds</div>
+                                <div class="text-[var(--accent-orange)] text-[13px] font-bold">Rp 1.200.000</div>
                                 <div class="flex items-center flex-wrap gap-[6px] mt-[6px]">
-                                    <span class="bg-[#94a3b8]/30 text-white text-[9px] font-bold px-[10px] py-1 uppercase tracking-[0.5px] inline-flex items-center" style="-webkit-mask-image: radial-gradient(circle at 0% 50%, transparent 4px, black 4.5px), radial-gradient(circle at 100% 50%, transparent 4px, black 4.5px); -webkit-mask-size: 51% 100%; -webkit-mask-repeat: no-repeat; -webkit-mask-position: left, right; mask-image: radial-gradient(circle at 0% 50%, transparent 4px, black 4.5px), radial-gradient(circle at 100% 50%, transparent 4px, black 4.5px); mask-size: 51% 100%; mask-repeat: no-repeat; mask-position: left, right;">Cashback 10%</span>
+                                    <span class="bg-[var(--border-input)] text-[var(--text-white)] text-[9px] font-bold px-[10px] py-1 uppercase tracking-[0.5px] inline-flex items-center" style="-webkit-mask-image: radial-gradient(circle at 0% 50%, transparent 4px, black 4.5px), radial-gradient(circle at 100% 50%, transparent 4px, black 4.5px); -webkit-mask-size: 51% 100%; -webkit-mask-repeat: no-repeat; -webkit-mask-position: left, right; mask-image: radial-gradient(circle at 0% 50%, transparent 4px, black 4.5px), radial-gradient(circle at 100% 50%, transparent 4px, black 4.5px); mask-size: 51% 100%; mask-repeat: no-repeat; mask-position: left, right;">Cashback 10%</span>
                                 </div>
                             </div>
-                            <div class="bg-[#151c2d] border rounded-[12px] px-3 py-[14px] cursor-pointer text-left transition-all duration-200 ease prod-item active:border-[#9ae2ff] active:bg-[rgba(154,226,255,0.1)] [&.selected]:border-[#9ae2ff] [&.selected]:bg-[rgba(154,226,255,0.1)] [&:not(.selected)]:border-[#94a3b8]/30">
-                                <div class="text-white text-[13px] font-bold mb-2">9288 Diamonds</div>
-                                <div class="text-[#f97316] text-[13px] font-bold">Rp 2.000.000</div>
+                            <div class="bg-[var(--bg-card)] border rounded-[var(--border-radius-md)] px-3 py-[14px] cursor-pointer text-left transition-all duration-200 ease prod-item active:border-[var(--border-active)] active:bg-[var(--bg-active-light)] [&.selected]:border-[var(--border-active)] [&.selected]:bg-[var(--bg-active-light)] [&:not(.selected)]:border-[var(--border-input)]">
+                                <div class="text-[var(--text-white)] text-[13px] font-bold mb-2">9288 Diamonds</div>
+                                <div class="text-[var(--accent-orange)] text-[13px] font-bold">Rp 2.000.000</div>
                                 <div class="flex items-center flex-wrap gap-[6px] mt-[6px]">
-                                    <span class="bg-[#94a3b8]/30 text-white text-[9px] font-bold px-[10px] py-1 uppercase tracking-[0.5px] inline-flex items-center" style="-webkit-mask-image: radial-gradient(circle at 0% 50%, transparent 4px, black 4.5px), radial-gradient(circle at 100% 50%, transparent 4px, black 4.5px); -webkit-mask-size: 51% 100%; -webkit-mask-repeat: no-repeat; -webkit-mask-position: left, right; mask-image: radial-gradient(circle at 0% 50%, transparent 4px, black 4.5px), radial-gradient(circle at 100% 50%, transparent 4px, black 4.5px); mask-size: 51% 100%; mask-repeat: no-repeat; mask-position: left, right;">Sultan</span>
-                                    <span class="text-[#94a3b8] text-[11px] line-through font-medium">Rp 2.200.000</span>
+                                    <span class="bg-[var(--border-input)] text-[var(--text-white)] text-[9px] font-bold px-[10px] py-1 uppercase tracking-[0.5px] inline-flex items-center" style="-webkit-mask-image: radial-gradient(circle at 0% 50%, transparent 4px, black 4.5px), radial-gradient(circle at 100% 50%, transparent 4px, black 4.5px); -webkit-mask-size: 51% 100%; -webkit-mask-repeat: no-repeat; -webkit-mask-position: left, right; mask-image: radial-gradient(circle at 0% 50%, transparent 4px, black 4.5px), radial-gradient(circle at 100% 50%, transparent 4px, black 4.5px); mask-size: 51% 100%; mask-repeat: no-repeat; mask-position: left, right;">Sultan</span>
+                                    <span class="text-[var(--text-gray)] text-[11px] line-through font-medium">Rp 2.200.000</span>
                                 </div>
                             </div>
                         </div>
@@ -192,89 +263,89 @@
 <div class="grid grid-cols-2 gap-3 mt-2" id="content-flashsale" style="display: none;">
     
     <!-- Item Flash Sale 1 -->
-    <div class="bg-[#151c2d] border rounded-[12px] p-3 flex flex-col gap-2 cursor-pointer transition-all duration-200 ease relative overflow-hidden flash-voucher active:border-[#f97316] active:bg-[rgba(249,115,22,0.05)] [&.selected]:border-[#f97316] [&.selected]:bg-[rgba(249,115,22,0.05)] [&:not(.selected)]:border-[#94a3b8]/30">
+    <div class="bg-[var(--bg-card)] border rounded-[var(--border-radius-md)] p-3 flex flex-col gap-2 cursor-pointer transition-all duration-200 ease relative overflow-hidden flash-voucher active:border-[var(--accent-orange)] active:bg-[var(--accent-orange-05)] [&.selected]:border-[var(--accent-orange)] [&.selected]:bg-[var(--accent-orange-05)] [&:not(.selected)]:border-[var(--border-input)]">
         <div class="flex justify-between items-center">
-            <span class="bg-[#ef4444]/10 text-[#ef4444] border border-[#ef4444]/20 text-[10px] font-bold px-2 py-1 rounded-[6px] flex items-center gap-1 tracking-[0.3px]"><i class="ph-fill ph-lightning"></i> 30% OFF</span>
-            <div class="text-[#f97316] text-[11px] font-semibold flex items-center gap-1"><i class="ph-fill ph-clock-countdown"></i> 02:15:30</div>
+            <span class="bg-[var(--bg-red-10)] text-[var(--accent-red)] border border-[var(--border-red-20)] text-[10px] font-bold px-2 py-1 rounded-[var(--border-radius-sm2)] flex items-center gap-1 tracking-[0.3px]"><i class="ph-fill ph-lightning"></i> 30% OFF</span>
+            <div class="text-[var(--accent-orange)] text-[11px] font-semibold flex items-center gap-1"><i class="ph-fill ph-clock-countdown"></i> 02:15:30</div>
         </div>
-        <div class="text-white text-[13px] font-bold mt-[2px]">2575 Diamonds</div>
+        <div class="text-[var(--text-white)] text-[13px] font-bold mt-[2px]">2575 Diamonds</div>
         <div class="flex items-center gap-[6px]">
-            <span class="text-[#f97316] text-[13px] font-bold">Rp 455.000</span>
-            <span class="text-[#94a3b8] text-[11px] line-through font-medium">Rp 650.000</span>
+            <span class="text-[var(--accent-orange)] text-[13px] font-bold">Rp 455.000</span>
+            <span class="text-[var(--text-gray)] text-[11px] line-through font-medium">Rp 650.000</span>
         </div>
         <div class="mt-[2px]">
-            <div class="flex justify-between text-[10px] text-[#94a3b8] font-semibold mb-[5px]">
+            <div class="flex justify-between text-[10px] text-[var(--text-gray)] font-semibold mb-[5px]">
                 <span>Tersisa 2</span>
                 <span>Terjual 18</span>
             </div>
-            <div class="w-full h-[6px] bg-[#1c253a] rounded-[10px] overflow-hidden">
-                <div class="h-full bg-gradient-to-r from-[#94a3b8] to-[#f79e1b] rounded-[10px]" style="width: 10%;"></div>
+            <div class="w-full h-[6px] bg-[var(--bg-card-header)] rounded-[var(--border-radius-lg)] overflow-hidden">
+                <div class="h-full bg-[image:var(--progress-grad)] rounded-[var(--border-radius-lg)]" style="width: 10%;"></div>
             </div>
         </div>
     </div>
 
     <!-- Item Flash Sale 2 -->
-    <div class="bg-[#151c2d] border rounded-[12px] p-3 flex flex-col gap-2 cursor-pointer transition-all duration-200 ease relative overflow-hidden flash-voucher active:border-[#f97316] active:bg-[rgba(249,115,22,0.05)] [&.selected]:border-[#f97316] [&.selected]:bg-[rgba(249,115,22,0.05)] [&:not(.selected)]:border-[#94a3b8]/30">
+    <div class="bg-[var(--bg-card)] border rounded-[var(--border-radius-md)] p-3 flex flex-col gap-2 cursor-pointer transition-all duration-200 ease relative overflow-hidden flash-voucher active:border-[var(--accent-orange)] active:bg-[var(--accent-orange-05)] [&.selected]:border-[var(--accent-orange)] [&.selected]:bg-[var(--accent-orange-05)] [&:not(.selected)]:border-[var(--border-input)]">
         <div class="flex justify-between items-center">
-            <span class="bg-[#ef4444]/10 text-[#ef4444] border border-[#ef4444]/20 text-[10px] font-bold px-2 py-1 rounded-[6px] flex items-center gap-1 tracking-[0.3px]"><i class="ph-fill ph-lightning"></i> 45% OFF</span>
-            <div class="text-[#f97316] text-[11px] font-semibold flex items-center gap-1"><i class="ph-fill ph-clock-countdown"></i> 01:05:10</div>
+            <span class="bg-[var(--bg-red-10)] text-[var(--accent-red)] border border-[var(--border-red-20)] text-[10px] font-bold px-2 py-1 rounded-[var(--border-radius-sm2)] flex items-center gap-1 tracking-[0.3px]"><i class="ph-fill ph-lightning"></i> 45% OFF</span>
+            <div class="text-[var(--accent-orange)] text-[11px] font-semibold flex items-center gap-1"><i class="ph-fill ph-clock-countdown"></i> 01:05:10</div>
         </div>
-        <div class="text-white text-[13px] font-bold mt-[2px]">4000 Diamonds</div>
+        <div class="text-[var(--text-white)] text-[13px] font-bold mt-[2px]">4000 Diamonds</div>
         <div class="flex items-center gap-[6px]">
-            <span class="text-[#f97316] text-[13px] font-bold">Rp 539.000</span>
-            <span class="text-[#94a3b8] text-[11px] line-through font-medium">Rp 980.000</span>
+            <span class="text-[var(--accent-orange)] text-[13px] font-bold">Rp 539.000</span>
+            <span class="text-[var(--text-gray)] text-[11px] line-through font-medium">Rp 980.000</span>
         </div>
         <div class="mt-[2px]">
-            <div class="flex justify-between text-[10px] text-[#94a3b8] font-semibold mb-[5px]">
+            <div class="flex justify-between text-[10px] text-[var(--text-gray)] font-semibold mb-[5px]">
                 <span>Tersisa 45</span>
                 <span>Terjual 55</span>
             </div>
-            <div class="w-full h-[6px] bg-[#1c253a] rounded-[10px] overflow-hidden">
-                <div class="h-full bg-gradient-to-r from-[#94a3b8] to-[#f79e1b] rounded-[10px]" style="width: 45%;"></div>
+            <div class="w-full h-[6px] bg-[var(--bg-card-header)] rounded-[var(--border-radius-lg)] overflow-hidden">
+                <div class="h-full bg-[image:var(--progress-grad)] rounded-[var(--border-radius-lg)]" style="width: 45%;"></div>
             </div>
         </div>
     </div>
 
     <!-- Item Flash Sale 3 -->
-    <div class="bg-[#151c2d] border rounded-[12px] p-3 flex flex-col gap-2 cursor-pointer transition-all duration-200 ease relative overflow-hidden flash-voucher active:border-[#f97316] active:bg-[rgba(249,115,22,0.05)] [&.selected]:border-[#f97316] [&.selected]:bg-[rgba(249,115,22,0.05)] [&:not(.selected)]:border-[#94a3b8]/30">
+    <div class="bg-[var(--bg-card)] border rounded-[var(--border-radius-md)] p-3 flex flex-col gap-2 cursor-pointer transition-all duration-200 ease relative overflow-hidden flash-voucher active:border-[var(--accent-orange)] active:bg-[var(--accent-orange-05)] [&.selected]:border-[var(--accent-orange)] [&.selected]:bg-[var(--accent-orange-05)] [&:not(.selected)]:border-[var(--border-input)]">
         <div class="flex justify-between items-center">
-            <span class="bg-[#ef4444]/10 text-[#ef4444] border border-[#ef4444]/20 text-[10px] font-bold px-2 py-1 rounded-[6px] flex items-center gap-1 tracking-[0.3px]"><i class="ph-fill ph-fire"></i> HOT DEAL</span>
-            <div class="text-[#f97316] text-[11px] font-semibold flex items-center gap-1"><i class="ph-fill ph-clock-countdown"></i> 00:45:00</div>
+            <span class="bg-[var(--bg-red-10)] text-[var(--accent-red)] border border-[var(--border-red-20)] text-[10px] font-bold px-2 py-1 rounded-[var(--border-radius-sm2)] flex items-center gap-1 tracking-[0.3px]"><i class="ph-fill ph-fire"></i> HOT DEAL</span>
+            <div class="text-[var(--accent-orange)] text-[11px] font-semibold flex items-center gap-1"><i class="ph-fill ph-clock-countdown"></i> 00:45:00</div>
         </div>
-        <div class="text-white text-[13px] font-bold mt-[2px]">Twilight Pass</div>
+        <div class="text-[var(--text-white)] text-[13px] font-bold mt-[2px]">Twilight Pass</div>
         <div class="flex items-center gap-[6px]">
-            <span class="text-[#f97316] text-[13px] font-bold">Rp 99.000</span>
-            <span class="text-[#94a3b8] text-[11px] line-through font-medium">Rp 150.000</span>
+            <span class="text-[var(--accent-orange)] text-[13px] font-bold">Rp 99.000</span>
+            <span class="text-[var(--text-gray)] text-[11px] line-through font-medium">Rp 150.000</span>
         </div>
         <div class="mt-[2px]">
-            <div class="flex justify-between text-[10px] text-[#94a3b8] font-semibold mb-[5px]">
+            <div class="flex justify-between text-[10px] text-[var(--text-gray)] font-semibold mb-[5px]">
                 <span>Tersisa 40</span>
                 <span>Terjual 10</span>
             </div>
-            <div class="w-full h-[6px] bg-[#1c253a] rounded-[10px] overflow-hidden">
-                <div class="h-full bg-gradient-to-r from-[#94a3b8] to-[#f79e1b] rounded-[10px]" style="width: 80%;"></div>
+            <div class="w-full h-[6px] bg-[var(--bg-card-header)] rounded-[var(--border-radius-lg)] overflow-hidden">
+                <div class="h-full bg-[image:var(--progress-grad)] rounded-[var(--border-radius-lg)]" style="width: 80%;"></div>
             </div>
         </div>
     </div>
 
     <!-- Item Flash Sale 4 -->
-    <div class="bg-[#151c2d] border rounded-[12px] p-3 flex flex-col gap-2 cursor-pointer transition-all duration-200 ease relative overflow-hidden flash-voucher active:border-[#f97316] active:bg-[rgba(249,115,22,0.05)] [&.selected]:border-[#f97316] [&.selected]:bg-[rgba(249,115,22,0.05)] [&:not(.selected)]:border-[#94a3b8]/30">
+    <div class="bg-[var(--bg-card)] border rounded-[var(--border-radius-md)] p-3 flex flex-col gap-2 cursor-pointer transition-all duration-200 ease relative overflow-hidden flash-voucher active:border-[var(--accent-orange)] active:bg-[var(--accent-orange-05)] [&.selected]:border-[var(--accent-orange)] [&.selected]:bg-[var(--accent-orange-05)] [&:not(.selected)]:border-[var(--border-input)]">
         <div class="flex justify-between items-center">
-            <span class="bg-[#ef4444]/10 text-[#ef4444] border border-[#ef4444]/20 text-[10px] font-bold px-2 py-1 rounded-[6px] flex items-center gap-1 tracking-[0.3px]"><i class="ph-fill ph-lightning"></i> 25% OFF</span>
-            <div class="text-[#f97316] text-[11px] font-semibold flex items-center gap-1"><i class="ph-fill ph-clock-countdown"></i> 05:20:15</div>
+            <span class="bg-[var(--bg-red-10)] text-[var(--accent-red)] border border-[var(--border-red-20)] text-[10px] font-bold px-2 py-1 rounded-[var(--border-radius-sm2)] flex items-center gap-1 tracking-[0.3px]"><i class="ph-fill ph-lightning"></i> 25% OFF</span>
+            <div class="text-[var(--accent-orange)] text-[11px] font-semibold flex items-center gap-1"><i class="ph-fill ph-clock-countdown"></i> 05:20:15</div>
         </div>
-        <div class="text-white text-[13px] font-bold mt-[2px]">9288 Diamonds</div>
+        <div class="text-[var(--text-white)] text-[13px] font-bold mt-[2px]">9288 Diamonds</div>
         <div class="flex items-center gap-[6px]">
-            <span class="text-[#f97316] text-[13px] font-bold">Rp 1.650.000</span>
-            <span class="text-[#94a3b8] text-[11px] line-through font-medium">Rp 2.200.000</span>
+            <span class="text-[var(--accent-orange)] text-[13px] font-bold">Rp 1.650.000</span>
+            <span class="text-[var(--text-gray)] text-[11px] line-through font-medium">Rp 2.200.000</span>
         </div>
         <div class="mt-[2px]">
-            <div class="flex justify-between text-[10px] text-[#94a3b8] font-semibold mb-[5px]">
+            <div class="flex justify-between text-[10px] text-[var(--text-gray)] font-semibold mb-[5px]">
                 <span>Tersisa 1</span>
                 <span>Terjual 19</span>
             </div>
-            <div class="w-full h-[6px] bg-[#1c253a] rounded-[10px] overflow-hidden">
-                <div class="h-full bg-gradient-to-r from-[#94a3b8] to-[#f79e1b] rounded-[10px]" style="width: 5%;"></div>
+            <div class="w-full h-[6px] bg-[var(--bg-card-header)] rounded-[var(--border-radius-lg)] overflow-hidden">
+                <div class="h-full bg-[image:var(--progress-grad)] rounded-[var(--border-radius-lg)]" style="width: 5%;"></div>
             </div>
         </div>
     </div>
@@ -287,59 +358,105 @@
  </div>
 </div>
 
-                <div class="bg-[#151c2d] rounded-[12px] overflow-hidden mb-4">
-                    <div class="flex items-center bg-[#1c253a]">
-                        <div class="bg-gradient-to-b from-[#94a3b8] to-[#f79e1b] text-[#0f172a] text-[16px] font-extrabold py-3 px-5 rounded-br-[12px] flex items-center justify-center">3</div>
-                        <div class="text-white text-[14px] font-bold pl-4">Pilih Pembayaran</div>
+                <div class="bg-[var(--bg-card)] rounded-[var(--border-radius-md)] overflow-hidden mb-4">
+                    <div class="flex items-center bg-[var(--bg-card-header)]">
+                        <div class="bg-[image:var(--badge-grad)] text-[var(--text-dark)] text-[16px] font-extrabold py-3 px-5 rounded-br-[var(--border-radius-md)] flex items-center justify-center">3</div>
+                        <div class="text-[var(--text-white)] text-[14px] font-bold pl-4">Pilih Pembayaran</div>
                     </div>
                     <div class="p-4 pb-5 flex flex-col gap-4">
-                        <div class="flex items-center justify-between py-3 px-[14px] border rounded-[12px] p-[14px_16px] cursor-pointer transition-all duration-200 ease payment-item active:border-[#9ae2ff] active:bg-[#9ae2ff]/10 [&.selected]:border-[#9ae2ff] [&.selected]:bg-[#9ae2ff]/10 [&:not(.selected)]:border-[#94a3b8]/30" onclick="selectPayment(this)">
+                        <div class="flex items-center justify-between py-3 px-[14px] border rounded-[var(--border-radius-md)] p-[14px_16px] cursor-pointer transition-all duration-200 ease payment-item active:border-[var(--border-active)] active:bg-[var(--bg-active-light)] [&.selected]:border-[var(--border-active)] [&.selected]:bg-[var(--bg-active-light)] [&:not(.selected)]:border-[var(--border-input)]" onclick="selectPayment(this)">
                             <div class="flex items-center gap-3">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Logo_QRIS.svg" class="w-[48px] h-[32px] bg-white p-[2px] rounded-[6px] object-contain" alt="QRIS">
-                                <div class="text-white text-[14px] font-bold ml-1">QRIS (E-Wallet/M-Banking)</div>
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Logo_QRIS.svg" class="w-[48px] h-[32px] bg-white p-[2px] rounded-[var(--border-radius-sm2)] object-contain" alt="QRIS">
+                                <div class="text-[var(--text-white)] text-[14px] font-bold">QRIS (E-Wallet/M-Banking)</div>
                             </div>
-                            <div class="text-[#f97316] text-[14px] font-bold">Rp 9.980.000</div>
+                            <div class="text-[var(--accent-orange)] text-[14px] font-bold">Rp 9.980.000</div>
                         </div>
 
+                        <!-- Kategori E-Wallet -->
+                        <div class="bg-[var(--bg-card)] border border-[var(--border-input)] rounded-[var(--border-radius-md)] overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] group payment-category [&.active]:border-[var(--border-focus)]" id="cat-ewallet">
+                             <div class="p-[14px_16px] cursor-pointer" onclick="togglePayment('cat-ewallet')">
+                             <div class="flex justify-between items-center">
+                             <span class="text-[var(--text-white)] text-[14px] font-bold">E-Wallet</span>
+                             <i class="ph ph-caret-down text-[var(--text-gray)] text-[16px] transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] group-[.active]:rotate-180"></i>
+                            </div>
+                            <div class="flex gap-2 mt-[10px] opacity-100 max-h-[24px] overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] group-[.active]:opacity-0 group-[.active]:max-h-0 group-[.active]:mt-0">
+                            <img src="https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?q=80&w=100&h=100&auto=format&fit=crop" class="h-[15px] w-[28px] rounded-[var(--border-radius-xs)] object-cover" alt="Logo">
+                            <img src="https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=100&h=100&auto=format&fit=crop" class="h-[15px] w-[28px] rounded-[var(--border-radius-xs)] object-cover" alt="Logo">
+                            <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=100&h=100&auto=format&fit=crop" class="h-[15px] w-[28px] rounded-[var(--border-radius-xs)] object-cover" alt="Logo">
+                     </div>
+                   </div>
+    
+                     <div class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] group-[.active]:grid-rows-[1fr]">
+                     <!-- Efek fade & slide semulus pantat bayi ada di div ini -->
+                     <div class="overflow-hidden opacity-0 -translate-y-3 transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] group-[.active]:opacity-100 group-[.active]:translate-y-0">
+                     <div class="px-4 pb-4 border-t border-transparent transition-colors duration-500 ease group-[.active]:border-t-[var(--border-input)]">
+                     <div class="grid grid-cols-1 gap-[10px] pt-4">
+                     <div class="flex items-center justify-between py-3 px-[14px] border rounded-[var(--border-radius-lg)] cursor-pointer transition-all duration-200 ease payment-item active:border-[var(--border-active)] active:bg-[var(--bg-active-light)] [&.selected]:border-[var(--border-active)] [&.selected]:bg-[var(--bg-active-light)] [&:not(.selected)]:border-[var(--border-input)]" onclick="selectPayment(this)">
+                        <div class="flex items-center gap-3">
+                            <img src="https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?q=80&w=100&h=100&auto=format&fit=crop" class="w-[45px] h-[30px] bg-white p-[2px] rounded-[var(--border-radius-sm2)] object-cover" alt="Gopay">
+                            <div class="text-[var(--text-white)] text-[13px] font-semibold">GoPay</div>
+                        </div>
+                        <div class="text-[var(--accent-orange)] text-[13px] font-bold">Rp 80.000</div>
+                    </div>
+                    <div class="flex items-center justify-between py-3 px-[14px] border rounded-[var(--border-radius-lg)] cursor-pointer transition-all duration-200 ease payment-item active:border-[var(--border-active)] active:bg-[var(--bg-active-light)] [&.selected]:border-[var(--border-active)] [&.selected]:bg-[var(--bg-active-light)] [&:not(.selected)]:border-[var(--border-input)]" onclick="selectPayment(this)">
+                        <div class="flex items-center gap-3">
+                            <img src="https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=100&h=100&auto=format&fit=crop" class="w-[45px] h-[30px] bg-white p-[2px] rounded-[var(--border-radius-sm2)] object-cover" alt="OVO">
+                            <div class="text-[var(--text-white)] text-[13px] font-semibold">OVO</div>
+                        </div>
+                        <div class="text-[var(--accent-orange)] text-[13px] font-bold">Rp 81.500</div>
+                    </div>
+                    <div class="flex items-center justify-between py-3 px-[14px] border rounded-[var(--border-radius-lg)] cursor-pointer transition-all duration-200 ease payment-item active:border-[var(--border-active)] active:bg-[var(--bg-active-light)] [&.selected]:border-[var(--border-active)] [&.selected]:bg-[var(--bg-active-light)] [&:not(.selected)]:border-[var(--border-input)]" onclick="selectPayment(this)">
+                        <div class="flex items-center gap-3">
+                            <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=100&h=100&auto=format&fit=crop" class="w-[45px] h-[30px] bg-white p-[2px] rounded-[var(--border-radius-sm2)] object-cover" alt="Dana">
+                            <div class="text-[var(--text-white)] text-[13px] font-semibold">DANA</div>
+                        </div>
+                        <div class="text-[var(--accent-orange)] text-[13px] font-bold">Rp 80.500</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Kategori E-Wallet -->
-<div class="bg-[#151c2d] border border-[#94a3b8]/30 rounded-[12px] overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] group payment-category [&.active]:border-[#657e55]" id="cat-ewallet">
-    <div class="p-[14px_16px] cursor-pointer" onclick="togglePayment('cat-ewallet')">
+<div class="bg-[var(--bg-card)] border border-[var(--border-input)] rounded-[var(--border-radius-md)] overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] group payment-category [&.active]:border-[var(--border-focus)]" id="cat-va">
+    <div class="p-[14px_16px] cursor-pointer" onclick="togglePayment('cat-va')">
         <div class="flex justify-between items-center">
-            <span class="text-white text-[14px] font-bold">E-Wall</span>
-            <i class="ph ph-caret-down text-[#94a3b8] text-[16px] transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] group-[.active]:rotate-180"></i>
+            <span class="text-[var(--text-white)] text-[14px] font-bold">Virtual Account</span>
+            <i class="ph ph-caret-down text-[var(--text-gray)] text-[16px] transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] group-[.active]:rotate-180"></i>
         </div>
         <div class="flex gap-2 mt-[10px] opacity-100 max-h-[24px] overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] group-[.active]:opacity-0 group-[.active]:max-h-0 group-[.active]:mt-0">
-            <img src="https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?q=80&w=100&h=100&auto=format&fit=crop" class="h-[15px] w-[28px] rounded-[2px] object-cover" alt="Logo">
-            <img src="https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=100&h=100&auto=format&fit=crop" class="h-[15px] w-[28px] rounded-[2px] object-cover" alt="Logo">
-            <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=100&h=100&auto=format&fit=crop" class="h-[15px] w-[28px] rounded-[2px] object-cover" alt="Logo">
+            <img src="https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?q=80&w=100&h=100&auto=format&fit=crop" class="h-[15px] w-[28px] rounded-[var(--border-radius-xs)] object-cover" alt="Logo">
+            <img src="https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=100&h=100&auto=format&fit=crop" class="h-[15px] w-[28px] rounded-[var(--border-radius-xs)] object-cover" alt="Logo">
+            <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=100&h=100&auto=format&fit=crop" class="h-[15px] w-[28px] rounded-[var(--border-radius-xs)] object-cover" alt="Logo">
         </div>
     </div>
     
     <div class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] group-[.active]:grid-rows-[1fr]">
         <!-- Efek fade & slide semulus pantat bayi ada di div ini -->
         <div class="overflow-hidden opacity-0 -translate-y-3 transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] group-[.active]:opacity-100 group-[.active]:translate-y-0">
-            <div class="px-4 pb-4 border-t border-transparent transition-colors duration-500 ease group-[.active]:border-t-[#94a3b8]/30">
+            <div class="px-4 pb-4 border-t border-transparent transition-colors duration-500 ease group-[.active]:border-t-[var(--border-input)]">
                 <div class="grid grid-cols-1 gap-[10px] pt-4">
-                    <div class="flex items-center justify-between py-3 px-[14px] border rounded-[10px] cursor-pointer transition-all duration-200 ease payment-item active:border-[#9ae2ff] active:bg-[#9ae2ff]/10 [&.selected]:border-[#9ae2ff] [&.selected]:bg-[#9ae2ff]/10 [&:not(.selected)]:border-[#94a3b8]/30" onclick="selectPayment(this)">
+                    <div class="flex items-center justify-between py-3 px-[14px] border rounded-[var(--border-radius-lg)] cursor-pointer transition-all duration-200 ease payment-item active:border-[var(--border-active)] active:bg-[var(--bg-active-light)] [&.selected]:border-[var(--border-active)] [&.selected]:bg-[var(--bg-active-light)] [&:not(.selected)]:border-[var(--border-input)]" onclick="selectPayment(this)">
                         <div class="flex items-center gap-3">
-                            <img src="https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?q=80&w=100&h=100&auto=format&fit=crop" class="w-[45px] h-[30px] bg-white p-[2px] rounded-[6px] object-cover" alt="Gopay">
-                            <div class="text-white text-[13px] font-semibold">GoPay</div>
+                            <img src="https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?q=80&w=100&h=100&auto=format&fit=crop" class="w-[45px] h-[30px] bg-white p-[2px] rounded-[var(--border-radius-sm2)] object-cover" alt="Gopay">
+                            <div class="text-[var(--text-white)] text-[13px] font-semibold">BNI</div>
                         </div>
-                        <div class="text-[#f97316] text-[13px] font-bold">Rp 80.000</div>
+                        <div class="text-[var(--accent-orange)] text-[13px] font-bold">Rp 80.000</div>
                     </div>
-                    <div class="flex items-center justify-between py-3 px-[14px] border rounded-[10px] cursor-pointer transition-all duration-200 ease payment-item active:border-[#9ae2ff] active:bg-[#9ae2ff]/10 [&.selected]:border-[#9ae2ff] [&.selected]:bg-[#9ae2ff]/10 [&:not(.selected)]:border-[#94a3b8]/30" onclick="selectPayment(this)">
+                    <div class="flex items-center justify-between py-3 px-[14px] border rounded-[var(--border-radius-lg)] cursor-pointer transition-all duration-200 ease payment-item active:border-[var(--border-active)] active:bg-[var(--bg-active-light)] [&.selected]:border-[var(--border-active)] [&.selected]:bg-[var(--bg-active-light)] [&:not(.selected)]:border-[var(--border-input)]" onclick="selectPayment(this)">
                         <div class="flex items-center gap-3">
-                            <img src="https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=100&h=100&auto=format&fit=crop" class="w-[45px] h-[30px] bg-white p-[2px] rounded-[6px] object-cover" alt="OVO">
-                            <div class="text-white text-[13px] font-semibold">OVO</div>
+                            <img src="https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=100&h=100&auto=format&fit=crop" class="w-[45px] h-[30px] bg-white p-[2px] rounded-[var(--border-radius-sm2)] object-cover" alt="OVO">
+                            <div class="text-[var(--text-white)] text-[13px] font-semibold">BRI</div>
                         </div>
-                        <div class="text-[#f97316] text-[13px] font-bold">Rp 81.500</div>
+                        <div class="text-[var(--accent-orange)] text-[13px] font-bold">Rp 81.500</div>
                     </div>
-                    <div class="flex items-center justify-between py-3 px-[14px] border rounded-[10px] cursor-pointer transition-all duration-200 ease payment-item active:border-[#9ae2ff] active:bg-[#9ae2ff]/10 [&.selected]:border-[#9ae2ff] [&.selected]:bg-[#9ae2ff]/10 [&:not(.selected)]:border-[#94a3b8]/30" onclick="selectPayment(this)">
+                    <div class="flex items-center justify-between py-3 px-[14px] border rounded-[var(--border-radius-lg)] cursor-pointer transition-all duration-200 ease payment-item active:border-[var(--border-active)] active:bg-[var(--bg-active-light)] [&.selected]:border-[var(--border-active)] [&.selected]:bg-[var(--bg-active-light)] [&:not(.selected)]:border-[var(--border-input)]" onclick="selectPayment(this)">
                         <div class="flex items-center gap-3">
-                            <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=100&h=100&auto=format&fit=crop" class="w-[45px] h-[30px] bg-white p-[2px] rounded-[6px] object-cover" alt="Dana">
-                            <div class="text-white text-[13px] font-semibold">DANA</div>
+                            <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=100&h=100&auto=format&fit=crop" class="w-[45px] h-[30px] bg-white p-[2px] rounded-[var(--border-radius-sm2)] object-cover" alt="Dana">
+                            <div class="text-[var(--text-white)] text-[13px] font-semibold">BCA</div>
                         </div>
-                        <div class="text-[#f97316] text-[13px] font-bold">Rp 80.500</div>
+                        <div class="text-[var(--accent-orange)] text-[13px] font-bold">Rp 80.500</div>
                     </div>
                 </div>
             </div>
@@ -347,85 +464,49 @@
     </div>
 </div>
 
-<!-- Kategori Virtual Account -->
-<div class="bg-[#151c2d] border border-[#94a3b8]/30 rounded-[12px] overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] group payment-category [&.active]:border-[#657e55]" id="cat-va">
-    <div class="p-[14px_16px] cursor-pointer" onclick="togglePayment('cat-va')">
-        <div class="flex justify-between items-center">
-            <span class="text-white text-[14px] font-bold">Virtual Account</span>
-            <i class="ph ph-caret-down text-[#94a3b8] text-[16px] transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] group-[.active]:rotate-180"></i>
-        </div>
-        <div class="flex gap-2 mt-[10px] opacity-100 max-h-[24px] overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] group-[.active]:opacity-0 group-[.active]:max-h-0 group-[.active]:mt-0">
-            <img src="https://images.unsplash.com/photo-1557682250-33bd709cbe85?q=80&w=100&h=100&auto=format&fit=crop" class="h-[15px] w-[28px] rounded-[2px] object-cover" alt="Logo">
-            <img src="https://images.unsplash.com/photo-1557682250-33bd709cbe85?q=80&w=100&h=100&auto=format&fit=crop" class="h-[15px] w-[28px] rounded-[2px] object-cover" alt="Logo">
-        </div>
-    </div>
-    
-    <div class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] group-[.active]:grid-rows-[1fr]">
-        <!-- Efek fade & slide semulus pantat bayi ada di div ini -->
-        <div class="overflow-hidden opacity-0 -translate-y-3 transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] group-[.active]:opacity-100 group-[.active]:translate-y-0">
-            <div class="px-4 pb-4 border-t border-transparent transition-colors duration-500 ease group-[.active]:border-t-[#94a3b8]/30">
-                <div class="grid grid-cols-1 gap-[10px] pt-4">
-                    <div class="flex items-center justify-between py-3 px-[14px] border rounded-[10px] cursor-pointer transition-all duration-200 ease payment-item active:border-[#9ae2ff] active:bg-[#9ae2ff]/10 [&.selected]:border-[#9ae2ff] [&.selected]:bg-[#9ae2ff]/10 [&:not(.selected)]:border-[#94a3b8]/30" onclick="selectPayment(this)">
-                        <div class="flex items-center gap-3">
-                            <img src="https://images.unsplash.com/photo-1557682250-33bd709cbe85?q=80&w=100&h=100&auto=format&fit=crop" class="w-[45px] h-[30px] bg-white p-[2px] rounded-[6px] object-cover" alt="BCA">
-                            <div class="text-white text-[13px] font-semibold">BCA Virtual Account</div>
-                        </div>
-                        <div class="text-[#f97316] text-[13px] font-bold">Rp 82.000</div>
-                    </div>
-                    <div class="flex items-center justify-between py-3 px-[14px] border rounded-[10px] cursor-pointer transition-all duration-200 ease payment-item active:border-[#9ae2ff] active:bg-[#9ae2ff]/10 [&.selected]:border-[#9ae2ff] [&.selected]:bg-[#9ae2ff]/10 [&:not(.selected)]:border-[#94a3b8]/30" onclick="selectPayment(this)">
-                        <div class="flex items-center gap-3">
-                            <img src="https://images.unsplash.com/photo-1557682250-33bd709cbe85?q=80&w=100&h=100&auto=format&fit=crop" class="w-[45px] h-[30px] bg-white p-[2px] rounded-[6px] object-cover" alt="Mandiri">
-                            <div class="text-white text-[13px] font-semibold">Mandiri Virtual Account</div>
-                        </div>
-                        <div class="text-[#f97316] text-[13px] font-bold">Rp 82.000</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 
                     </div>
                 </div>
 
-                <div class="bg-[#151c2d] rounded-[12px] overflow-hidden mb-4">
-                    <div class="flex items-center bg-[#1c253a]">
-                        <div class="bg-gradient-to-b from-[#94a3b8] to-[#f79e1b] text-[#0f172a] text-[16px] font-extrabold py-3 px-5 rounded-br-[12px] flex items-center justify-center">4</div>
-                        <div class="text-white text-[14px] font-bold pl-4">Rincian Pembayaran</div>
+                <div class="bg-[var(--bg-card)] rounded-[var(--border-radius-md)] overflow-hidden mb-4">
+                    <div class="flex items-center bg-[var(--bg-card-header)]">
+                        <div class="bg-[image:var(--badge-grad)] text-[var(--text-dark)] text-[16px] font-extrabold py-3 px-5 rounded-br-[var(--border-radius-md)] flex items-center justify-center">4</div>
+                        <div class="text-[var(--text-white)] text-[14px] font-bold pl-4">Rincian Pembayaran</div>
                     </div>
                     <div class="p-4 pb-5 flex flex-col gap-4">
                         
                         <!-- Bagian Rincian -->
-                        <div class="bg-[#151c2d] border border-[#94a3b8]/30 rounded-[12px] p-4 flex flex-col gap-[10px]">
+                        <div class="bg-[var(--bg-card)] border border-[var(--border-input)] rounded-[var(--border-radius-md)] p-4 flex flex-col gap-[10px]">
                             
                             <!-- Info Akun -->
-                            <div class="pb-[5px] mb-0 border-b border-dashed border-[#1e293b]">
-                                <div class="text-[12px] text-white font-semibold mb-[6px] tracking-[-0.2px]">Data Akun</div>
-                                <div class="flex justify-between text-[13px] text-[#94a3b8] mb-1 [&>span:last-child]:text-white [&>span:last-child]:font-bold">
+                            <div class="pb-[5px] mb-0 border-b border-dashed border-[var(--border-header)]">
+                                <div class="text-[12px] text-[var(--text-white)] font-semibold mb-[6px] tracking-[-0.2px]">Data Akun</div>
+                                <div class="flex justify-between text-[13px] text-[var(--text-gray)] mb-1 [&>span:last-child]:text-[var(--text-white)] [&>span:last-child]:font-bold">
                                     <span>User ID</span>
                                     <span>123456789</span>
                                 </div>
-                                <div class="flex justify-between text-[13px] text-[#94a3b8] mb-1 [&>span:last-child]:text-white [&>span:last-child]:font-bold">
+                                <div class="flex justify-between text-[13px] text-[var(--text-gray)] mb-1 [&>span:last-child]:text-[var(--text-white)] [&>span:last-child]:font-bold">
                                     <span>Server</span>
                                     <span>(1234)</span>
                                 </div>
                             </div>
 
                             <!-- Info Biaya -->
-                            <div class="pb-[5px] mb-0 border-b border-dashed border-[#1e293b]">
-                                <div class="text-[12px] text-white font-semibold mb-[6px] tracking-[-0.2px]">Rincian Biaya</div>
-                                <div class="flex justify-between text-[13px] text-[#94a3b8] mb-1 [&>span:last-child]:text-[#f97316] [&>span:last-child]:font-bold">
+                            <div class="pb-[5px] mb-0 border-b border-dashed border-[var(--border-header)]">
+                                <div class="text-[12px] text-[var(--text-white)] font-semibold mb-[6px] tracking-[-0.2px]">Rincian Biaya</div>
+                                <div class="flex justify-between text-[13px] text-[var(--text-gray)] mb-1 [&>span:last-child]:text-[var(--accent-orange)] [&>span:last-child]:font-bold">
                                     <span>344 Diamonds</span>
                                     <span>Rp 80.000</span>
                                 </div>
-                                <div class="flex justify-between text-[13px] text-[#94a3b8] mb-1 [&>span:last-child]:text-[#f97316] [&>span:last-child]:font-bold">
+                                <div class="flex justify-between text-[13px] text-[var(--text-gray)] mb-1 [&>span:last-child]:text-[var(--accent-orange)] [&>span:last-child]:font-bold">
                                     <span>Biaya Layanan VA-BCA</span>
                                     <span>Rp 1.500</span>
                                 </div>
                             </div>
 
                             <!-- Total -->
-                            <div class="flex justify-between text-white text-[14px] font-bold mt-2 [&>span:last-child]:text-[#f97316] [&>span:last-child]:font-bold">
+                            <div class="flex justify-between text-[var(--text-white)] text-[14px] font-bold mt-2 [&>span:last-child]:text-[var(--accent-orange)] [&>span:last-child]:font-bold">
                                 <span>Total Pembayaran</span>
                                 <span>Rp 81.500</span>
                             </div>
@@ -434,16 +515,16 @@
                         <!-- Input Nomor WA -->
                         <div class="flex flex-col gap-2">
                             <div class="flex items-center gap-[6px]">
-                                <span class="text-[#e2e8f0] text-[13px] font-semibold">*Nomor WhatsApp</span>
+                                <span class="text-[var(--text-light)] text-[13px] font-semibold">*Nomor WhatsApp</span>
                             </div>
-                            <input type="tel" class="bg-[#0b1121] border border-[#94a3b8]/30 rounded-[12px] px-4 py-3 text-white text-[14px] font-medium outline-none transition-colors duration-200 ease focus:border-[#657e55] placeholder:text-[#475569] placeholder:font-normal w-full" placeholder="08xxxxxxxxxx">
-                            <span class="text-[#94a3b8] text-[11px] font-medium mt-1 pl-[2px] flex items-center gap-1">*Invoice akan dikirim melalui WA di atas.
+                            <input type="tel" class="bg-[var(--bg-input)] border border-[var(--border-input)] rounded-[var(--border-radius-md)] px-4 py-3 text-[var(--text-white)] text-[14px] font-medium outline-none transition-colors duration-200 ease focus:border-[var(--border-focus)] placeholder:text-[var(--text-placeholder)] placeholder:font-normal w-full" placeholder="08xxxxxxxxxx">
+                            <span class="text-[var(--text-gray)] text-[11px] font-medium mt-1 pl-[2px] flex items-center gap-1">*Invoice akan dikirim melalui WA di atas.
                             </span>
                         </div>
 
                         <!-- Tombol -->
                         <!-- Tombol Beli di dalam Card Rincian Pembayaran -->
-                           <button class="bg-gradient-to-r from-[#94a3b8] to-[#f79e1b] text-[#0f172a] border-none rounded-[50px] p-[6px] text-[15px] font-bold flex justify-center items-center gap-[5px] w-full cursor-pointer mt-1 shadow-[0_4px_12px_rgba(247,158,27,0.2)] transition-opacity duration-200 ease active:opacity-80 flex !important" onclick="openModal()">
+                           <button class="bg-[image:var(--btn-grad)] text-[var(--text-dark)] border-none rounded-[var(--border-radius-xl)] p-[6px] text-[15px] font-bold flex justify-center items-center gap-[5px] w-full cursor-pointer mt-1 shadow-[var(--shadow-btn)] transition-opacity duration-200 ease active:opacity-80 flex !important" onclick="openModal()">
                            <i class="ph ph-shopping-cart-simple text-[20px]"></i>
                            Beli Sekarang
                            </button>
@@ -452,16 +533,16 @@
                 
 
 
-                <div class="bg-[#151c2d] border border-[#1c253a] rounded-[12px] p-4 flex items-center gap-4 mb-5 cursor-pointer transition-colors duration-200 ease active:bg-[#3f3f46]">
+                <div class="bg-[var(--bg-card)] border border-[var(--bg-card-header)] rounded-[var(--border-radius-md)] p-4 flex items-center gap-4 mb-5 cursor-pointer transition-colors duration-200 ease active:bg-[var(--bg-hover)]">
                     <div>
-                        <svg class="w-[28px] h-[28px] stroke-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg class="w-[28px] h-[28px] stroke-[var(--text-white)]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
                             <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
                         </svg>
                     </div>
                     <div class="flex flex-col gap-1">
-                        <div class="text-white text-[14px] font-bold">Butuh Bantuan?</div>
-                        <div class="text-[#e2e8f0] text-[12px] font-medium">Kamu bisa hubungi admin disini.</div>
+                        <div class="text-[var(--text-white)] text-[14px] font-bold">Butuh Bantuan?</div>
+                        <div class="text-[var(--text-light)] text-[12px] font-medium">Kamu bisa hubungi admin disini.</div>
                     </div>
                 </div>
             </div> 
@@ -471,22 +552,22 @@
             
 <!-- MULAI WRAPPER KONTEN KETERANGAN/DESKRIPSI -->
 <div id="content-keterangan" style="display: none;">
-    <div class="bg-[#151c2d] rounded-[12px] overflow-hidden mb-4">
-        <div class="flex items-center bg-[#1c253a]">
-            <div class="bg-gradient-to-b from-[#94a3b8] to-[#f79e1b] text-[#0f172a] text-[16px] font-extrabold py-3 px-5 rounded-br-[12px] flex items-center justify-center">
+    <div class="bg-[var(--bg-card)] rounded-[var(--border-radius-md)] overflow-hidden mb-4">
+        <div class="flex items-center bg-[var(--bg-card-header)]">
+            <div class="bg-[image:var(--badge-grad)] text-[var(--text-dark)] text-[16px] font-extrabold py-3 px-5 rounded-br-[var(--border-radius-md)] flex items-center justify-center">
                 <i class="ph-fill ph-article"></i>
             </div>
-            <div class="text-white text-[14px] font-bold pl-4">Deskripsi Produk</div>
+            <div class="text-[var(--text-white)] text-[14px] font-bold pl-4">Deskripsi Produk</div>
         </div>
         
-        <div class="p-4 pb-5 flex flex-col gap-4 text-[#94a3b8] text-[13px] leading-[1.6]">
+        <div class="p-4 pb-5 flex flex-col gap-4 text-[var(--text-gray)] text-[13px] leading-[1.6]">
             
-            <h3 class="text-white text-[15px] mb-2 font-bold">Mobile Legends: Bang Bang</h3>
+            <h3 class="text-[var(--text-white)] text-[15px] mb-2 font-bold">Mobile Legends: Bang Bang</h3>
             <p class="mb-4">
                 Mobile Legends: Bang Bang adalah game MOBA mobile 5v5 yang sangat populer. Top up Diamond MLBB sekarang untuk membeli skin premium, Starlight Member, hero baru, dan berbagai item in-game eksklusif lainnya.
             </p>
 
-            <h4 class="text-white text-[14px] mb-[10px] flex items-center gap-[6px] font-bold">
+            <h4 class="text-[var(--text-white)] text-[14px] mb-[10px] flex items-center gap-[6px] font-bold">
                 Cara Top Up:
             </h4>
             
@@ -498,12 +579,12 @@
                 <li>Selesaikan pembayaran dan Diamond akan otomatis masuk ke akun Anda dalam hitungan detik!</li>
             </ol>
 
-            <div class="p-3 bg-[#0b1121] border border-[#94a3b8]/30 rounded-[12px]">
-                <p class="mb-1 text-white font-semibold flex items-center gap-[6px]">
-                    <i class="ph-fill ph-clock text-[#60a5fa] text-[16px]"></i> 
+            <div class="p-3 bg-[var(--bg-input)] border border-[var(--border-input)] rounded-[var(--border-radius-md)]">
+                <p class="mb-1 text-[var(--text-white)] font-semibold flex items-center gap-[6px]">
+                    <i class="ph-fill ph-clock text-[var(--icon-blue)] text-[16px]"></i> 
                     Proses Otomatis 24/7
                 </p>
-                <p class="text-[12px] text-[#94a3b8]">
+                <p class="text-[12px] text-[var(--text-gray)]">
                     Layanan kami aktif 24 jam. Pesanan Anda akan diproses secara instan setelah pembayaran terkonfirmasi oleh sistem kami.
                 </p>
             </div>
@@ -511,50 +592,50 @@
         </div>
     </div>
     
-    <div class="bg-[#151c2d] rounded-[12px] overflow-hidden mb-4">
-    <div class="flex items-center bg-[#1c253a]">
-        <div class="bg-gradient-to-b from-[#94a3b8] to-[#f79e1b] text-[#0f172a] text-[16px] font-extrabold py-3 px-5 rounded-br-[12px] flex items-center justify-center">
-            <i class="ph-fill ph-chats-circle text-[#0f172a]"></i>
+    <div class="bg-[var(--bg-card)] rounded-[var(--border-radius-md)] overflow-hidden mb-4">
+    <div class="flex items-center bg-[var(--bg-card-header)]">
+        <div class="bg-[image:var(--badge-grad)] text-[var(--text-dark)] text-[16px] font-extrabold py-3 px-5 rounded-br-[var(--border-radius-md)] flex items-center justify-center">
+            <i class="ph-fill ph-chats-circle text-[var(--text-dark)]"></i>
         </div>
-        <div class="text-white text-[14px] font-bold pl-4">Ulasan Pembeli</div>
+        <div class="text-[var(--text-white)] text-[14px] font-bold pl-4">Ulasan Pembeli</div>
     </div>
     
     <div class="p-4 pb-5 flex flex-col gap-4">
         
-        <div class="flex items-center bg-[#0b1121] border border-[#94a3b8]/30 rounded-[12px] p-4 mb-5 gap-4">
-            <div class="flex flex-col items-center justify-center border-r border-[#94a3b8]/30 pr-4 min-w-[90px]">
-                <span class="text-[36px] font-extrabold text-white leading-none mb-1">4.9</span>
-                <div class="text-[#fbbf24] text-[14px] flex">
+        <div class="flex items-center bg-[var(--bg-input)] border border-[var(--border-input)] rounded-[var(--border-radius-md)] p-4 mb-5 gap-4">
+            <div class="flex flex-col items-center justify-center border-r border-[var(--border-input)] pr-4 min-w-[90px]">
+                <span class="text-[36px] font-extrabold text-[var(--text-white)] leading-none mb-1">4.9</span>
+                <div class="text-[var(--accent-yellow)] text-[14px] flex">
                     <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
                 </div>
-                <span class="text-[11px] text-[#94a3b8] mt-[6px] text-center">62.21jt Ulasan</span>
+                <span class="text-[11px] text-[var(--text-gray)] mt-[6px] text-center">62.21jt Ulasan</span>
             </div>
             
 <div class="flex-1 flex flex-col gap-[6px]">
     <div class="flex items-center gap-2">
-        <div class="flex items-center gap-1 text-[12px] text-white font-bold w-[24px]">5 <i class="ph-fill ph-star text-[#fbbf24] text-[12px]"></i></div>
-        <div class="flex-1 h-2 bg-[#1c253a] rounded-[3px] overflow-hidden"><div class="h-full bg-[#fbbf24] rounded-[2px]" style="width: 95%;"></div></div>
-        <div class="text-[11px] text-[#94a3b8] font-medium w-[42px] text-right">62.21jt</div>
+        <div class="flex items-center gap-1 text-[12px] text-[var(--text-white)] font-bold w-[24px]">5 <i class="ph-fill ph-star text-[var(--accent-yellow)] text-[12px]"></i></div>
+        <div class="flex-1 h-2 bg-[var(--bg-card-header)] rounded-[var(--border-radius-xs2)] overflow-hidden"><div class="h-full bg-[var(--accent-yellow)] rounded-[var(--border-radius-xs)]" style="width: 95%;"></div></div>
+        <div class="text-[11px] text-[var(--text-gray)] font-medium w-[42px] text-right">62.21jt</div>
     </div>
     <div class="flex items-center gap-2">
-        <div class="flex items-center gap-1 text-[12px] text-white font-bold w-[24px]">4 <i class="ph-fill ph-star text-[#fbbf24] text-[12px]"></i></div>
-        <div class="flex-1 h-2 bg-[#1c253a] rounded-[3px] overflow-hidden"><div class="h-full bg-[#fbbf24] rounded-[2px]" style="width: 10%;"></div></div>
-        <div class="text-[11px] text-[#94a3b8] font-medium w-[42px] text-right">1.64rb</div>
+        <div class="flex items-center gap-1 text-[12px] text-[var(--text-white)] font-bold w-[24px]">4 <i class="ph-fill ph-star text-[var(--accent-yellow)] text-[12px]"></i></div>
+        <div class="flex-1 h-2 bg-[var(--bg-card-header)] rounded-[var(--border-radius-xs2)] overflow-hidden"><div class="h-full bg-[var(--accent-yellow)] rounded-[var(--border-radius-xs)]" style="width: 10%;"></div></div>
+        <div class="text-[11px] text-[var(--text-gray)] font-medium w-[42px] text-right">1.64rb</div>
     </div>
     <div class="flex items-center gap-2">
-        <div class="flex items-center gap-1 text-[12px] text-white font-bold w-[24px]">3 <i class="ph-fill ph-star text-[#fbbf24] text-[12px]"></i></div>
-        <div class="flex-1 h-2 bg-[#1c253a] rounded-[3px] overflow-hidden"><div class="h-full bg-[#fbbf24] rounded-[2px]" style="width: 3%;"></div></div>
-        <div class="text-[11px] text-[#94a3b8] font-medium w-[42px] text-right">288</div>
+        <div class="flex items-center gap-1 text-[12px] text-[var(--text-white)] font-bold w-[24px]">3 <i class="ph-fill ph-star text-[var(--accent-yellow)] text-[12px]"></i></div>
+        <div class="flex-1 h-2 bg-[var(--bg-card-header)] rounded-[var(--border-radius-xs2)] overflow-hidden"><div class="h-full bg-[var(--accent-yellow)] rounded-[var(--border-radius-xs)]" style="width: 3%;"></div></div>
+        <div class="text-[11px] text-[var(--text-gray)] font-medium w-[42px] text-right">288</div>
     </div>
     <div class="flex items-center gap-2">
-        <div class="flex items-center gap-1 text-[12px] text-white font-bold w-[24px]">2 <i class="ph-fill ph-star text-[#fbbf24] text-[12px]"></i></div>
-        <div class="flex-1 h-2 bg-[#1c253a] rounded-[3px] overflow-hidden"><div class="h-full bg-[#fbbf24] rounded-[2px]" style="width: 1%;"></div></div>
-        <div class="text-[11px] text-[#94a3b8] font-medium w-[42px] text-right">106</div>
+        <div class="flex items-center gap-1 text-[12px] text-[var(--text-white)] font-bold w-[24px]">2 <i class="ph-fill ph-star text-[var(--accent-yellow)] text-[12px]"></i></div>
+        <div class="flex-1 h-2 bg-[var(--bg-card-header)] rounded-[var(--border-radius-xs2)] overflow-hidden"><div class="h-full bg-[var(--accent-yellow)] rounded-[var(--border-radius-xs)]" style="width: 1%;"></div></div>
+        <div class="text-[11px] text-[var(--text-gray)] font-medium w-[42px] text-right">106</div>
     </div>
     <div class="flex items-center gap-2">
-        <div class="flex items-center gap-1 text-[12px] text-white font-bold w-[24px]">1 <i class="ph-fill ph-star text-[#fbbf24] text-[12px]"></i></div>
-        <div class="flex-1 h-2 bg-[#1c253a] rounded-[3px] overflow-hidden"><div class="h-full bg-[#fbbf24] rounded-[2px]" style="width: 4%;"></div></div>
-        <div class="text-[11px] text-[#94a3b8] font-medium w-[42px] text-right">295</div>
+        <div class="flex items-center gap-1 text-[12px] text-[var(--text-white)] font-bold w-[24px]">1 <i class="ph-fill ph-star text-[var(--accent-yellow)] text-[12px]"></i></div>
+        <div class="flex-1 h-2 bg-[var(--bg-card-header)] rounded-[var(--border-radius-xs2)] overflow-hidden"><div class="h-full bg-[var(--accent-yellow)] rounded-[var(--border-radius-xs)]" style="width: 4%;"></div></div>
+        <div class="text-[11px] text-[var(--text-gray)] font-medium w-[42px] text-right">295</div>
     </div>
 </div>
 
@@ -562,75 +643,75 @@
 
         <div class="flex flex-col gap-3">
             
-            <div class="bg-[#151c2d] border border-[#1e293b] rounded-[12px] p-[14px] transition-colors duration-200 ease hover:bg-[#0b1121]">
+            <div class="bg-[var(--bg-card)] border border-[var(--border-header)] rounded-[var(--border-radius-md)] p-[14px] transition-colors duration-200 ease hover:bg-[var(--bg-body)]">
                 <div class="flex justify-between items-start mb-2">
                     <div class="flex flex-col gap-[2px]">
-                        <div class="text-white text-[13px] font-bold flex items-center gap-[6px]"><i class="ph-fill ph-user-circle text-[#64748b] text-[14px]"></i> zhy**********</div>
-                        <div class="text-[#94a3b8] text-[11px]">16-05-2026 • 15:39 WIB</div>
+                        <div class="text-[var(--text-white)] text-[13px] font-bold flex items-center gap-[6px]"><i class="ph-fill ph-user-circle text-[var(--icon-gray)] text-[14px]"></i> zhy**********</div>
+                        <div class="text-[var(--text-gray)] text-[11px]">16-05-2026 • 15:39 WIB</div>
                     </div>
-                    <div class="text-[#fbbf24] text-[12px] flex gap-[2px]">
+                    <div class="text-[var(--accent-yellow)] text-[12px] flex gap-[2px]">
                         <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
                     </div>
                 </div>
-                <div class="text-[#cbd5e1] text-[13px] leading-[1.5] mb-3">
+                <div class="text-[var(--text-lighter)] text-[13px] leading-[1.5] mb-3">
                     Prosesnya cepat banget, mantap deh pokoknya ngga nyesel langganan disini!
                 </div>
-                <div class="inline-flex items-center gap-[6px] bg-[#0b1121] border border-[#94a3b8]/30 text-[#94a3b8] px-[10px] py-[6px] rounded-[50px] text-[11px] font-semibold">
-                    <i class="ph-fill ph-diamond text-[#fbbf24]"></i> Weekly Diamond Pass - (Limited)
+                <div class="inline-flex items-center gap-[6px] bg-[var(--bg-input)] border border-[var(--border-input)] text-[var(--text-gray)] px-[10px] py-[6px] rounded-[var(--border-radius-xl)] text-[11px] font-semibold">
+                    <i class="ph-fill ph-diamond text-[var(--accent-yellow)]"></i> Weekly Diamond Pass - (Limited)
                 </div>
             </div>
 
-            <div class="bg-[#151c2d] border border-[#1e293b] rounded-[12px] p-[14px] transition-colors duration-200 ease hover:bg-[#0b1121]">
+            <div class="bg-[var(--bg-card)] border border-[var(--border-header)] rounded-[var(--border-radius-md)] p-[14px] transition-colors duration-200 ease hover:bg-[var(--bg-body)]">
                 <div class="flex justify-between items-start mb-2">
                     <div class="flex flex-col gap-[2px]">
-                        <div class="text-white text-[13px] font-bold flex items-center gap-[6px]"><i class="ph-fill ph-user-circle text-[#64748b] text-[14px]"></i> jun**********</div>
-                        <div class="text-[#94a3b8] text-[11px]">16-05-2026 • 08:06 WIB</div>
+                        <div class="text-[var(--text-white)] text-[13px] font-bold flex items-center gap-[6px]"><i class="ph-fill ph-user-circle text-[var(--icon-gray)] text-[14px]"></i> jun**********</div>
+                        <div class="text-[var(--text-gray)] text-[11px]">16-05-2026 • 08:06 WIB</div>
                     </div>
-                    <div class="text-[#fbbf24] text-[12px] flex gap-[2px]">
+                    <div class="text-[var(--accent-yellow)] text-[12px] flex gap-[2px]">
                         <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
                     </div>
                 </div>
-                <div class="text-[#cbd5e1] text-[13px] leading-[1.5] mb-3">
+                <div class="text-[var(--text-lighter)] text-[13px] leading-[1.5] mb-3">
                     Puas banget topup disini, admin responsif dan gampang pakenya.
                 </div>
-                <div class="inline-flex items-center gap-[6px] bg-[#0b1121] border border-[#94a3b8]/30 text-[#94a3b8] px-[10px] py-[6px] rounded-[50px] text-[11px] font-semibold">
-                    <i class="ph-fill ph-diamond text-[#fbbf24]"></i> 70 (64+6) Diamonds
+                <div class="inline-flex items-center gap-[6px] bg-[var(--bg-input)] border border-[var(--border-input)] text-[var(--text-gray)] px-[10px] py-[6px] rounded-[var(--border-radius-xl)] text-[11px] font-semibold">
+                    <i class="ph-fill ph-diamond text-[var(--accent-yellow)]"></i> 70 (64+6) Diamonds
                 </div>
             </div>
 
-            <div class="bg-[#151c2d] border border-[#1e293b] rounded-[12px] p-[14px] transition-colors duration-200 ease hover:bg-[#0b1121]">
+            <div class="bg-[var(--bg-card)] border border-[var(--border-header)] rounded-[var(--border-radius-md)] p-[14px] transition-colors duration-200 ease hover:bg-[var(--bg-body)]">
                 <div class="flex justify-between items-start mb-2">
                     <div class="flex flex-col gap-[2px]">
-                        <div class="text-white text-[13px] font-bold flex items-center gap-[6px]"><i class="ph-fill ph-user-circle text-[#64748b] text-[14px]"></i> 23z**********</div>
-                        <div class="text-[#94a3b8] text-[11px]">16-05-2026 • 01:51 WIB</div>
+                        <div class="text-[var(--text-white)] text-[13px] font-bold flex items-center gap-[6px]"><i class="ph-fill ph-user-circle text-[var(--icon-gray)] text-[14px]"></i> 23z**********</div>
+                        <div class="text-[var(--text-gray)] text-[11px]">16-05-2026 • 01:51 WIB</div>
                     </div>
-                    <div class="text-[#fbbf24] text-[12px] flex gap-[2px]">
+                    <div class="text-[var(--accent-yellow)] text-[12px] flex gap-[2px]">
                         <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
                     </div>
                 </div>
-                <div class="text-[#cbd5e1] text-[13px] leading-[1.5] mb-3">
+                <div class="text-[var(--text-lighter)] text-[13px] leading-[1.5] mb-3">
                     Cepet masuknya padahal top up jam 2 pagi.
                 </div>
-                <div class="inline-flex items-center gap-[6px] bg-[#0b1121] border border-[#94a3b8]/30 text-[#94a3b8] px-[10px] py-[6px] rounded-[50px] text-[11px] font-semibold">
-                    <i class="ph-fill ph-diamond text-[#fbbf24]"></i> 1000 (500+500) Diamonds - First Top Up
+                <div class="inline-flex items-center gap-[6px] bg-[var(--bg-input)] border border-[var(--border-input)] text-[var(--text-gray)] px-[10px] py-[6px] rounded-[var(--border-radius-xl)] text-[11px] font-semibold">
+                    <i class="ph-fill ph-diamond text-[var(--accent-yellow)]"></i> 1000 (500+500) Diamonds - First Top Up
                 </div>
             </div>
 
-            <div class="bg-[#151c2d] border border-[#1e293b] rounded-[12px] p-[14px] transition-colors duration-200 ease hover:bg-[#0b1121]">
+            <div class="bg-[var(--bg-card)] border border-[var(--border-header)] rounded-[var(--border-radius-md)] p-[14px] transition-colors duration-200 ease hover:bg-[var(--bg-body)]">
                 <div class="flex justify-between items-start mb-2">
                     <div class="flex flex-col gap-[2px]">
-                        <div class="text-white text-[13px] font-bold flex items-center gap-[6px]"><i class="ph-fill ph-user-circle text-[#64748b] text-[14px]"></i> nan**********</div>
-                        <div class="text-[#94a3b8] text-[11px]">16-05-2026 • 00:12 WIB</div>
+                        <div class="text-[var(--text-white)] text-[13px] font-bold flex items-center gap-[6px]"><i class="ph-fill ph-user-circle text-[var(--icon-gray)] text-[14px]"></i> nan**********</div>
+                        <div class="text-[var(--text-gray)] text-[11px]">16-05-2026 • 00:12 WIB</div>
                     </div>
-                    <div class="text-[#fbbf24] text-[12px] flex gap-[2px]">
+                    <div class="text-[var(--accent-yellow)] text-[12px] flex gap-[2px]">
                         <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
                     </div>
                 </div>
-                <div class="text-[#cbd5e1] text-[13px] leading-[1.5] mb-3">
+                <div class="text-[var(--text-lighter)] text-[13px] leading-[1.5] mb-3">
                     Josss, langganan terbaikk.
                 </div>
-                <div class="inline-flex items-center gap-[6px] bg-[#0b1121] border border-[#94a3b8]/30 text-[#94a3b8] px-[10px] py-[6px] rounded-[50px] text-[11px] font-semibold">
-                    <i class="ph-fill ph-diamond text-[#fbbf24]"></i> Weekly Diamond Pass
+                <div class="inline-flex items-center gap-[6px] bg-[var(--bg-input)] border border-[var(--border-input)] text-[var(--text-gray)] px-[10px] py-[6px] rounded-[var(--border-radius-xl)] text-[11px] font-semibold">
+                    <i class="ph-fill ph-diamond text-[var(--accent-yellow)]"></i> Weekly Diamond Pass
                 </div>
             </div>
 
@@ -639,26 +720,26 @@
 </div>
 
     <!-- Card FAQ -->
-    <div class="bg-[#151c2d] rounded-[12px] overflow-hidden mb-4">
-        <div class="flex items-center bg-[#1c253a]">
-            <div class="bg-gradient-to-b from-[#94a3b8] to-[#f79e1b] text-[#0f172a] text-[16px] font-extrabold py-3 px-5 rounded-br-[12px] flex items-center justify-center">
-                <i class="ph-fill ph-question text-[#0f172a]"></i>
+    <div class="bg-[var(--bg-card)] rounded-[var(--border-radius-md)] overflow-hidden mb-4">
+        <div class="flex items-center bg-[var(--bg-card-header)]">
+            <div class="bg-[image:var(--badge-grad)] text-[var(--text-dark)] text-[16px] font-extrabold py-3 px-5 rounded-br-[var(--border-radius-md)] flex items-center justify-center">
+                <i class="ph-fill ph-question text-[var(--text-dark)]"></i>
             </div>
-            <div class="text-white text-[14px] font-bold pl-4">Pertanyaan Umum (FAQ)</div>
+            <div class="text-[var(--text-white)] text-[14px] font-bold pl-4">Pertanyaan Umum (FAQ)</div>
         </div>
         
         <div class="p-4 pb-5 flex flex-col gap-4">
             <div class="flex flex-col gap-[10px]">
                 
                 <!-- FAQ 1 -->
-                <div class="bg-[#151c2d] border border-[#94a3b8]/30 rounded-[12px] overflow-hidden transition-all duration-400 ease-[cubic-bezier(0.4,0,0.2,1)] group faq-item [&.active]:border-[#9ae2ff] [&.active]:bg-[rgba(154,226,255,0.05)]">
+                <div class="bg-[var(--bg-card)] border border-[var(--border-input)] rounded-[var(--border-radius-md)] overflow-hidden transition-all duration-400 ease-[cubic-bezier(0.4,0,0.2,1)] group faq-item [&.active]:border-[var(--border-active)] [&.active]:bg-[var(--bg-active-light-05)]">
                     <div class="flex justify-between items-center p-[14px_16px] cursor-pointer select-none" onclick="toggleFaq(this)">
-                        <span class="text-white text-[13px] font-bold">Berapa lama proses top up masuk ke akun?</span>
-                        <i class="ph ph-caret-down text-[#94a3b8] text-[16px] transition-all duration-400 ease-[cubic-bezier(0.4,0,0.2,1)] group-[.active]:rotate-180 group-[.active]:text-[#9ae2ff]"></i>
+                        <span class="text-[var(--text-white)] text-[13px] font-bold">Berapa lama proses top up masuk ke akun?</span>
+                        <i class="ph ph-caret-down text-[var(--text-gray)] text-[16px] transition-all duration-400 ease-[cubic-bezier(0.4,0,0.2,1)] group-[.active]:rotate-180 group-[.active]:text-[var(--border-active)]"></i>
                     </div>
                     <div class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-400 ease-[cubic-bezier(0.4,0,0.2,1)] group-[.active]:grid-rows-[1fr]">
                         <div class="overflow-hidden">
-                            <div class="px-4 pb-4 text-[#94a3b8] text-[12.5px] leading-[1.6]">
+                            <div class="px-4 pb-4 text-[var(--text-gray)] text-[12.5px] leading-[1.6]">
                                 Secara normal, proses top up memakan waktu <strong>1 - 3 menit</strong> setelah pembayaran berhasil dikonfirmasi oleh sistem. Proses ini berjalan secara otomatis 24/7.
                             </div>
                         </div>
@@ -666,16 +747,16 @@
                 </div>
 
                 <!-- FAQ 2 (Berisi Daftar/List) -->
-                <div class="bg-[#151c2d] border border-[#94a3b8]/30 rounded-[12px] overflow-hidden transition-all duration-400 ease-[cubic-bezier(0.4,0,0.2,1)] group faq-item [&.active]:border-[#9ae2ff] [&.active]:bg-[rgba(154,226,255,0.05)]">
+                <div class="bg-[var(--bg-card)] border border-[var(--border-input)] rounded-[var(--border-radius-md)] overflow-hidden transition-all duration-400 ease-[cubic-bezier(0.4,0,0.2,1)] group faq-item [&.active]:border-[var(--border-active)] [&.active]:bg-[var(--bg-active-light-05)]">
                     <div class="flex justify-between items-center p-[14px_16px] cursor-pointer select-none" onclick="toggleFaq(this)">
-                        <span class="text-white text-[13px] font-bold">Bagaimana jika diamond belum masuk?</span>
-                        <i class="ph ph-caret-down text-[#94a3b8] text-[16px] transition-all duration-400 ease-[cubic-bezier(0.4,0,0.2,1)] group-[.active]:rotate-180 group-[.active]:text-[#9ae2ff]"></i>
+                        <span class="text-[var(--text-white)] text-[13px] font-bold">Bagaimana jika diamond belum masuk?</span>
+                        <i class="ph ph-caret-down text-[var(--text-gray)] text-[16px] transition-all duration-400 ease-[cubic-bezier(0.4,0,0.2,1)] group-[.active]:rotate-180 group-[.active]:text-[var(--border-active)]"></i>
                     </div>
                     <div class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-400 ease-[cubic-bezier(0.4,0,0.2,1)] group-[.active]:grid-rows-[1fr]">
                         <div class="overflow-hidden">
-                            <div class="px-4 pb-4 text-[#94a3b8] text-[12.5px] leading-[1.6]">
+                            <div class="px-4 pb-4 text-[var(--text-gray)] text-[12.5px] leading-[1.6]">
                                 Jika diamond belum masuk setelah 10 menit, mohon jangan panik. Silakan lakukan pengecekan berikut:
-                                <ol class="pl-[18px] mt-2 flex flex-col gap-[6px] text-[#cbd5e1] list-decimal marker:text-[#f97316] marker:font-bold">
+                                <ol class="pl-[18px] mt-2 flex flex-col gap-[6px] text-[var(--text-lighter)] list-decimal marker:text-[var(--accent-orange)] marker:font-bold">
                                     <li>Pastikan <b>User ID</b> dan <b>Zone ID</b> yang Anda masukkan sudah benar.</li>
                                     <li>Relogin (keluar dan masuk kembali) ke dalam game Mobile Legends Anda.</li>
                                     <li>Jika masih belum masuk, klik tombol <b>Hubungi Admin</b> di halaman utama dengan menyertakan Nomor Invoice transaksi.</li>
@@ -686,14 +767,14 @@
                 </div>
 
                 <!-- FAQ 3 -->
-                <div class="bg-[#151c2d] border border-[#94a3b8]/30 rounded-[12px] overflow-hidden transition-all duration-400 ease-[cubic-bezier(0.4,0,0.2,1)] group faq-item [&.active]:border-[#9ae2ff] [&.active]:bg-[rgba(154,226,255,0.05)]">
+                <div class="bg-[var(--bg-card)] border border-[var(--border-input)] rounded-[var(--border-radius-md)] overflow-hidden transition-all duration-400 ease-[cubic-bezier(0.4,0,0.2,1)] group faq-item [&.active]:border-[var(--border-active)] [&.active]:bg-[var(--bg-active-light-05)]">
                     <div class="flex justify-between items-center p-[14px_16px] cursor-pointer select-none" onclick="toggleFaq(this)">
-                        <span class="text-white text-[13px] font-bold">Apakah pembayaran di sini aman?</span>
-                        <i class="ph ph-caret-down text-[#94a3b8] text-[16px] transition-all duration-400 ease-[cubic-bezier(0.4,0,0.2,1)] group-[.active]:rotate-180 group-[.active]:text-[#9ae2ff]"></i>
+                        <span class="text-[var(--text-white)] text-[13px] font-bold">Apakah pembayaran di sini aman?</span>
+                        <i class="ph ph-caret-down text-[var(--text-gray)] text-[16px] transition-all duration-400 ease-[cubic-bezier(0.4,0,0.2,1)] group-[.active]:rotate-180 group-[.active]:text-[var(--border-active)]"></i>
                     </div>
                     <div class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-400 ease-[cubic-bezier(0.4,0,0.2,1)] group-[.active]:grid-rows-[1fr]">
                         <div class="overflow-hidden">
-                            <div class="px-4 pb-4 text-[#94a3b8] text-[12.5px] leading-[1.6]">
+                            <div class="px-4 pb-4 text-[var(--text-gray)] text-[12.5px] leading-[1.6]">
                                 Sangat aman! Kami menggunakan jalur pembayaran resmi (Payment Gateway) dan transaksi dijamin 100% legal. Akun Anda aman dari resiko banned.
                             </div>
                         </div>
@@ -711,58 +792,58 @@
         </section>
     </main>
         <!-- POPUP KONFIRMASI (Letakkan di dalam .app-container sebelum tag penutup) -->
-    <div class="fixed inset-y-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] bg-black/70 z-[999] flex items-end invisible opacity-0 transition-all duration-300 ease group modal-overlay [&.active]:visible [&.active]:opacity-100" id="modal-confirm">
-        <div class="bg-[#151c2d] w-full max-h-[90%] overflow-y-auto rounded-t-[24px] px-5 pt-6 pb-6 translate-y-full transition-transform duration-500 ease-[cubic-bezier(0.175,0.885,0.32,1.15)] relative shadow-[0_-10px_40px_rgba(0,0,0,0.6)] group-[.active]:translate-y-0">
+    <div class="fixed inset-y-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] bg-[var(--bg-overlay)] z-[999] flex items-end invisible opacity-0 transition-all duration-300 ease group modal-overlay [&.active]:visible [&.active]:opacity-100" id="modal-confirm">
+        <div class="bg-[var(--bg-card)] w-full max-h-[90%] overflow-y-auto rounded-t-[var(--border-radius-2xl)] px-5 pt-6 pb-6 translate-y-full transition-transform duration-500 ease-[cubic-bezier(0.175,0.885,0.32,1.15)] relative shadow-[var(--shadow-modal)] group-[.active]:translate-y-0">
             <!-- Wadah untuk animasi bintang -->
             <div id="star-container"></div>
             
-            <div class="w-[40px] h-1 bg-[#94a3b8]/30 rounded-[4px] -mt-[10px] mx-auto mb-4"></div>
+            <div class="w-[40px] h-1 bg-[var(--border-input)] rounded-[var(--border-radius-sm)] -mt-[10px] mx-auto mb-4"></div>
             
             <div class="flex justify-between items-center mb-5">
-                <div class="text-white text-[16px] font-bold">Konfirmasi Pesanan</div>
-                <button class="bg-[#0b1121] border border-[#94a3b8]/30 text-[#94a3b8] w-8 h-8 rounded-full flex justify-center items-center text-[16px] cursor-pointer transition-all duration-200 active:scale-90 active:text-white active:border-[#f97316]" onclick="closeModal()">
+                <div class="text-[var(--text-white)] text-[16px] font-bold">Konfirmasi Pesanan</div>
+                <button class="bg-[var(--bg-input)] border border-[var(--border-input)] text-[var(--text-gray)] w-8 h-8 rounded-full flex justify-center items-center text-[16px] cursor-pointer transition-all duration-200 active:scale-90 active:text-[var(--text-white)] active:border-[var(--accent-orange)]" onclick="closeModal()">
                     <i class="ph ph-x"></i>
                 </button>
             </div>
             
             <div>
-                <div class="bg-[#151c2d] border border-[#94a3b8]/30 rounded-[12px] p-4 flex flex-col gap-[10px] !bg-[#0b1121]">
+                <div class="bg-[var(--bg-card)] border border-[var(--border-input)] rounded-[var(--border-radius-md)] p-4 flex flex-col gap-[10px] !bg-[var(--bg-input)]">
                     <!-- Info Akun -->
-                    <div class="pb-[5px] mb-0 border-b border-dashed border-[#1e293b]">
-                        <div class="text-[12px] text-white font-semibold mb-[6px] tracking-[-0.2px]">Data Tujuan</div>
-                        <div class="flex justify-between text-[13px] text-[#94a3b8] mb-1 [&>span:last-child]:text-[#f97316] [&>span:last-child]:font-bold">
+                    <div class="pb-[5px] mb-0 border-b border-dashed border-[var(--border-header)]">
+                        <div class="text-[12px] text-[var(--text-white)] font-semibold mb-[6px] tracking-[-0.2px]">Data Tujuan</div>
+                        <div class="flex justify-between text-[13px] text-[var(--text-gray)] mb-1 [&>span:last-child]:text-[var(--accent-orange)] [&>span:last-child]:font-bold">
                             <span>User ID / Zone ID</span>
-                            <span class="!text-white">123456789 (1234)</span>
+                            <span class="!text-[var(--text-white)]">123456789 (1234)</span>
                         </div>
-                        <div class="flex justify-between text-[13px] text-[#94a3b8] mb-1 [&>span:last-child]:text-[#f97316] [&>span:last-child]:font-bold">
+                        <div class="flex justify-between text-[13px] text-[var(--text-gray)] mb-1 [&>span:last-child]:text-[var(--accent-orange)] [&>span:last-child]:font-bold">
                             <span>Nickname In-Game</span>
-                            <span class="!text-white">ProPlayer2026</span>
+                            <span class="!text-[var(--text-white)]">ProPlayer2026</span>
                         </div>
                     </div>
 
                     <!-- Info Biaya -->
-                    <div class="pb-[5px] mb-0 border-b border-dashed border-[#1e293b]">
-                        <div class="text-[12px] text-white font-semibold mb-[6px] tracking-[-0.2px]">Rincian Pembelian</div>
-                        <div class="flex justify-between text-[13px] text-[#94a3b8] mb-1 [&>span:last-child]:text-[#f97316] [&>span:last-child]:font-bold">
+                    <div class="pb-[5px] mb-0 border-b border-dashed border-[var(--border-header)]">
+                        <div class="text-[12px] text-[var(--text-white)] font-semibold mb-[6px] tracking-[-0.2px]">Rincian Pembelian</div>
+                        <div class="flex justify-between text-[13px] text-[var(--text-gray)] mb-1 [&>span:last-child]:text-[var(--accent-orange)] [&>span:last-child]:font-bold">
                             <span>Item Produk</span>
-                            <span class="!text-white">344 Diamonds</span>
+                            <span class="!text-[var(--text-white)]">344 Diamonds</span>
                         </div>
-                        <div class="flex justify-between text-[13px] text-[#94a3b8] mb-1 [&>span:last-child]:text-[#f97316] [&>span:last-child]:font-bold">
+                        <div class="flex justify-between text-[13px] text-[var(--text-gray)] mb-1 [&>span:last-child]:text-[var(--accent-orange)] [&>span:last-child]:font-bold">
                             <span>Metode Pembayaran</span>
-                            <span class="!text-white">BCA Virtual Account</span>
+                            <span class="!text-[var(--text-white)]">BCA Virtual Account</span>
                         </div>
-                        <div class="flex justify-between text-[13px] text-[#94a3b8] mb-1 [&>span:last-child]:text-[#f97316] [&>span:last-child]:font-bold">
+                        <div class="flex justify-between text-[13px] text-[var(--text-gray)] mb-1 [&>span:last-child]:text-[var(--accent-orange)] [&>span:last-child]:font-bold">
                             <span>Harga Produk</span>
                             <span>Rp 80.000</span>
                         </div>
-                        <div class="flex justify-between text-[13px] text-[#94a3b8] mb-1 [&>span:last-child]:text-[#f97316] [&>span:last-child]:font-bold">
+                        <div class="flex justify-between text-[13px] text-[var(--text-gray)] mb-1 [&>span:last-child]:text-[var(--accent-orange)] [&>span:last-child]:font-bold">
                             <span>Biaya Layanan</span>
                             <span>Rp 1.500</span>
                         </div>
                     </div>
 
                     <!-- Total -->
-                    <div class="flex justify-between text-white text-[14px] font-bold mt-2 [&>span:last-child]:text-[#f97316] [&>span:last-child]:font-bold">
+                    <div class="flex justify-between text-[var(--text-white)] text-[14px] font-bold mt-2 [&>span:last-child]:text-[var(--accent-orange)] [&>span:last-child]:font-bold">
                         <span>Total Pembayaran</span>
                         <span style="font-size: 18px;">Rp 81.500</span>
                     </div>
@@ -770,7 +851,7 @@
             </div>
             
             <div class="mt-5">
-                <button class="bg-gradient-to-r from-[#94a3b8] to-[#f79e1b] text-[#0f172a] border-none rounded-[50px] p-[6px] font-bold justify-center items-center gap-[5px] cursor-pointer mt-1 transition-opacity duration-200 ease active:opacity-80 h-[35px] text-[16px] shadow-[0_8px_20px_rgba(247,158,27,0.3)] flex w-full">
+                <button class="bg-[image:var(--btn-grad)] text-[var(--text-dark)] border-none rounded-[var(--border-radius-xl)] p-[6px] font-bold justify-center items-center gap-[5px] cursor-pointer mt-1 transition-opacity duration-200 ease active:opacity-80 h-[35px] text-[16px] shadow-[var(--shadow-btn-lg)] flex w-full">
                     Bayar Sekarang <i class="ph-fill ph-check-circle text-[18px]"></i>
                 </button>
             </div>
