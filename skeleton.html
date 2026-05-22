@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beranda - Order Game.ID (Skeleton Loading)</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">    
+    
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        // Mapping CSS variables ke Tailwind configuration
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'body': 'var(--bg-body)',
+                        'header': 'var(--bg-header)',
+                        'card': 'var(--bg-card)',
+                        'card-soft': 'var(--bg-card-soft)',
+                        'card-header': 'var(--bg-card-header)',
+                        'input': 'var(--bg-input)',
+                        
+                        't-white': 'var(--text-white)',
+                        't-gray': 'var(--text-gray)',
+                        't-dark': 'var(--text-dark)',
+                        
+                        'accent-orange': 'var(--accent-orange)',
+                        'accent-yellow': 'var(--accent-yellow)',
+                        
+                        'border-input': 'var(--border-input)',
+                        'border-header': 'var(--border-header)',
+                    },
+                    borderRadius: {
+                        'sm': 'var(--border-radius-sm)',
+                        'md': 'var(--border-radius-md)',
+                        'lg': 'var(--border-radius-lg)',
+                        'xl': 'var(--border-radius-xl)',
+                    },
+                    fontFamily: {
+                        'ibm': ['"IBM Plex Sans Condensed"', 'sans-serif'],
+                    },
+                    keyframes: {
+                        pulseSimple: {
+                            '0%, 100%': { opacity: '1', transform: 'scale(0.9)' },
+                            '50%': { opacity: '0.5', transform: 'scale(1.2)' },
+                        }
+                    },
+                    animation: {
+                        'pulseSimple': 'pulseSimple 1.5s infinite',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Tetap mempertahankan ROOT asli sesuai permintaan */
+        :root {
+            --bg-body: #0b1121;
+            --bg-header: #0b1121;
+            --bg-card: #151c2d;
+            --bg-card-soft: rgba(21, 28, 45, 0.5);
+            --bg-card-header: #1c253a;
+            --bg-input: #0b1121;
+            
+            --text-white: #ffffff;
+            --text-gray: #94a3b8;
+            --text-dark: #0f172a;
+            
+            --accent-orange: #f97316;
+            --accent-yellow: #fbbf24;
+            
+            --tab-active-grad: linear-gradient(180deg, #9ae2ff 0%, #6ab7ff 100%);
+            --btn-grad: linear-gradient(90deg, #94a3b8 0%, #f79e1b 100%);
+            --badge-grad: linear-gradient(180deg, #94a3b8 0%, #f79e1b 100%);
+            
+            --border-input: rgba(148, 163, 184, 0.3);
+            --border-header: #1e293b;
+            
+            --border-radius-sm: 4px;
+            --border-radius-md: 12px; 
+            --border-radius-lg: 10px;
+            --border-radius-xl: 100px;
+        }
+
+        /* Reset tap highlight color untuk UI ala App */
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+    </style>
+
+    <style type="text/tailwindcss">
+        @layer utilities {
+            /* Utility untuk menghilangkan scrollbar bawaan browser */
+            .no-scrollbar::-webkit-scrollbar {
+                display: none;
+            }
+            .no-scrollbar {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+        }
+
+        @layer components {
+            /* Komponen Tab Kategori yang bergantung pada JS class toggle */
+            .prod-tab-btn {
+                @apply px-4 py-[9px] rounded-md border border-border-input bg-card text-t-gray text-[14px] font-bold cursor-pointer transition-all duration-200 whitespace-nowrap;
+            }
+            .prod-tab-btn.active {
+                @apply border-accent-yellow bg-[rgba(249,115,22,0.1)] text-accent-yellow;
+            }
+        }
+    </style>
+</head>
+<body class="bg-black flex justify-center font-ibm m-0 p-0 box-border">
+
+<div class="w-full min-h-screen bg-body relative shadow-none xl:shadow-[0_0_20px_rgba(0,0,0,0.8)] pb-[40px] sm:max-w-full md:max-w-[768px] lg:max-w-[1024px] xl:max-w-[1300px]">
+    
+    <!-- HEADER (Tetap aslinya karena ini bagian navigasi statis) -->
+    <header class="flex justify-between items-center px-4 py-[10px] bg-header sticky top-0 z-50 border-b border-border-header">
+        <a href="#" class="flex items-center bg-transparent py-[6px] pl-[6px] pr-[12px] rounded-[50px] gap-2 no-underline">
+            <img src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f?q=80&w=200&auto=format&fit=crop" alt="Logo" class="w-[24px] h-[24px] rounded-full object-cover">
+            <div class="text-[13px] font-[800] text-t-dark tracking-[-0.2px]"><span class="text-accent-orange">Order</span> Game.ID</div>
+        </a>
+        <div class="flex items-center gap-[10px]">
+            <button class="bg-card border-0 text-t-white flex items-center justify-center rounded-[10px] cursor-pointer h-[30px] w-[36px] text-[18px]">
+                <i class="ph ph-magnifying-glass"></i>
+            </button>
+            <button class="bg-card border-0 text-t-white flex items-center justify-center rounded-[10px] cursor-pointer h-[30px] px-[14px] gap-2 text-[12px] font-semibold">
+                <img src="https://flagcdn.com/w20/id.png" alt="ID" class="w-[16px] h-[16px] rounded-full">
+                ID / IDR
+            </button>
+            <button class="bg-card border-0 text-t-white flex items-center justify-center rounded-[10px] cursor-pointer h-[30px] w-[36px] text-[18px]">
+                <i class="ph ph-list"></i>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- BANNER (Skeleton) -->
+        <section class="p-4 bg-card-soft mb-[25px] rounded-b-[15px]">
+            <!-- Skeleton banner menggantikan img -->
+            <div class="w-full h-[140px] md:h-[250px] xl:h-[350px] rounded-md bg-card-header animate-pulse shadow-[0_8px_20px_rgba(0,0,0,0.3)]"></div>
+        </section>
+        
+        <!-- FLASH SALE SECTION (Skeleton) -->
+        <section class="my-6 p-4 bg-card-soft" id="flash-sale-container">
+            <div class="flex justify-between items-center mb-3">
+                <div class="text-t-white text-[16px] font-bold flex items-center gap-[6px] uppercase">
+                    <span class="w-[6px] h-[6px] bg-accent-orange rounded-full animate-pulseSimple"></span> Flash Sale
+                </div>
+                <div class="flex items-center gap-1">
+                    <div class="bg-card-header animate-pulse h-[20px] w-[22px] rounded-[4px]"></div>
+                    <span class="text-t-gray font-bold text-[11px]">:</span>
+                    <div class="bg-card-header animate-pulse h-[20px] w-[22px] rounded-[4px]"></div>
+                    <span class="text-t-gray font-bold text-[11px]">:</span>
+                    <div class="bg-card-header animate-pulse h-[20px] w-[22px] rounded-[4px]"></div>
+                </div>
+            </div>
+
+            <div class="flex gap-3 overflow-x-auto pb-2 snap-x snap-mandatory no-scrollbar">
+                
+                <!-- KARTU FLASH SALE SKELETON 1 -->
+                <div class="flex-none w-[285px] md:w-[320px] xl:w-[380px] border border-transparent bg-card rounded-md p-[10px] flex gap-3 snap-start">
+                    <div class="w-[80px] h-[80px] shrink-0 bg-card-header rounded-[8px] animate-pulse"></div>
+                    <div class="grow flex flex-col justify-center gap-[6px]">
+                        <div class="h-3.5 bg-card-header rounded w-full animate-pulse"></div>
+                        <div class="h-3.5 bg-card-header rounded w-3/4 animate-pulse"></div>
+                        <div class="flex items-center gap-[6px] mt-1">
+                            <div class="h-4 bg-card-header rounded w-16 animate-pulse"></div>
+                            <div class="h-3 bg-card-header rounded w-12 animate-pulse"></div>
+                        </div>
+                        <div class="w-full h-[5px] bg-card-header rounded-[2px] mt-1 animate-pulse"></div>
+                    </div>
+                </div>
+
+                <!-- KARTU FLASH SALE SKELETON 2 -->
+                <div class="flex-none w-[285px] md:w-[320px] xl:w-[380px] border border-transparent bg-card rounded-md p-[10px] flex gap-3 snap-start">
+                    <div class="w-[80px] h-[80px] shrink-0 bg-card-header rounded-[8px] animate-pulse"></div>
+                    <div class="grow flex flex-col justify-center gap-[6px]">
+                        <div class="h-3.5 bg-card-header rounded w-full animate-pulse"></div>
+                        <div class="h-3.5 bg-card-header rounded w-3/4 animate-pulse"></div>
+                        <div class="flex items-center gap-[6px] mt-1">
+                            <div class="h-4 bg-card-header rounded w-16 animate-pulse"></div>
+                            <div class="h-3 bg-card-header rounded w-12 animate-pulse"></div>
+                        </div>
+                        <div class="w-full h-[5px] bg-card-header rounded-[2px] mt-1 animate-pulse"></div>
+                    </div>
+                </div>
+
+                <!-- KARTU FLASH SALE SKELETON 3 -->
+                <div class="flex-none w-[285px] md:w-[320px] xl:w-[380px] border border-transparent bg-card rounded-md p-[10px] flex gap-3 snap-start">
+                    <div class="w-[80px] h-[80px] shrink-0 bg-card-header rounded-[8px] animate-pulse"></div>
+                    <div class="grow flex flex-col justify-center gap-[6px]">
+                        <div class="h-3.5 bg-card-header rounded w-full animate-pulse"></div>
+                        <div class="h-3.5 bg-card-header rounded w-3/4 animate-pulse"></div>
+                        <div class="flex items-center gap-[6px] mt-1">
+                            <div class="h-4 bg-card-header rounded w-16 animate-pulse"></div>
+                            <div class="h-3 bg-card-header rounded w-12 animate-pulse"></div>
+                        </div>
+                        <div class="w-full h-[5px] bg-card-header rounded-[2px] mt-1 animate-pulse"></div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- TRENDING (Skeleton) -->
+        <section id="trending-container">
+            <div class="flex justify-between items-center px-4 mb-3 mt-2">
+                <div class="text-t-white text-[17px] font-bold flex items-center gap-[6px]">
+                    🔥 SEDANG TRENDING
+                </div>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 px-4 mb-6">
+                
+                <!-- Kapsul Skeleton 1 -->
+                <div class="flex items-center bg-card border-[0.7px] border-border-input rounded-md p-[6px] gap-[10px]">
+                    <div class="w-[52px] h-[52px] rounded-[7px] bg-card-header animate-pulse"></div>
+                    <div class="flex flex-col gap-1.5 w-full pr-2">
+                        <div class="h-3.5 bg-card-header rounded w-full animate-pulse"></div>
+                        <div class="h-3 bg-card-header rounded w-2/3 animate-pulse"></div>
+                    </div>
+                </div>
+                <!-- Kapsul Skeleton 2 -->
+                <div class="flex items-center bg-card border-[0.7px] border-border-input rounded-md p-[6px] gap-[10px]">
+                    <div class="w-[52px] h-[52px] rounded-[7px] bg-card-header animate-pulse"></div>
+                    <div class="flex flex-col gap-1.5 w-full pr-2">
+                        <div class="h-3.5 bg-card-header rounded w-full animate-pulse"></div>
+                        <div class="h-3 bg-card-header rounded w-2/3 animate-pulse"></div>
+                    </div>
+                </div>
+                <!-- Kapsul Skeleton 3 -->
+                <div class="flex items-center bg-card border-[0.7px] border-border-input rounded-md p-[6px] gap-[10px]">
+                    <div class="w-[52px] h-[52px] rounded-[7px] bg-card-header animate-pulse"></div>
+                    <div class="flex flex-col gap-1.5 w-full pr-2">
+                        <div class="h-3.5 bg-card-header rounded w-full animate-pulse"></div>
+                        <div class="h-3 bg-card-header rounded w-2/3 animate-pulse"></div>
+                    </div>
+                </div>
+                <!-- Kapsul Skeleton 4 -->
+                <div class="flex items-center bg-card border-[0.7px] border-border-input rounded-md p-[6px] gap-[10px]">
+                    <div class="w-[52px] h-[52px] rounded-[7px] bg-card-header animate-pulse"></div>
+                    <div class="flex flex-col gap-1.5 w-full pr-2">
+                        <div class="h-3.5 bg-card-header rounded w-full animate-pulse"></div>
+                        <div class="h-3 bg-card-header rounded w-2/3 animate-pulse"></div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- TAB KATEGORI -->
+        <section>
+            <div class="px-4 mb-4 mt-[35px]">
+                <div class="flex gap-[10px] overflow-x-auto pb-1 no-scrollbar">
+                    <div class="prod-tab-btn active" id="tab-mobile" data-redirect-url="/kategori/game-mobile" onclick="switchHomeCategory('mobile')">
+                        <i class="ph-fill ph-device-mobile"></i> Game Mobile
+                    </div>
+                    <div class="prod-tab-btn" id="tab-pc" data-redirect-url="/kategori/game-pc" onclick="switchHomeCategory('pc')">
+                        <i class="ph-fill ph-desktop"></i> Game PC
+                    </div>
+                    <div class="prod-tab-btn" id="tab-voucher" data-redirect-url="/kategori/voucher-digital" onclick="switchHomeCategory('voucher')">
+                        <i class="ph-fill ph-ticket"></i> Voucher Digital
+                    </div>
+                    <div class="prod-tab-btn" id="tab-pulsa" data-redirect-url="/kategori/pulsa-ppob" onclick="switchHomeCategory('pulsa')">
+                        <i class="ph-fill ph-phone-call"></i> Pulsa & PPOB
+                    </div>
+                </div>
+            </div>
+
+            <!-- ISI PRODUK KATEGORI MOBILE (Skeleton) -->
+            <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-3 px-4 mb-6" id="content-mobile">
+                <!-- Looping 6 Skeleton Card untuk mengisi ruang -->
+                <div class="bg-card p-[9px] rounded-md animate-pulse">
+                    <div class="w-full h-[110px] md:h-[150px] xl:h-[140px] rounded-md bg-card-header mb-2 border border-transparent"></div>
+                    <div class="flex flex-col pl-[2px] gap-1.5 mt-2">
+                        <div class="h-3.5 bg-card-header rounded-full w-full"></div>
+                        <div class="h-3 bg-card-header rounded-full w-2/3"></div>
+                    </div>
+                </div>
+                <div class="bg-card p-[9px] rounded-md animate-pulse">
+                    <div class="w-full h-[110px] md:h-[150px] xl:h-[140px] rounded-md bg-card-header mb-2 border border-transparent"></div>
+                    <div class="flex flex-col pl-[2px] gap-1.5 mt-2">
+                        <div class="h-3.5 bg-card-header rounded-full w-full"></div>
+                        <div class="h-3 bg-card-header rounded-full w-2/3"></div>
+                    </div>
+                </div>
+                <div class="bg-card p-[9px] rounded-md animate-pulse">
+                    <div class="w-full h-[110px] md:h-[150px] xl:h-[140px] rounded-md bg-card-header mb-2 border border-transparent"></div>
+                    <div class="flex flex-col pl-[2px] gap-1.5 mt-2">
+                        <div class="h-3.5 bg-card-header rounded-full w-full"></div>
+                        <div class="h-3 bg-card-header rounded-full w-2/3"></div>
+                    </div>
+                </div>
+                <div class="bg-card p-[9px] rounded-md animate-pulse">
+                    <div class="w-full h-[110px] md:h-[150px] xl:h-[140px] rounded-md bg-card-header mb-2 border border-transparent"></div>
+                    <div class="flex flex-col pl-[2px] gap-1.5 mt-2">
+                        <div class="h-3.5 bg-card-header rounded-full w-full"></div>
+                        <div class="h-3 bg-card-header rounded-full w-2/3"></div>
+                    </div>
+                </div>
+                <div class="bg-card p-[9px] rounded-md animate-pulse">
+                    <div class="w-full h-[110px] md:h-[150px] xl:h-[140px] rounded-md bg-card-header mb-2 border border-transparent"></div>
+                    <div class="flex flex-col pl-[2px] gap-1.5 mt-2">
+                        <div class="h-3.5 bg-card-header rounded-full w-full"></div>
+                        <div class="h-3 bg-card-header rounded-full w-2/3"></div>
+                    </div>
+                </div>
+                <div class="bg-card p-[9px] rounded-md animate-pulse">
+                    <div class="w-full h-[110px] md:h-[150px] xl:h-[140px] rounded-md bg-card-header mb-2 border border-transparent"></div>
+                    <div class="flex flex-col pl-[2px] gap-1.5 mt-2">
+                        <div class="h-3.5 bg-card-header rounded-full w-full"></div>
+                        <div class="h-3 bg-card-header rounded-full w-2/3"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ISI PRODUK KATEGORI PC (Skeleton - Awalnya disembunyikan) -->
+            <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-3 px-4 mb-6" id="content-pc" style="display: none;">
+                <div class="bg-card p-[9px] rounded-md animate-pulse">
+                    <div class="w-full h-[110px] md:h-[150px] xl:h-[140px] rounded-md bg-card-header mb-2 border border-transparent"></div>
+                    <div class="flex flex-col pl-[2px] gap-1.5 mt-2">
+                        <div class="h-3.5 bg-card-header rounded-full w-full"></div>
+                        <div class="h-3 bg-card-header rounded-full w-2/3"></div>
+                    </div>
+                </div>
+                <div class="bg-card p-[9px] rounded-md animate-pulse">
+                    <div class="w-full h-[110px] md:h-[150px] xl:h-[140px] rounded-md bg-card-header mb-2 border border-transparent"></div>
+                    <div class="flex flex-col pl-[2px] gap-1.5 mt-2">
+                        <div class="h-3.5 bg-card-header rounded-full w-full"></div>
+                        <div class="h-3 bg-card-header rounded-full w-2/3"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ISI PRODUK KATEGORI VOUCHER (Skeleton - Awalnya disembunyikan) -->
+            <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-3 px-4 mb-6" id="content-voucher" style="display: none;">
+                <div class="bg-card p-[9px] rounded-md animate-pulse">
+                    <div class="w-full h-[110px] md:h-[150px] xl:h-[140px] rounded-md bg-card-header mb-2 border border-transparent"></div>
+                    <div class="flex flex-col pl-[2px] gap-1.5 mt-2">
+                        <div class="h-3.5 bg-card-header rounded-full w-full"></div>
+                        <div class="h-3 bg-card-header rounded-full w-2/3"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ISI PRODUK KATEGORI PULSA (Skeleton - Awalnya disembunyikan) -->
+            <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-3 px-4 mb-6" id="content-pulsa" style="display: none;">
+                 <div class="bg-card p-[9px] rounded-md animate-pulse">
+                    <div class="w-full h-[110px] md:h-[150px] xl:h-[140px] rounded-md bg-card-header mb-2 border border-transparent"></div>
+                    <div class="flex flex-col pl-[2px] gap-1.5 mt-2">
+                        <div class="h-3.5 bg-card-header rounded-full w-full"></div>
+                        <div class="h-3 bg-card-header rounded-full w-2/3"></div>
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+    </main>
+</div>
+
+<script>
+/**
+ * Fungsi untuk manajemen perpindahan tab kategori di Beranda
+ * Sesuai catatan: "setiap kali membuat kategori maka berikan form url tujuan, karena berfungsi untuk direct"
+ */
+function switchHomeCategory(tabName) {
+    const tabs = ['mobile', 'pc', 'voucher', 'pulsa'];
+    
+    tabs.forEach(tab => {
+        const tabBtn = document.getElementById('tab-' + tab);
+        const content = document.getElementById('content-' + tab);
+        
+        if (tabBtn && content) {
+            if (tab === tabName) {
+                // Konfigurasi CSS Tailwind kita akan otomatis mendeteksi class .active
+                tabBtn.className = 'prod-tab-btn active';
+                content.style.display = 'grid'; 
+            } else {
+                tabBtn.className = 'prod-tab-btn';
+                content.style.display = 'none';
+            }
+        }
+    });
+
+    // Menangani aksi Direct (pengalihan URL) dari attribute data-redirect-url
+    const activeElement = document.getElementById('tab-' + tabName);
+    if (activeElement && activeElement.hasAttribute('data-redirect-url')) {
+        const targetUrl = activeElement.getAttribute('data-redirect-url');
+        console.log("Kategori dialihkan ke url tujuan: " + targetUrl);
+        
+        // CATATAN DEVELOPER (PHP/Laravel):
+        // Buka blokir sintaks di bawah ini saat diintegrasikan dengan backend 
+        // untuk melakukan direct redirection sebenarnya berdasarkan form url tujuan.
+        
+        // window.location.href = targetUrl;
+    }
+}
+</script>
+
+</body>
+</html>
