@@ -188,7 +188,7 @@
 </head>
 <body class="bg-black flex justify-center m-0 p-0 box-border antialiased" style="-webkit-tap-highlight-color: transparent; font-family: 'IBM Plex Sans Condensed', sans-serif;">
 
-<div class="w-full max-w-[480px] min-h-screen bg-body relative shadow-[0_0_20px_rgba(0,0,0,0.8)] pb-[90px]">
+<div class="w-full max-w-[1300px] mx-auto min-h-screen bg-body relative shadow-[0_0_20px_rgba(0,0,0,0.8)] pb-[90px] lg:pb-8">
     <!-- HEADER -->
     <header class="flex justify-between items-center py-2.5 px-4 bg-header sticky top-0 z-50 border-b border-borderHeader">
         <a href="/home" class="flex items-center bg-transparent py-1.5 pr-3 pl-1.5 rounded-xl gap-2 no-underline">
@@ -209,8 +209,8 @@
         </div>
     </header>
 
-    <main class="p-4 flex flex-col gap-4">
-        
+    <main class="p-4 lg:p-8 grid grid-cols-1 lg:grid-cols-[3fr_1fr] gap-4 lg:gap-6 items-start">
+        <div class="flex flex-col gap-4">
         <!-- CARD 1: STATUS & TIMER -->
         <div class="bg-card rounded-md overflow-hidden card">
             <div class="flex items-center bg-cardHeader">
@@ -293,8 +293,10 @@
 
             </div>
         </div>
+        </div>
 
         <!-- CARD 3: RINCIAN PESANAN -->
+         <div class="flex flex-col gap-4 lg:sticky lg:top-[80px]">
         <div class="bg-card rounded-md overflow-hidden card">
             <div class="flex items-center bg-cardHeader">
                 <div class="bg-badge-grad text-darkText text-[16px] font-extrabold py-3 px-5 rounded-br-md flex items-center justify-center step-badge">
@@ -343,6 +345,7 @@
                 </div>
 
             </div>
+        </div>
         </div>
 
         <!-- CARD 4: CARA PEMBAYARAN (ACCORDION) -->
@@ -418,11 +421,12 @@
 
             </div>
         </div>
+        
 
     </main>
 
     <!-- FIXED BOTTOM ACTIONS -->
-    <div class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] bg-card border-t border-borderInput p-4 z-[99] shadow-[0_-4px_20px_rgba(0,0,0,0.3)] flex gap-3 fixed-bottom">
+    <div class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full lg:max-w-[1300px] bg-card border-t border-borderInput p-4 z-[99] shadow-[0_-4px_20px_rgba(0,0,0,0.3)] flex gap-3 fixed-bottom lg:rounded-t-2xl lg:px-8">
         <!-- Button Home menggunakan .btn-outline (garis dijamin 1px lewat CSS) -->
         <a href="/home" class="btn-submit btn-outline" style="width: 50px; padding: 0; flex-shrink: 0;">
             <i class="ph ph-house" style="font-size: 20px;"></i>
@@ -439,7 +443,7 @@
     
     <!-- BOTTOM SHEET MODAL ULASAN -->
     <div class="fixed inset-0 bg-black/60 z-[1000] flex justify-center items-end opacity-0 invisible transition-all duration-300 modal-backdrop" id="modalUlasan">
-        <div class="w-full max-w-[480px] bg-card rounded-t-[24px] py-6 px-4 translate-y-full transition-transform duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] flex flex-col gap-4 shadow-[0_-4px_24px_rgba(0,0,0,0.5)] modal-sheet">
+        <div class="w-full sm:max-w-[480px] bg-card rounded-t-[24px] sm:rounded-[24px] sm:mb-auto sm:mt-20 py-6 px-4 translate-y-full transition-transform duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] flex flex-col gap-4 shadow-[0_-4px_24px_rgba(0,0,0,0.5)] modal-sheet">
             <div class="flex justify-between items-center mb-1">
                 <div class="text-white text-[18px] font-extrabold">Nilai Pesanan</div>
                 <button class="bg-input border-none text-grayText w-8 h-8 rounded-full flex items-center justify-center cursor-pointer transition-colors duration-200 active:bg-borderHeader btn-close" onclick="tutupModalUlasan()">
